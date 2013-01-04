@@ -1,0 +1,55 @@
+H-anim tests. See:
+
+http://www.h-anim.org/
+
+NONE of these tests were written by me  - copyrights of course
+stay with the owners, who put (should have put?) their names into
+the files.
+
+Some of these tests don't run. These are complex VRML files. Work
+is being performed to make them work as best as they can - but note
+that sometimes they don't even work in all of the commercial VRML
+viewers....
+
+
+nancy_h-anim.wrl:
+
+nana_1.1.wrl:		nana with prototypes. From
+			http://ligwww.epfl.ch/~babski/StandardBody/
+
+nana_ss_1.1.wrl:	nana with prototypes and sensors. From
+			http://ligwww.epfl.ch/~babski/StandardBody/
+
+
+
+joe_1.1.wrl:		joe with prototypes. From
+			http://ligwww.epfl.ch/~babski/StandardBody/
+
+joe_ss_1.1.wrl:		joe with prototypes and sensors. From
+			http://ligwww.epfl.ch/~babski/StandardBody/
+
+surprise.wrl:		Lord knows, but it sounded interesting. From
+			http://ligwww.epfl.ch/~babski/StandardBody/
+
+SphereMan_1.1.wrl:	Ghostly person. From
+			http://ligwww.epfl.ch/~babski/StandardBody/
+
+marvin_005.wrl:		Marvin the Maritan, from
+			http://www.cis.upenn.edu/~beitler/hanim/models
+
+yt_005.wrl:		Another woman, from:
+			http://www.cis.upenn.edu/~beitler/hanim/models
+
+brain_005.wrl:		A dangerous looking mouse, from:
+			http://www.cis.upenn.edu/~beitler/hanim/models
+
+dilbert_005.wrl:	Dilbert, of course!
+			http://www.cis.upenn.edu/~beitler/hanim/models
+
+dork*, recoil.wrl, cannon.wrl, gunner.wrl, sarge.wrl. See avatars fire
+			a cannon. From:
+			http://www.cs.tamu.edu/people/mmiller/hanim/
+
+ellen.wrl:
+
+

@@ -1,0 +1,121 @@
+#VRML V2.0 utf8
+
+# Now, create 3 Buttons and wire together with a Script
+Transform {
+  translation -3 0 0
+  children DEF B1 Group {
+    children [
+    DEF B1TOS TouchSensor {}
+    DEF B1Toggle Script {
+      eventIn SFTime touch
+      eventOut SFInt32 which_changed
+      url [
+        "ToggleScript.class" ]
+    }
+    DEF B1SW Switch {
+      whichChoice 0
+      choice [
+        Shape {     # child 0 - "off"
+          geometry Box {}
+          appearance DEF A2 Appearance {
+            material Material { diffuseColor .3 0 0 }
+          }
+        }
+        Shape {     # choice 1 - "on"
+          geometry Box {}
+          appearance DEF A1 Appearance {
+            material Material { diffuseColor 1 0 0 }
+          }
+        }
+      ]
+    }
+  ]}
+  ROUTE B1TOS.touchTime TO B1Toggle.touch
+  ROUTE B1Toggle.which_changed TO B1SW.set_whichChoice
+}
+DEF B2  Group {
+    children [
+    DEF B2TOS TouchSensor {}
+    DEF B2Toggle Script {
+      eventIn SFTime touch
+      eventOut SFInt32 which_changed
+      url [
+        "ToggleScript.class" ]
+    }
+    DEF B2SW Switch {
+      whichChoice 0
+      choice [
+        Shape {     # child 0 - "off"
+          geometry Sphere {}
+          appearance DEF A2 Appearance {
+            material Material { diffuseColor .3 0 0 }
+          }
+        }
+        Shape {     # choice 1 - "on"
+          geometry Sphere {}
+          appearance DEF A1 Appearance {
+            material Material { diffuseColor 1 0 0 }
+          }
+        }
+      ]
+    }
+  ]}
+ROUTE B2TOS.touchTime TO B2Toggle.touch
+ROUTE B2Toggle.which_changed TO B2SW.set_whichChoice
+Transform {
+  translation 3 0 0
+  children DEF B3  Group {
+    children [
+    DEF B3TOS TouchSensor {}
+    DEF B3Toggle Script {
+      eventIn SFTime touch
+      eventOut SFInt32 which_changed
+      url [
+        "ToggleScript.class" ]
+    }
+    DEF B3SW Switch {
+      whichChoice 0
+      choice [
+        Shape {     # child 0 - "off"
+          geometry Cone {}
+          appearance DEF A2 Appearance {
+            material Material { diffuseColor .3 0 0 }
+          }
+        }
+        Shape {     # choice 1 - "on"
+          geometry Cone {}
+          appearance DEF A1 Appearance {
+            material Material { diffuseColor 1 0 0 }
+          }
+        }
+      ]
+    }
+  ]}
+  ROUTE B3TOS.touchTime TO B3Toggle.touch
+  ROUTE B3Toggle.which_changed TO B3SW.set_whichChoice
+}
+DEF ThreeButtons Script {
+  field SFInt32 b1 0
+  field SFInt32 b2 0
+  field SFInt32 b3 0
+  eventIn SFInt32 set_b1
+  eventIn SFInt32 set_b2
+  eventIn SFInt32 set_b3
+  eventOut SFTime startTime
+  url [ "ScriptLogic.class" ]
+}
+DEF T Transform { children [                 # Explosion effect
+  Shape { geometry Sphere {  radius 0.1 } }  # Hidden inside
+  DEF SI PositionInterpolator {
+    key [ 0.0 1.0 ]
+    keyValue [ 0.01 0.01 0.01, 300.0 300.0 300.0 ]
+  }
+  DEF TS TimeSensor { }
+  NavigationInfo { type "EXAMINE" }
+] }
+ROUTE B1Toggle.which_changed TO ThreeButtons.set_b1
+ROUTE B2Toggle.which_changed TO ThreeButtons.set_b2
+ROUTE B3Toggle.which_changed TO ThreeButtons.set_b3
+ROUTE ThreeButtons.startTime TO TS.startTime
+ROUTE TS.fraction_changed TO SI.set_fraction
+ROUTE SI.value_changed TO T.set_scale

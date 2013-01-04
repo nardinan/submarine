@@ -1,0 +1,137 @@
+#VRML V2.0 utf8
+# Copyright (C) 2001 John Stewart CRC Canada
+# DISTRIBUTED WITH NO WARRANTY, EXPRESS OR IMPLIED.
+# See the GNU Library General Public License (file COPYING in the distribution)
+# for conditions of use and redistribution.
+
+PROTO note [ 	field SFFloat size 1.0
+		field SFColor color 0.9 0.9 0.9 ]
+{
+  Transform {
+	translation 2 0 0
+	children [
+	  Shape { geometry Cylinder { height IS size radius 0.2}
+	  appearance Appearance { material  Material { diffuseColor IS color } }
+	  } ] }
+}
+
+PROTO octbutton [ field SFFloat size 1.0
+		field SFColor color 1 0 0]
+{
+          Shape { geometry Cone { bottomRadius IS size height 0.2}
+          appearance Appearance { material  Material { diffuseColor IS color } }
+          }
+}
+
+PROTO button [ field SFFloat size 1.0
+		field SFColor color 1 0 0]
+{
+          Shape { geometry Sphere { radius IS size}
+          appearance Appearance { material  Material { diffuseColor IS color } }
+          }
+}
+
+
+Group {
+  children [
+
+    Background {
+        skyAngle        [ 1.07 1.45 1.52 1.57 ]
+        skyColor        [ 0.00 0.00 0.30
+                          0.00 0.00 0.80
+                          0.45 0.70 0.80
+                          0.70 0.50 0.00
+                          1.00 0.00 0.00 ]
+        groundAngle     1.57
+        groundColor     [ 0.0 0.0 0.0, 0.0 0.7 0.0 ]
+    }
+
+
+    NavigationInfo {
+      type "FLY"
+      type "WALK"
+        type "EXAMINE"
+	headlight TRUE
+    }
+
+    DEF VIEWPOINT Viewpoint {
+        description "one"
+        position 0 0 10
+        orientation 0 1 0 0
+    }
+
+    Viewpoint {
+        description "two"
+        position 8.660254 0 -5
+        orientation 0 1 0 2.0943951
+    }
+
+    Viewpoint {
+        description "three"
+        position -8.660254 0 -5
+        orientation 0 1 0 4.1887902
+    }
+
+
+    DEF sphere Transform {               # Second child - a red sphere
+      translation  4 0 2
+      children [
+        Shape {
+          geometry Sphere { radius 2.3 }
+          appearance Appearance {
+            material  DEF sphereMat Material { diffuseColor 1 0 0 }   # Red
+          }
+        }
+      ]
+    }
+
+    DEF box Transform {               # Third child - a blue box
+      translation -3 .2 1
+      rotation     0 1 1  .9
+      children [
+        Shape {
+          geometry Box {}
+          appearance Appearance {
+            material Material { diffuseColor 0 0 1 }  # Blue
+         }
+        }
+      ]
+    }
+
+
+
+   # The Synthesizer. First, make the Octive
+   Transform {
+      translation 10 0 -30
+      rotation 1 0 0 1.57
+      children [
+	# notes are C, C# D D# E F F# G G# A A# B
+	Transform { rotation 0 1 0 0 children [ note {} DEF Note1 TouchSensor{}]}
+	Transform { rotation 0 1 0 0 children [ note { } DEF Note2 TouchSensor{}]}
+	Transform { rotation 0 1 0 0.52 children [ note {size 1.5 color 0.1 0.1 0.1} DEF Note2 TouchSensor{}] }
+	Transform { rotation 0 1 0 1.04 children [ note {size 2.0} DEF Note3 TouchSensor{}] }
+	Transform { rotation 0 1 0 1.57 children [ note {size 2.5 color 0.1 0.1 0.1} DEF Note4 TouchSensor{}] }
+	Transform { rotation 0 1 0 2.09 children [ note {size 3.0} DEF Note5 TouchSensor{}] }
+	Transform { rotation 0 1 0 2.61 children [ note {size 3.5} DEF Note6 TouchSensor{}] }
+	Transform { rotation 0 1 0 3.14 children [ note {size 4.0 color 0.1 0.1 0.1} DEF Note7 TouchSensor{}] }
+	Transform { rotation 0 1 0 3.66 children [ note {size 4.5} DEF Note8 TouchSensor{}] }
+	Transform { rotation 0 1 0 4.18 children [ note {size 5.0 color 0.1 0.1 0.1} DEF Note9 TouchSensor{}] }
+	Transform { rotation 0 1 0 4.71 children [ note {size 5.5} DEF Note10 TouchSensor{}] }
+	Transform { rotation 0 1 0 5.23 children [ note {size 6.0 color 0.1 0.1 0.1} DEF Note11 TouchSensor{}] }
+	Transform { rotation 0 1 0 5.75 children [ note {size 6.5} DEF Note12 TouchSensor{}] }
+
+	# The Play and Record buttons
+	Transform { translation 0 -2 -1 children [ button {size 0.2} DEF Record TouchSensor{}] }
+	Transform { translation 0 -2  1 children [ button {size 0.2 color 1 1 0} DEF Play TouchSensor{}] }
+
+	# and the octive switching buttons
+	Transform { translation 1 2 1 children [ octbutton {size 0.1 color 0.7 0.3 0.7 } DEF Oct1 TouchSensor{}] }
+	Transform { translation 1 2 -1 children [ octbutton {size 0.15 color 0.7 0.3 0.7 } DEF Oct2 TouchSensor{}] }
+	Transform { translation -1 2 -1 children [ octbutton {size 0.2 color 0.7 0.3 0.7 } DEF Oct3 TouchSensor{}] }
+	Transform { translation -1 2 1 children [ octbutton {size 0.25 color 0.7 0.3 0.7 } DEF Oct4 TouchSensor{}] }
+      ]
+    }
+  ]
+}
+
+

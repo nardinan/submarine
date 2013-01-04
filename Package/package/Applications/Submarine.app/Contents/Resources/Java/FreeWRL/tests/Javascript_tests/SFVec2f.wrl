@@ -1,0 +1,56 @@
+#VRML V2.0 utf8 CosmoWorlds V1.0
+
+Transform {
+	translation -3 0 0
+	children Shape {
+		appearance Appearance {
+			material Material {}
+			texture ImageTexture { url "../helpers/mandrill.jpg" }
+			textureTransform DEF TEX1 TextureTransform {}
+		}
+		geometry Box { }
+	}
+}
+
+Transform {
+	translation 3 0 0
+	children Shape {
+		appearance Appearance {
+			material Material {}
+			texture ImageTexture { url "../helpers/mandrill.jpg" }
+			textureTransform DEF TEX2 TextureTransform {}
+		}
+		geometry Box { }
+	}
+}
+
+# Animation clock
+	DEF Clock TimeSensor {
+		cycleInterval 2
+		loop TRUE
+	},
+
+# Animation path
+
+	DEF ColumnPath PositionInterpolator2D {
+		key [ 0.0 0.5 1.0 ]
+		keyValue [
+			-1  -2
+			0   -1
+			1   2
+		]
+}
+
+DEF SCRIPT Script { 
+	eventIn SFVec2f scaler
+	eventOut SFVec2f centerer
+url "vrmlscript: 
+function scaler (sc, tm) {
+	centerer = new SFVec2f(sc[0]/2, sc[1]/2);
+}
+"}
+
+ROUTE Clock.fraction_changed TO ColumnPath.set_fraction
+ROUTE ColumnPath.value_changed TO TEX1.scale
+ROUTE TEX1.scale_changed TO SCRIPT.scaler
+ROUTE SCRIPT.centerer TO TEX2.set_translation

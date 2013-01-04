@@ -1,0 +1,24 @@
+#VRML V2.0 uft8
+
+# tests Viewpoints, fieldOfView, and Inlines.
+
+DEF VIEWPOINT Viewpoint {
+        description "one"
+	fieldOfView 0.2
+}
+
+Viewpoint {
+        description "two"
+	fieldOfView 0.75
+}
+
+Viewpoint {
+        description "three"
+	fieldOfView 2.0
+}
+
+Viewpoint {
+	description "crash"
+	fieldOfView 3.0
+}
+Inline { url "helpers/Simple.wrl" }

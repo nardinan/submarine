@@ -1,0 +1,53 @@
+#VRML V2.0 utf8
+#MultiTexture test - images taken from X3D Spec. John Stewart CRC Canada.
+
+Transform { translation 3 2 0 children [
+		Transform { children DEF BOX1 Shape {
+			appearance Appearance { material Material { } }
+			geometry NULL
+} } ] } 
+
+Transform { translation -3 2 0 children [
+		Transform { children DEF BOX2 Shape {
+			appearance Appearance { material Material {} }
+			geometry NULL
+} } ] } 
+
+Transform { translation -3 -2 0 children [
+		Transform { children DEF BOX3 Shape {
+			appearance Appearance { material Material {} }
+			geometry NULL
+} } ] } 
+
+Transform { translation 3 -2 0 children [
+		Transform { children DEF BOX4 Shape {
+			appearance Appearance { material Material {} }
+			geometry NULL
+} } ] } 
+
+DEF SCRIPT Script { 
+	eventOut SFNode createFromString
+	field MFNode nodes []
+	eventOut SFNode createFromString 
+	eventIn SFNode copyGeometryPointer 
+	eventOut SFNode copiedPointer
+	eventOut SFNode newedPointer
+	eventOut SFNode fromMFNode
+url "vrmlscript: 
+function initialize (sc, tm) {
+	//nodes = Browser.createVrmlFromString(\"Cone {}; Box {}\");
+	createFromString = new SFNode(\"Cylinder {height 1}\");
+}
+
+function copyGeometryPointer (ptr,tm) {
+	copiedPointer = ptr;
+	newedPointer = new SFNode(ptr);
+	//	fromMFNode = nodes[0];
+}
+"}
+
+ROUTE SCRIPT.createFromString TO BOX1.geometry
+ROUTE BOX1.geometry TO SCRIPT.copyGeometryPointer
+ROUTE SCRIPT.copiedPointer TO BOX2.geometry
+ROUTE SCRIPT.newedPointer TO BOX4.geometry
+#ROUTE SCRIPT.fromMFNode TO BOX3.geometry

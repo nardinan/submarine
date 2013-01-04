@@ -1,0 +1,59 @@
+#VRML V2.0 utf8
+# Copyright (C) 2002 John Stewart, CRC Canada.
+# Sound file from a "Snowbird" web site.
+# DISTRIBUTED WITH NO WARRANTY, EXPRESS OR IMPLIED.
+# See the GNU Library General Public License (file COPYING in the distribution)
+# for conditions of use and redistribution.
+
+# from the VRML book, page 125.
+
+# test orientationinterpolator.
+Group {
+	children [
+	# rotating cylinder
+		DEF Column Transform {
+			#rotation 0.0 0.0 0.0 1.54
+			children
+				Transform {
+				rotation 1.0 0.0 0.0 1.54
+				children [
+
+                Sound {
+                        source AudioClip { loop TRUE url "helpers/Checkin2.wav" }
+			maxBack 0.5
+			minBack 0
+			direction 0 1 0
+                }
+
+
+					Shape {
+					appearance Appearance {
+						material Material {}
+					}
+					geometry Cone { }
+					} # of shape
+				] 		# of children
+				}
+		},
+
+	# Animation clock
+		DEF Clock TimeSensor {
+			cycleInterval 30.0
+			loop TRUE
+		},
+
+	# Animation path
+
+		DEF ColumnPath OrientationInterpolator {
+			key [ 0.0 0.5 1.0 ]
+			keyValue [
+				0.0 1.0 0.0 0.0,
+				0.0 1.0 0.0 3.14,
+				0.0 1.0 0.0 6.28
+			]
+		}
+	]
+}
+
+ROUTE Clock.fraction_changed TO ColumnPath.set_fraction
+ROUTE ColumnPath.value_changed TO Column.set_rotation

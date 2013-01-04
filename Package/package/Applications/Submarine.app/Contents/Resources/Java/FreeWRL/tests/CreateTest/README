@@ -1,0 +1,35 @@
+The EAI classes are a "work in progress"; and are just getting
+rebuilt.
+
+October 13, 2000 - John.Stewart@crc.ca
+August 9, 2001   - updated by Ayla Khan
+
+Things to watch out for:
+
+1) sometimes the appletviewer does not shutdown correctly.
+
+ps -aux | grep jdk
+
+to find out if one is running, and
+kill "pid" (the number of the process) to stop it.
+
+2) the appletviewer now ignores the CLASSPATH.
+
+Appletviewer's -J option can be used as a temporary work-around.
+This option is non-standard however, and it's usage may change in the future.
+
+In the meanwhile:
+
+EAI=../../java/classes
+
+sets the path to the EAI classes, and
+
+appletviewer -J-classpath -J$EAI -J-Djava.security.policy="$EAI/java.policy" add-remove1.html
+
+sets up the classpath, and the java security policy file needed to run the applet in
+appletviewer.
+
+3) verify all paths in the script "standalone", to run it with
+the appletviewer. It assumes that both freewrl and the appletviewer
+are installed and in your path.
+

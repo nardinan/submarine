@@ -1,0 +1,60 @@
+#VRML V2.0 utf8
+
+# Animation clock
+        DEF Clock TimeSensor {
+                cycleInterval 0.25
+                loop TRUE
+        }
+
+        DEF IS IntegerSequencer {
+                key [0 .25 .50 .75]
+                keyValue [0 1 2 3]
+        }
+
+Transform {
+  children [
+        DEF cpS Switch {
+                whichChoice 0
+                choice [
+                        Shape { appearance Appearance { material Material {diffuseColor 0 1 1}} geometry Box {}}
+                        Shape { appearance Appearance { material Material {diffuseColor 0 1 0}} geometry Box {}}
+                        Shape { appearance Appearance { material Material {diffuseColor 1 1 0}} geometry Box {}}
+                        Shape { appearance Appearance { material Material {diffuseColor 1 1 1}} geometry Box {}}
+                        Shape { appearance Appearance { material Material {diffuseColor 0 1 1}} geometry Cone {}}
+                        Shape { appearance Appearance { material Material {diffuseColor 0 1 0}} geometry Cone {}}
+                        Shape { appearance Appearance { material Material {diffuseColor 1 1 0}} geometry Cone {}}
+                        Shape { appearance Appearance { material Material {diffuseColor 1 1 1}} geometry Cone {}}
+                        Shape { appearance Appearance { material Material {diffuseColor 0 1 1}} geometry Sphere {}}
+                        Shape { appearance Appearance { material Material {diffuseColor 0 1 0}} geometry Sphere {}}
+                        Shape { appearance Appearance { material Material {diffuseColor 1 1 0}} geometry Sphere {}}
+                        Shape { appearance Appearance { material Material {diffuseColor 1 1 1}} geometry Sphere {}}
+        ]
+        }
+]
+}
+
+ROUTE Clock.fraction_changed TO IS.set_fraction
+ROUTE IS.value_changed TO cpS.set_whichChoice
+
+DEF SCRIPT Script { 
+	eventOut MFInt32 this_keyValue
+	field SFInt32 counter 0
+
+url "vrmlscript: 
+function eventsProcessed () {
+	if (counter == 100) {
+		this_keyValue = new MFInt32(4,5,6,7);
+	} else if (counter == 300) {
+		this_keyValue = new MFInt32(0, 4,6,11);
+	} else if (counter == 600) {
+		this_keyValue = new MFInt32(8,9,5,3);
+	} else if (counter == 1000) {
+		this_keyValue = new MFInt32(0,1,2,3);
+		counter = 0;
+	}
+		counter ++;
+}
+"}
+
+ROUTE SCRIPT.this_keyValue TO IS.set_keyValue
+

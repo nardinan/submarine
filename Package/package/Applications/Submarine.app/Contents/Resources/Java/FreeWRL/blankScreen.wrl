@@ -1,0 +1,39 @@
+#VRML V2.0 utf8
+
+Transform {
+        rotation 1 0 0 0.4
+        translation 0 0 3
+        children [
+                DEF BOX Transform { children Shape {
+                        appearance Appearance {
+                                material Material { }
+				texture ImageTexture {url "/Applications/FreeWRL/startupImage.jpg"}
+                        }
+                        geometry Box { }
+                }
+        }
+
+        ]
+}
+
+
+# Animation clock
+        DEF Clock TimeSensor {
+                cycleInterval 4.0
+                loop TRUE
+        },
+
+# Animation path
+
+        DEF ColumnPath OrientationInterpolator {
+                key [ 0.0 0.5 1.0 ]
+                keyValue [
+                        0.0 1.0 0.0 6.28,
+                        0.0 1.0 0.0 3.14,
+                        0.0 1.0 0.0 0.0,
+                ]
+}
+
+ROUTE Clock.fraction_changed TO ColumnPath.set_fraction
+ROUTE ColumnPath.value_changed TO BOX.set_rotation
+

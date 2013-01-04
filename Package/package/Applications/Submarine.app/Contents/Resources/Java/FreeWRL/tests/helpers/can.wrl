@@ -1,0 +1,53 @@
+#VRML V2.0 utf8
+# The VRML 2.0 Sourcebook
+# Copyright [1997] By
+# Andrea L. Ames, David R. Nadeau, and John L. Moreland
+Group {
+	children [
+	# Can top
+		Shape {
+			appearance Appearance {
+				material Material { }
+				texture ImageTexture {
+					#url "cantop.jpg"
+					url "cantop.png"
+				}
+			}
+			geometry Cylinder {
+				bottom FALSE
+				side FALSE
+				height 2.7
+			}
+		}
+	# Can bottom
+		Shape {
+			appearance Appearance {
+				material Material { }
+				texture ImageTexture {
+					#url "canbot.jpg"
+					url "canbot.png"
+				}
+			}
+			geometry Cylinder {
+				top FALSE
+				side FALSE
+				height 2.7
+			}
+		}
+	# Can side
+		Shape {
+			appearance Appearance {
+				material Material { }
+				texture ImageTexture {
+					#url "canlabel.jpg"
+					url "canlabel.png"
+				}
+			}
+			geometry Cylinder {
+				top FALSE
+				bottom FALSE
+				height 2.7
+			}
+		}
+	]
+}

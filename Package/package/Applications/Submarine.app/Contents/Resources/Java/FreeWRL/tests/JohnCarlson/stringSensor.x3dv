@@ -1,0 +1,83 @@
+#X3D V3.0 utf8
+
+PROFILE Immersive
+
+DEF STRINGS StringSensor {}
+
+# A shape to indicate the sensor is active 
+Transform {
+  translation -2 0 0
+  children Shape {
+    appearance Appearance {
+      material DEF ACTIVE_MATERIAL Material {
+        emissiveColor 0 0 1
+      }
+    }
+    geometry Sphere { radius 0.25 }
+  }
+}
+
+# Text field holding the text as it is being typed
+Transform {
+  translation 0 0.75 0
+  children Shape {
+    appearance Appearance {
+      material Material {
+        emissiveColor 0 1 1
+      }
+    }
+    geometry DEF WORKING_TEXT Text { string "working text" }
+  }
+}
+
+# Text field holding the last complete string 
+Transform {
+  translation 0 -0.75 0
+  children Shape {
+    appearance Appearance {
+      material Material {
+        emissiveColor 1 0 1
+      }
+    }
+    geometry DEF COMPLETE_TEXT Text { string "completed text here " }
+  }
+}
+
+DEF ACTIVE_SCRIPT Script {
+  inputOnly SFBool active
+  outputOnly SFColor color 
+  url "ecmascript:
+    function active(val) {
+      if(val)
+        color = new SFColor(0, 1, 0);
+      else
+        color = new SFColor(1, 0, 0);
+    }
+  "
+}
+
+ROUTE STRINGS.isActive TO ACTIVE_SCRIPT.active
+ROUTE ACTIVE_SCRIPT.color TO ACTIVE_MATERIAL.emissiveColor
+
+# Needed to convert a single SFString from the StringSensor node into the 
+# MFSting needed for the String field of the Text geometry
+DEF TEXT_SCRIPT Script {
+  inputOnly SFString enteredText
+  inputOnly SFString finalText
+  outputOnly MFString enteredStrings
+  outputOnly MFString finalStrings
+  url "ecmascript:
+    function enteredText(val) {
+      enteredStrings = new MFString(val);
+    }
+    function finalText(val) {       
+      finalStrings = new MFString(val);
+    }
+  "
+}
+
+ROUTE STRINGS.enteredText TO TEXT_SCRIPT.enteredText
+ROUTE STRINGS.finalText TO TEXT_SCRIPT.finalText
+
+ROUTE TEXT_SCRIPT.enteredStrings TO WORKING_TEXT.set_string
+ROUTE TEXT_SCRIPT.finalStrings TO COMPLETE_TEXT.set_string

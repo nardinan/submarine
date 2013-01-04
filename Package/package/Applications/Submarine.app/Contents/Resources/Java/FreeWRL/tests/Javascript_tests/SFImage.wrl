@@ -1,0 +1,67 @@
+#VRML V2.0 utf8
+#from web3d.vapourtech.com/library/ vrml.php?mode=proto&id=22&save=1
+
+Transform {translation -2.5 0 0 children [ 
+	Shape {
+		appearance Appearance {
+   			texture DEF CONE_TEXTURE PixelTexture { }
+			material Material { }
+		}
+		geometry Cone { }
+	}
+] }
+
+Transform {translation 2.5 0 0 children [ 
+	Shape {
+		appearance Appearance {
+   			texture DEF BOX_TEXTURE PixelTexture { }
+			material Material { }
+		}
+		geometry Box { }
+	}
+] }
+
+DEF SCRIPT Script {
+	eventIn SFFloat trigger
+	eventIn SFImage coneImageChanged
+	field SFInt32 xsize 10
+	field SFInt32 ysize 10
+	field SFInt32 triggerflip 0
+	eventOut SFImage changeConeImage
+	eventOut SFImage changeBoxImage
+      url [
+         "javascript:
+            function generate_texture() {
+               size = xsize * ysize;
+               pixels = new MFInt32()
+               for (i=0; i<size; i++) {
+                  pixels[i] = Math.random() * 255
+               }
+               changeConeImage = new SFImage(xsize,ysize,1,pixels);
+
+            }
+            function initialize() {
+               generate_texture();
+            }
+            function trigger(value,time) {
+		triggerflip += 1;
+		if (triggerflip == 50) {
+               		generate_texture();
+			triggerflip = 0;
+		}
+            }
+	function coneImageChanged (value,time) {
+		changeBoxImage = value;
+	}
+
+         "
+      ]
+   }
+   DEF TIMER TimeSensor {
+      loop TRUE
+      cycleInterval 10
+   }
+ROUTE TIMER.fraction_changed TO SCRIPT.trigger
+ROUTE SCRIPT.changeConeImage TO CONE_TEXTURE.set_image
+ROUTE CONE_TEXTURE.image_changed TO SCRIPT.coneImageChanged
+ROUTE SCRIPT.changeBoxImage TO BOX_TEXTURE.set_image

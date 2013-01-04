@@ -1,0 +1,52 @@
+#VRML V2.0 utf8
+
+DEF SHAPE1 Transform { children Shape {
+			appearance Appearance {
+				material Material {diffuseColor 0.8 0.2 0.2 }
+			} geometry Sphere { }
+		}
+}
+DEF SHAPE2 Transform { children Shape {
+			appearance Appearance {
+				material Material {diffuseColor 0.2 0.2 0.8}
+			} geometry Cone { }
+		}
+}
+
+# Animation clock
+	DEF Clock TimeSensor {
+		cycleInterval 4.0
+		loop TRUE
+	},
+
+# Animation path
+
+	DEF PositionCycler PositionInterpolator {
+		key [ 0.0 0.33 0.66  1.0 ]
+		keyValue [
+			-1 -1 1
+			-1 1 -1
+			1 -1 -1
+			-1 -1 1
+		]
+}
+
+DEF SCRIPT Script { 
+        eventIn  SFVec3f set_position
+	eventOut SFVec3f inverse
+	eventOut SFVec3f normal
+
+url "vrmlscript: 
+function set_position ( frac, tm ) {
+	inverse = new SFVec3f(frac[0]*-1-2.0, frac[1]*-1 -2.0, frac[2]);
+	normal = new SFVec3f(2.0+frac[0], 2.0 -frac[1], frac[2]);
+}
+
+"}
+
+
+ROUTE Clock.fraction_changed TO PositionCycler.set_fraction
+ROUTE PositionCycler.value_changed TO SCRIPT.set_position
+ROUTE SCRIPT.normal TO SHAPE1.set_translation
+ROUTE SCRIPT.inverse TO SHAPE2.set_translation
+

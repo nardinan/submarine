@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE X3D PUBLIC
+	"http://www.web3D.org/TaskGroups/x3d/translation/x3d-compact.dtd"
+	"file://localhost/www.web3D.org/TaskGroups/x3d/translation/x3d-compact.dtd" [
+ <!ENTITY % BaseLineProfile    "INCLUDE">
+ <!ENTITY % CoreProfile        "IGNORE">
+ <!ENTITY % DisJavaVrmlProfile "INCLUDE">
+ <!ENTITY % GeoVrmlProfile     "INCLUDE">
+ <!ENTITY % HAnimProfile       "INCLUDE">
+]>
+<X3D>
+   <Header><meta name='image' content='texture-front.jpg'/><meta name='image' content='texture-rear.jpg'/><meta name='image' content='texture-top.jpg'/><meta name='image' content='texture-bottom.jpg'/><meta name='image' content='texture-left.jpg'/><meta name='image' content='texture-right.jpg'/>
+      <meta content="http://www.itl.nist.gov/div897/ctg/vrml/members.html" name="author"/>
+      <meta content=" texture.xml " name="filename"/>
+      <meta content="This file was provided by the National Institute of Standards and Technology, and is part of the   X3D Conformance Test Suite, available at http://www.nist.gov/vrml.html  The information contained within this file   is provided for use in establishing comformance to the ISO VRML97 Specification.   Conformance to this test does not imply recommendation or endorsement by the National Institute of Standards and Technology.   This software can be redistributed and/or modified freely provided that any derivative works bear some notice that they are   derived from it, and any modified versions bear some notice that they have been modified. " name="disclaimer"/>
+      <meta content="Michael Kass, NIST" name="translator"/>
+      <meta content="21 January 2001" name="revised"/>
+      <meta content=" A default box with a simple imagetexture applied.  Note that the texture is applied in its entirety to each face of the box.  The texture is applied right side up on the front, back and sides of the box.  On the top, the texture appears right side up when the box is tilted toward the user.  On the bottom, the texture appears right side up when the top of the box is tilted toward the -z axis. " name="description"/>
+      <meta content=" http://www.web3D.org/TaskGroups/x3d/translation/examples/Conformance/Geometry/Box/texture.xml " name="url"/>
+      <meta content="X3D-Edit, http://www.web3D.org/TaskGroups/x3d/translation/README.X3D-Edit.html" name="generator"/>
+   </Header>
+   <Scene>
+      <NavigationInfo type="&#34;EXAMINE&#34; &#34;WALK&#34; &#34;FLY&#34; &#34;ANY&#34;"/>
+      <Shape>
+         <Appearance>
+            <Material/>
+            <ImageTexture url="&#34;helpers/brick.png&#34;"/>
+         </Appearance>
+         <Box/>
+      </Shape>
+   </Scene>
+</X3D>

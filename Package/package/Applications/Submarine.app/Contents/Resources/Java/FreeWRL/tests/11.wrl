@@ -1,0 +1,37 @@
+#VRML V2.0 utf8
+# Copyright (C) 1999 John Stewart, CRC Canada.
+# DISTRIBUTED WITH NO WARRANTY, EXPRESS OR IMPLIED.
+# See the GNU Library General Public License (file COPYING in the distribution)
+# for conditions of use and redistribution.
+
+# first example of points, lines and faces.
+# this is a cube, made of points.
+
+
+Shape {
+	appearance Appearance {
+	lineProperties LineProperties {
+		linewidthScaleFactor 4.0
+	}
+	material Material {
+	  emissiveColor 0.8 1.0 0.6
+	}
+	}
+
+	geometry PointSet {
+		coord Coordinate {
+		point [
+			# the top of the cube
+			-1.0 1.0 1.0,
+			1.0 1.0 1.0,
+			1.0 1.0 -1.0,
+			-1.0 1.0 -1.0,
+			# around the bottom of the cube
+			-1.0 -1.0 1.0,
+			1.0 -1.0 1.0,
+			1.0 -1.0 -1.0,
+			-1.0 -1.0 -1.0
+			]
+		}
+		}
+}

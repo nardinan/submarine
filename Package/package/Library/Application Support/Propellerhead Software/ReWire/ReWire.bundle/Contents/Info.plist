@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>ReWire</string>
+	<key>CFBundleGetInfoString</key>
+	<string>1.7, Copyright 2000-2006 Propellerhead Software AB, All Rights Reserved.</string>
+	<key>CFBundleIdentifier</key>
+	<string>se.propellerheads.rewire.library</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>BNDL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.7</string>
+	<key>CFBundleSignature</key>
+	<string>ReWi</string>
+	<key>CFBundleVersion</key>
+	<string>1.7</string>
+	<key>CSResourcesFileMapped</key>
+	<true/>
+	<key>PropellerheadBuildNumber</key>
+	<string>101</string>
+</dict>
+</plist>

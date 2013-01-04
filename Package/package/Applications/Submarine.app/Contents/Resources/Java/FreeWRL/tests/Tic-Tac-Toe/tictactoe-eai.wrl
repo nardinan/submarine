@@ -1,0 +1,142 @@
+#VRML V2.0 utf8
+
+WorldInfo {
+  title "TicTacToe"
+  info [
+    "Author : Seongyong Lim"
+    "Email  : sylim@sly.kotel.co.kr"
+    "Date   : 16 May 1997"
+  ]
+}
+
+Viewpoint {
+  position 0 -5 7
+  orientation 1 0 0 .6
+  description "VRML 2.0 TicTacToe"
+}
+
+NavigationInfo {
+  type [ "EXAMINE" "ANY" ]
+}
+
+DEF root Transform {
+  children [
+    Transform {
+      children [
+        Transform {
+          translation -1 1 0
+          children [
+            DEF panel Shape {
+              geometry Box { size 1 1 .1 }
+              appearance Appearance {
+                material Material { diffuseColor 0 0 1 }
+              }
+            }
+            DEF touch1 TouchSensor {}
+          ]
+        }
+        Transform {
+          translation -1 0 0
+          children [
+            USE panel
+            DEF touch2 TouchSensor {}
+          ]
+        }
+        Transform {
+          translation -1 -1 0
+          children [
+            USE panel
+            DEF touch3 TouchSensor {}
+          ]
+        }
+        Transform {
+          translation 0 1 0
+          children [
+            USE panel
+            DEF touch4 TouchSensor {}
+          ]
+        }
+        Transform {
+          translation 0 0 0
+          children [
+            USE panel
+            DEF touch5 TouchSensor {}
+          ]
+        }
+        Transform {
+          translation 0 -1 0
+          children [
+            USE panel
+            DEF touch6 TouchSensor {}
+          ]
+        }
+        Transform {
+          translation 1 1 0
+          children [
+            USE panel
+            DEF touch7 TouchSensor {}
+          ]
+        }
+        Transform {
+          translation 1 0 0
+          children [
+            USE panel
+            DEF touch8 TouchSensor {}
+          ]
+        }
+        Transform {
+          translation 1 -1 0
+          children [
+            USE panel
+            DEF touch9 TouchSensor {}
+          ]
+        }
+      ]
+    }
+    DEF seps Transform {
+      children [
+        Transform {
+          translation -1.5 0 .25
+          children [
+            DEF sep Shape {
+              geometry Box { size .1 3 .5 }
+              appearance Appearance {
+                material Material { diffuseColor 1 1 0 }
+              }
+            }
+          ]
+        }
+        Transform {
+          translation -0.5 0 .25
+          children [
+            USE sep
+          ]
+        }
+        Transform {
+          translation 0.5 0 .25
+          children [
+       	    USE sep
+          ]
+        }
+        Transform {
+          translation 1.5 0 .25
+          children [
+            USE sep
+          ]
+        }
+      ]
+    }
+    Transform {
+      rotation 0 0 1 1.57
+      children [
+        USE seps
+      ]
+    }
+    DEF checkDelay TimeSensor {
+      cycleInterval .1
+    }
+    DEF nextDelay TimeSensor {
+      cycleInterval .1
+    }
+  ]
+}

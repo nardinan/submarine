@@ -1,0 +1,1203 @@
+%% $Id: vts_local.tex,v 1.8 2005/03/21 13:39:24 crc_canada Exp $
+%% break this up into multiple files!!!
+
+\documentclass[12pt,letterpaper]{article}
+\usepackage{times}
+\usepackage{pifont}
+\usepackage{longtable}
+
+%% Margins
+\setlength{\topmargin}{0mm}
+\setlength{\voffset}{0mm}
+\setlength{\hoffset}{0mm}
+\setlength{\oddsidemargin}{0mm}
+\setlength{\marginparsep}{0mm}
+\setlength{\marginparwidth}{0mm}
+\setlength{\marginparpush}{0mm}
+\setlength{\textwidth}{158mm}
+\setlength{\textheight}{206mm}
+
+%% Counters
+\newcounter{testCaseCtr}
+
+%% New Commands
+\newcommand{\testCase}{\arabic{testCaseCtr}.~ \stepcounter{testCaseCtr}}
+\newcommand{\resetTestCase}{\setcounter{testCaseCtr}{1}}
+
+%% Titles for test cases.
+%% This saves some typing, although the names are a bit unreadable,
+%% and letters need to be used instead of numbers.
+%% This should be moved to another file.
+
+%% Appearance: Appearance test cases
+\newcommand{\AppA}{Material Field}
+\newcommand{\AppB}{ImageTexture Applied To Texture Field}
+\newcommand{\AppC}{PixelTexture Applied To Texture Field}
+\newcommand{\AppDa}{Default Color, Opacity For Unlit, Uncolored,~}
+\newcommand{\AppDb}{Untextured Geometry}
+\newcommand{\AppE}{PointSet, IndexedLineSet With Default Color}
+\newcommand{\AppF}{Default Color For Unlit, Untextured Geometry}
+\newcommand{\AppGa}{ImageTexture Applied To Unlit,~}
+\newcommand{\AppGb}{Uncolored Geometry}
+\newcommand{\AppHa}{Color, Greyscale ImageTexture Applied~}
+\newcommand{\AppHb}{To Unlit IndexedFaceSet}
+\newcommand{\AppIa}{Intensity, Greyscale ImageTexture Applied~}
+\newcommand{\AppIb}{To Unlit IndexedFaceSet}
+\newcommand{\AppJa}{Color Precedence Of Color ImageTexture Over~}
+\newcommand{\AppJb}{Color Node}
+\newcommand{\AppKa}{Color Transparent ImageTexture Applied To~}
+\newcommand{\AppKb}{Unlit Geometry}
+\newcommand{\AppLa}{Greyscale Transparent ImageTexture~}
+\newcommand{\AppLb}{Applied To Unlit Geometry}
+
+%% Appearance: FontStyle test cases
+\newcommand{\FSA}{FontStyle With Default Values}
+\newcommand{\FSB}{FontStyle With 3 Family Types}
+\newcommand{\FSC}{FontStyle With Next Supported Family}
+\newcommand{\FSD}{FontStyle With Unsupported Family}
+\newcommand{\FSE}{FontStyle With All Families And Supported Styles}
+\newcommand{\FSF}{FontStyle With 3 Size, Spacing Values}
+\newcommand{\FSG}{FontStyle With Text Orientation, Spacing}
+
+%% Appearance: ImageTexture test cases
+\newcommand{\ITA}{JPEG RGB Texture Mapping To Primitive Geometry}
+\newcommand{\ITB}{PNG RGB, Palette Mapping To Primitive Geometry}
+\newcommand{\ITC}{JPEG Greyscale Texture Mapping To Primitive Geometry}
+\newcommand{\ITD}{PNG Greyscale Texture Mapping To Primitive Geometry}
+\newcommand{\ITE}{256 X 256 Pixel Minimum File Requirement For JPEG Files}
+\newcommand{\ITF}{256 X 256 Pixel Minimum File Requirement For PNG Files}
+\newcommand{\ITG}{Default IndexedFaceSet Geometry Mapping For JPEG Files}
+\newcommand{\ITHa}{Default IndexedFaceSet Geometry Mapping For Bounding Box~}
+\newcommand{\ITHb}{With Equal Length Sides, JPEG Files}
+\newcommand{\ITIa}{Default IndexedFaceSet Geometry Mapping For Bounding Box~}
+\newcommand{\ITIb}{With Equal Length Smaller Sides, JPEG Files}
+\newcommand{\ITJa}{Default IndexedFaceSet Geometry Mapping For Bounding Box~}
+\newcommand{\ITJb}{With Equal Length Longer Sides, JPEG Files}
+\newcommand{\ITK}{Default JPEG Mapping To ElevationGrid Geometry}
+\newcommand{\ITL}{Default JPEG Mapping To Extrusion Geometry}
+\newcommand{\ITM}{Default JPEG Mapping To Text Geometry}
+\newcommand{\ITN}{Default IndexedFaceSet Geometry Mapping For PNG Files}
+\newcommand{\ITOa}{Default IndexedFaceSet Geometry Mapping For Bounding Box~}
+\newcommand{\ITOb}{With Equal Length Sides, PNG Files}
+\newcommand{\ITPa}{Default IndexedFaceSet Geometry Mapping For Bounding Box~}
+\newcommand{\ITPb}{With Equal Length Smaller Sides, PNG Files}
+\newcommand{\ITQa}{Default IndexedFaceSet Geometry Mapping For Bounding Box~}
+\newcommand{\ITQb}{With Equal Length Longer Sides, PNG Files}
+\newcommand{\ITR}{Default PNG Mapping To ElevationGrid Geometry}
+\newcommand{\ITS}{Default PNG Mapping To Extrusion Geometry}
+\newcommand{\ITT}{Default PNG Mapping To Text Geometry}
+\newcommand{\ITUa}{PNG Greyscale, Alpha-Opacity, Binary Transparency~}
+\newcommand{\ITUb}{Texture Mapping To Primitive Geometry}
+\newcommand{\ITVa}{PNG Greyscale, Alpha-Opacity, Binary Transparency~}
+\newcommand{\ITVb}{Texture Mapping To Complex Geometry}
+\newcommand{\ITWa}{PNG RGB, Alpha-Opacity, Binary Transparency~}
+\newcommand{\ITWb}{Texture Mapping To Primitive Geometry}
+\newcommand{\ITXa}{PNG RGB, Alpha-Opacity, Binary Transparency~}
+\newcommand{\ITXb}{Texture Mapping To Complex Geometry}
+\newcommand{\ITY}{JPEG Greyscale, DiffuseColor Combination}
+\newcommand{\ITZ}{JPEG Greyscale, Color Node Combination}
+\newcommand{\ITAA}{PNG Greyscale, DiffuseColor Combination}
+\newcommand{\ITAB}{PNG Greyscale, Color Node Combination}
+\newcommand{\ITAC}{Unclamped Horizontal, Vertical ImageTexture JPEG Mapping}
+\newcommand{\ITAD}{Vertical Clamping Of ImageTexture JPEG Mapping}
+\newcommand{\ITAE}{Horizontal Clamping Of ImageTexture JPEG Mapping}
+\newcommand{\ITAF}{Unclamped Horizontal, Vertical ImageTexture PNG Mapping}
+\newcommand{\ITAG}{Vertical Clamping Of ImageTexture PNG Mapping}
+\newcommand{\ITAH}{Horizontal Clamping Of ImageTexture PNG Mapping}
+
+%% Appearance: Material test cases
+\newcommand{\MatA}{Default Material Node Values For Primitive Geometry}
+\newcommand{\MatB}{Default Material Node Values For Complex Geometry}
+\newcommand{\MatC}{5 DiffuseColor Values For Primitive Geometries}
+\newcommand{\MatD}{5 Shininess Values For Primitive Geometries}
+\newcommand{\MatE}{5 DiffuseColor Values For Complex Geometries}
+\newcommand{\MatF}{5 Shininess Values For Complex Geometries}
+\newcommand{\MatGa}{Preference Of Texture Color Over Material DiffuseColor~}
+\newcommand{\MatGb}{For Primitive Geometry}
+\newcommand{\MatHa}{Preference Of Texture Color Over Material DiffuseColor~}
+\newcommand{\MatHb}{For Complex Geometry}
+\newcommand{\MatIa}{Preference Of Texture Color Over Geometry Color~}
+\newcommand{\MatIb}{For Complex Geometry}
+\newcommand{\MatJa}{Preference Of DiffuseColor Blending With Greyscale Texture~}
+\newcommand{\MatJb}{When Geometry Color Is NULL}
+\newcommand{\MatKa}{Preference Of Geometry Color Blending With Greyscale Texture~}
+\newcommand{\MatKb}{Over Material Node DiffuseColor When Both Are Present}
+\newcommand{\MatL}{Preference Of Geometry Color Over Material Node DiffuseColor}
+\newcommand{\MatMa}{Preference Of DiffuseColor Geometry Coloring When~}
+\newcommand{\MatMb}{Geometry Color Node is NULL}
+\newcommand{\MatNa}{Preference Of Geometry Color Over Material EmissiveColor~}
+\newcommand{\MatNb}{For PointSet Geometry}
+\newcommand{\MatOa}{Preference Of EmissiveColor When Geometry Color Is NULL~}
+\newcommand{\MatOb}{For PointSet Geometry}
+\newcommand{\MatPa}{Preference Of Geometry Color Over Material EmissiveColor~}
+\newcommand{\MatPb}{For IndexedLineSet Geometry}
+\newcommand{\MatQa}{Preference Of EmissiveColor When Geometry Color Is NULL~}
+\newcommand{\MatQb}{For IndexedLineSet Geometry}
+\newcommand{\MatRa}{Preference Of Color Texture Alpha-Opacity Over~}
+\newcommand{\MatRb}{Material Node Transparency Field}
+\newcommand{\MatSa}{Preference Of Greyscale Texture Alpha-Opacity Over~}
+\newcommand{\MatSb}{Material Node Transparency Field}
+\newcommand{\MatTa}{Preference Of Material Transparency When Color Texture~}
+\newcommand{\MatTb}{Has No Alpha-Opacity Value}
+\newcommand{\MatUa}{Preference Of Material Transparency When Greyscale Texture~}
+\newcommand{\MatUb}{Has No Alpha-Opacity Value}
+\newcommand{\MatV}{5 AmbientIntensity Values For Primitive Geometries}
+\newcommand{\MatW}{5 EmissiveColor Values For Primitive Geometries}
+\newcommand{\MatX}{5 SpecularColor Values For Primitive Geometries}
+\newcommand{\MatY}{5 AmbientIntensity Values For Complex Geometries}
+\newcommand{\MatZ}{5 EmissiveColor Values For Complex Geometries}
+\newcommand{\MatAA}{5 SpecularColor Values For Complex Geometries}
+\newcommand{\MatAB}{5 Transparency Values For Primitive Geometries}
+\newcommand{\MatAC}{5 Transparency Values For Complex Geometries}
+
+%% Appearance: TextureTransform test cases
+\newcommand{\TTA}{Default TextureTransform Node To Primitive Geometries}
+\newcommand{\TTBa}{Default TextureTransform Mapping Of ImageTexture~}
+\newcommand{\TTBb}{For Extrusion Geometry}
+\newcommand{\TTCa}{Default TextureTransform Mapping Of ImageTexture~}
+\newcommand{\TTCb}{For ElevationGrid Geometry}
+\newcommand{\TTDa}{Default TextureTransform Mapping Of ImageTexture~}
+\newcommand{\TTDb}{For IndexedFaceSet Geometry}
+\newcommand{\TTEa}{Scale Field Applied To ImageTexture Mapped~}
+\newcommand{\TTEb}{To Primitive Geometry}
+\newcommand{\TTFa}{Scale Field Applied To ImageTexture Mapped~}
+\newcommand{\TTFb}{To Complex Geometry}
+\newcommand{\TTGa}{Rotation Field Applied To ImageTexture Mapped~}
+\newcommand{\TTGb}{To Primitive Geometry}
+\newcommand{\TTHa}{Rotation Field Applied To ImageTexture Mapped~}
+\newcommand{\TTHb}{To Complex Geometry}
+\newcommand{\TTIa}{Horizontal Test Of Translation Field Applied To~}
+\newcommand{\TTIb}{ImageTexture Mapped To Primitive Geometry}
+\newcommand{\TTJa}{Vertical Test Of Translation Field Applied To~}
+\newcommand{\TTJb}{ImageTexture Mapped To Primitive Geometry}
+\newcommand{\TTKa}{Horizontal Test Of Translation Field Applied To~}
+\newcommand{\TTKb}{ImageTexture Mapped To Complex Geometry}
+\newcommand{\TTLa}{Vertical Test Of Translation Field Applied To~}
+\newcommand{\TTLb}{ImageTexture Mapped To Complex geometry}
+\newcommand{\TTMa}{Test Of Center Field Applied To ImageTexture Mapped~}
+\newcommand{\TTMb}{To Primitive Geometry}
+\newcommand{\TTNa}{Test Of Center Field Applied To ImageTexture Mapped~}
+\newcommand{\TTNb}{To Complex Geometry}
+\newcommand{\TTOa}{Test Of All Fields Applied To ImageTexture Mapped~}
+\newcommand{\TTOb}{To Primitive Geometry}
+\newcommand{\TTPa}{Test Of All Fields Applied To ImageTexture Mapped~}
+\newcommand{\TTPb}{To Complex Geometry}
+
+%% Bindable Nodes: Background test cases
+\newcommand{\BkgA}{Simple (Single) Binded Background Sending TRUE Events}
+\newcommand{\BkgB}{Simple (Single) Non Binded Background Sending FALSE Events}
+\newcommand{\BkgCa}{Sending FALSE Event To Background At Stack Top Will Bind~}
+\newcommand{\BkgCb}{Next Background In Stack}
+\newcommand{\BkgDa}{Sending TRUE Event To Background Not At Stack Top Should~}
+\newcommand{\BkgDb}{Force Active Background Out Of Stack Top}
+\newcommand{\BkgE}{Multiple Backgrounds Being Activated/Deactivated Dynamically}
+\newcommand{\BkgFa}{When Last Angle Is $ < \pi$ Last Should Clamp From Last Angle~}
+\newcommand{\BkgFb}{To Nadir}
+\newcommand{\BkgGa}{When Last Angle Is $ < \frac{\pi}{2}$ Then Last Angle/Equator~}
+\newcommand{\BkgGb}{Region Should Be Invisible}
+\newcommand{\BkgH}{Set Different Values for the frontUrl Field (Jpeg Images)}
+\newcommand{\BkgI}{Set Different Values for the leftUrl Field (Jpeg Images)}
+\newcommand{\BkgJ}{Set Different Values for the rightUrl Field (Jpeg Images)}
+\newcommand{\BkgK}{Set Different Values for the backUrl Field (Jpeg Images)}
+\newcommand{\BkgL}{Set Different Values for the topUrl Field (Jpeg Images)}
+\newcommand{\BkgM}{Set Different Values for the bottomUrl Field (Jpeg Images)}
+\newcommand{\BkgN}{Whole Panorama Made up of JPEG Images}
+\newcommand{\BkgO}{Set Different Values for the frontUrl Field (png Images)}
+\newcommand{\BkgP}{Set Different Values for the leftUrl Field (png Images)}
+\newcommand{\BkgQ}{Set Different Values for the rightUrl Field (png Images)}
+\newcommand{\BkgR}{Set Different Values for the backUrl Field (png Images)}
+\newcommand{\BkgS}{Set Different Values for the topUrl Field (png Images)}
+\newcommand{\BkgT}{Set Different Values for the bottomUrl Field (png Images)}
+\newcommand{\BkgU}{Whole Panorama Made up of PNG Images}
+\newcommand{\BkgV}{Variations of the Same Color at Different Angles}
+\newcommand{\BkgWa}{Variations of the same ground color at different ground}
+\newcommand{\BkgWb}{angles (same sky color)}
+
+%% Bindable Nodes: Fog test cases
+\newcommand{\FogA}{Default Browser Behavior When No Fog Nodes Are Present}
+
+%% Bindable Nodes: NavigationInfo test cases
+
+%% Bindable Nodes: Viewpoint test cases
+
+%% Special Groups: Inline test cases
+\newcommand{\SpGrA}{Single Url Item}
+\newcommand{\SpGrB}{Inline Node Referencing Another Inline Node}
+\newcommand{\SpGrC}{Inline Node With Invalid Url Reference}
+\newcommand{\SpGrD}{Test Absolute Urls}
+\newcommand{\SpGrE}{Test Relative Urls}
+%% Beyond minimum conformance requirements: Bounding boxes
+\newcommand{\SpGrF}{Bounding Box Size Equal To Children's Size}
+
+%% Special Groups: LOD test cases
+%% Special Groups: Switch test cases
+
+\begin{document}
+\part*{NIST VRML Test Suite - Local FreeWRL Compliance Testing}
+
+Testing the FreeWRL VRML97 browser locally on think.dgrc.crc.ca.
+FreeWRL has been configured as a Netscape plug-in.
+The testing was done with Netscape Communicator 4.61.
+The web server used is Apache 1.3.19.
+Results are grouped by Node Group.
+
+\section{Appearance Test Cases}
+\resetTestCase
+
+\begin{center}
+\setlongtables
+\begin{longtable}{|l|l|l|}
+%% Table head and foot rows
+\hline
+\textbf{Appearance} & \textbf{Test Case} & \textbf{Result} \\\hline\hline
+\endhead
+%%\cline{2-3}
+ & \multicolumn{2}{|r|}{\textsl{continued on the next page\ldots}} \\\hline
+\endfoot\hline
+\endlastfoot
+
+Appearance & \testCase \AppA & Passed \\\cline{2-3}
+ & \testCase \AppB & Passed \\\cline{2-3}
+ & \testCase \AppC & Undet. \\\cline{2-3}
+ & \testCase \AppDa & Passed \\
+ & \AppDb & \\\cline{2-3}
+ & \testCase \AppE & Failed \\\cline{2-3}
+ & \testCase \AppF & Failed \\\cline{2-3}
+ & \testCase \AppGa & Passed \\
+ & \AppGb & \\\cline{2-3}
+ & \testCase \AppHa & Passed \\
+ & \AppHb & \\\cline{2-3}
+ & \testCase \AppIa & Passed \\
+ & \AppIb & \\\cline{2-3}
+ & \testCase \AppJa & Failed \\
+ & \AppJb & \\\cline{2-3}
+ & \testCase \AppKa & Failed \\
+ & \AppKb & \\\cline{2-3}
+ & \testCase \AppLa & Failed \\
+ & \AppLb & \\\hline
+\resetTestCase
+FontStyle & \testCase \FSA & Failed \\\cline{2-3}
+ & \testCase \FSB & Failed \\\cline{2-3}
+ & \testCase \FSC & Failed \\\cline{2-3}
+ & \testCase \FSD & Failed \\\cline{2-3}
+ & \testCase \FSE & Failed \\\cline{2-3}
+ & \testCase \FSF & Failed \\\cline{2-3}
+ & \testCase \FSG & Failed \\\hline
+\resetTestCase
+ImageTexture & \testCase \ITA & Passed \\\cline{2-3}
+ & \testCase \ITB & Passed \\\cline{2-3}
+ & \testCase \ITC & Passed \\\cline{2-3}
+ & \testCase \ITD & Passed \\\cline{2-3}
+ & \testCase \ITE & Passed \\\cline{2-3}
+ & \testCase \ITF & Passed \\\cline{2-3}
+ & \testCase \ITG & Passed \\\cline{2-3}
+ & \testCase \ITHa & Passed \\
+ & \ITHb & \\\cline{2-3}
+ & \testCase \ITIa & Passed \\
+ & \ITIb & \\\cline{2-3}
+ & \testCase \ITJa & Passed \\
+ & \ITJb & \\\cline{2-3}
+ & \testCase \ITK & Passed \\\cline{2-3}
+ & \testCase \ITL & Failed \\\cline{2-3}
+ & \testCase \ITM & Failed \\\cline{2-3}
+ & \testCase \ITN & Passed \\\cline{2-3}
+ & \testCase \ITOa & Passed \\
+ & \ITOb & \\\cline{2-3}
+ & \testCase \ITPa & Passed \\
+ & \ITPb & \\\cline{2-3}
+ & \testCase \ITQa & Passed \\
+ & \ITQb & \\\cline{2-3}
+ & \testCase \ITR & Passed \\\cline{2-3}
+ & \testCase \ITS & Failed \\\cline{2-3}
+ & \testCase \ITT & Failed \\\cline{2-3}
+ & \testCase \ITUa & Passed \\
+ & \ITUb & \\\cline{2-3}
+ & \testCase \ITVa & Failed \\
+ & \ITVb & \\\cline{2-3}
+ & \testCase \ITWa & Passed \\
+ & \ITWb & \\\cline{2-3}
+ & \testCase \ITXa & Failed \\
+ & \ITXb & \\\cline{2-3}
+ & \testCase \ITY & Passed \\\cline{2-3}
+ & \testCase \ITZ & Passed \\\cline{2-3}
+ & \testCase \ITAA & Passed \\\cline{2-3}
+ & \testCase \ITAB & Passed \\\cline{2-3}
+ & \testCase \ITAC & Passed \\\cline{2-3}
+ & \testCase \ITAD & Passed \\\cline{2-3}
+ & \testCase \ITAE & Passed \\\cline{2-3}
+ & \testCase \ITAF & Passed \\\cline{2-3}
+ & \testCase \ITAG & Passed \\\cline{2-3}
+ & \testCase \ITAH & Passed \\\hline
+\resetTestCase
+Material & \testCase \MatA & Passed \\\cline{2-3}
+ & \testCase \MatB & Passed \\\cline{2-3}
+ & \testCase \MatC & Passed \\\cline{2-3}
+ & \testCase \MatD & Passed \\\cline{2-3}
+ & \testCase \MatE & Passed \\\cline{2-3}
+ & \testCase \MatF & Passed \\\cline{2-3}
+ & \testCase \MatGa & Failed \\
+ & \MatGb & \\\cline{2-3}
+ & \testCase \MatHa & Failed \\
+ & \MatHb & \\\cline{2-3}
+ & \testCase \MatIa & Failed \\
+ & \MatIb & \\\cline{2-3}
+ & \testCase \MatJa & Failed \\
+ & \MatJb & \\\cline{2-3}
+ & \testCase \MatKa & Passed \\
+ & \MatKb & \\\cline{2-3}
+ & \testCase \MatL & Passed \\\cline{2-3}
+ & \testCase \MatMa & Passed \\
+ & \MatMb & \\\cline{2-3}
+ & \testCase \MatNa & Failed \\
+ & \MatNb & \\\cline{2-3}
+ & \testCase \MatOa & Passed \\
+ & \MatOb & \\\cline{2-3}
+ & \testCase \MatPa & Failed \\
+ & \MatPb & \\\cline{2-3}
+ & \testCase \MatQa & Failed \\
+ & \MatQb & \\\cline{2-3}
+ & \testCase \MatRa & Failed \\
+ & \MatRb & \\\cline{2-3}
+ & \testCase \MatSa & Failed \\
+ & \MatSb & \\\cline{2-3}
+ & \testCase \MatTa & Failed \\
+ & \MatTb & \\\cline{2-3}
+ & \testCase \MatUa & Failed \\
+ & \MatUb & \\\cline{2-3}
+ & \testCase \MatV & Passed \\\cline{2-3}
+ & \testCase \MatW & Passed \\\cline{2-3}
+ & \testCase \MatX & Passed \\\cline{2-3}
+ & \testCase \MatY & Passed \\\cline{2-3}
+ & \testCase \MatZ & Failed \\\cline{2-3}
+ & \testCase \MatAA & Passed \\\cline{2-3}
+ & \testCase \MatAB & Failed \\\cline{2-3}
+ & \testCase \MatAC & Failed \\\hline
+\resetTestCase
+MovieTexture & \multicolumn{2}{|c|}{\textbf{MovieTexture not supported.}}\\\hline
+\resetTestCase
+PixelTexture & & \\\hline
+\resetTestCase
+Texture- & \testCase \TTA & Passed \\\cline{2-3}
+Transform & \testCase \TTBa & Failed \\
+ & \TTBb & \\\cline{2-3}
+ & \testCase \TTCa & Passed \\
+ & \TTCb & \\\cline{2-3}
+ & \testCase \TTDa & Passed \\
+ & \TTDb & \\\cline{2-3}
+ & \testCase \TTEa & Failed \\
+ & \TTEb & \\\cline{2-3}
+ & \testCase \TTFa & Failed \\
+ & \TTFb & \\\cline{2-3}
+ & \testCase \TTGa & Failed \\
+ & \TTGb & \\\cline{2-3}
+ & \testCase \TTHa & Failed \\
+ & \TTHb & \\\cline{2-3}
+ & \testCase \TTIa & Failed \\
+ & \TTIb & \\\cline{2-3}
+ & \testCase \TTJa & Failed \\
+ & \TTJb & \\\cline{2-3}
+ & \testCase \TTKa & Failed \\
+ & \TTKb & \\\cline{2-3}
+ & \testCase \TTLa & Failed \\
+ & \TTLb & \\\cline{2-3}
+ & \testCase \TTMa & Failed \\
+ & \TTMb & \\\cline{2-3}
+ & \testCase \TTNa & Failed \\
+ & \TTNb & \\\cline{2-3}
+ & \testCase \TTOa & Failed \\
+ & \TTOb & \\\cline{2-3}
+ & \testCase \TTPa & Failed \\
+ & \TTPb & \\\cline{2-3}
+\end{longtable}
+\end{center}
+
+\subsection{Appearance Test Cases}
+
+%%\subsubsection{Material Field}
+\subsubsection{\AppA}
+The VRML file is material.wrl.
+
+\subsubsection{\AppB}
+\label{sec:imagetexture}
+The VRML file is imagetexture.wrl, and the JPEG ImageTexture is vts.jpg.
+
+\subsubsection{\AppC}
+The VRML file is pixeltexture.wrl.\newline
+Netscape either stalls or runs out of memory.
+Look into this later.
+
+\subsubsection{\AppDa\AppDb}
+\label{sec:unlit}
+The VRML file is unlit.wrl.
+
+\subsubsection{\AppE}
+The VRML file is unlit\_pointline.wrl.\newline
+The IndexedLineSet is not entirely rendered.
+
+\subsubsection{\AppF}
+The VRML file is unlit\_color.wrl.\newline
+FreeWRL crashes as both plug-in and stand-alone application:
+\begin{verbatim}
+Done the shape
+Gen elevgrid 800 21 21
+Done the shape
+Done the shape
+Not same number of colors and points a
+ /usr/lib/perl5/site_perl/i386-linux/VRML/GLBackEnd.pm line 708.
+VRML::GLBackEnd::render('VRML::GLBackEnd=HASH(0x815a420)')
+called at /usr/lib/perl5/site_perl/i386-linux/VRML/GLBackEnd.pm
+line 220
+VRML::GLBackEnd::update_scene('VRML::GLBackEnd=HASH(0x815a420)',
+989519064.2)
+called at /usr/lib/perl5/site_perl/i386-linux/VRML/Browser.pm
+line 204
+VRML::Browser::tick('VRML::Browser=HASH(0x86b97b4)')
+called at /usr/lib/perl5/site_perl/i386-linux/VRML/Browser.pm
+line 127
+VRML::Browser::eventloop('VRML::Browser=HASH(0x86b97b4)')
+called at /usr/bin/freewrl line 551
+Died at /usr/bin/freewrl line 391.
+\end{verbatim}
+
+\subsubsection{\AppGa\AppGb}
+\label{sec:unlit-texture-nocolor}
+The VRML file is unlit\_texture\_nocolor.wrl, and the JPEG ImageTexture is vts.jpg.\newline
+
+\subsubsection{\AppHa\AppHb}
+The VRML file is unlit\_greyscale\_color\_blend.wrl, and the JPEG ImageTexture
+is greyscalecolor.jpg.\newline
+
+\subsubsection{\AppIa\AppIb}
+The VRML file is unlit\_greyscale\_intensity.wrl, and the JPEG ImageTexture
+is greyscalecolor.jpg.\newline
+
+\subsubsection{\AppJa\AppJb}
+The VRML file is unlit\_texture\_color.wrl, and the JPEG ImageTexture
+is greyscalecolor.jpg.\newline
+The geometry Color Node is preferred over texture color.
+
+\subsubsection{\AppKa\AppKb}
+\label{sec:unlit-rgb-texture}
+The VRML file is unlit\_rgb\_texture\_alpha.wrl, and the ImageTexture
+is rgb\_alpha.png.\newline
+The ImageTexture does not get applied to the Extrusion correctly.
+
+\subsubsection{\AppLa\AppLb}
+The VRML file is unlit\_greyscale\_texture\_alpha.wrl, and the ImageTexture
+is greyscale\_alpha.png.\newline
+The results are similar to section~\ref{sec:unlit-rgb-texture}.
+
+\subsection{FontStyle Test Cases}
+
+\subsubsection{\FSA}
+\label{sec:fs-default}
+The VRML file is Appearance/FontStyle/default.wrl.
+The FreeWRL generated text does not resemble the expected result when FreeWRL is both
+a stand-alone application and plug-in.
+
+\subsubsection{\FSB}
+\label{sec:3-families}
+The VRML file is family.wrl.\newline
+The results are similar to section~\ref{sec:fs-default}.
+
+\subsubsection{\FSC}
+The VRML file is next\_family.wrl.\newline
+The results are similar to section~\ref{sec:fs-default}.
+
+\subsubsection{\FSD}
+The VRML file is serif\_family.wrl.\newline
+The results are similar to section~\ref{sec:fs-default}.
+
+\subsubsection{\FSE}
+The VRML file is style.wrl.\newline
+The results are similar to section~\ref{sec:fs-default}.
+
+\subsubsection{\FSF}
+The VRML file is size\_spacing.wrl.\newline
+The sizes appear too large, and the size 2, spacing 0.5 combination overlaps.
+The vertical text is rendered horizontally.
+
+\subsubsection{\FSG}
+The VRML file is driver.wrl.\newline
+FreeWRL crashes as both plug-in and stand-alone application:
+\begin{verbatim}
+FreeWRL NOTE: run with -best mode to get smooth shading
+PARSE ERROR: ' horizontal "TRUE"
+
+
+	directOutput TRUE
+	url' XXX ' "javascript:
+
+
+
+	function getFile (value,',
+in improper SFString because  at
+/usr/lib/perl5/site_perl/5.6.0/i386-linux/VRML/Parser.pm line 66.
+	VRML::Error::parsefail('^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^
+J^J^J^J^J^J^M^JViewpoint {^M^J^Iposition 0 0 22^M^J}^M^J^M^J^M^JDE...',
+'improper SFString')
+called at /usr/lib/perl5/site_perl/5.6.0/i386-linux/VRML/VRMLFields.pm
+line 752
+	VRML::Field::SFString::parse('VRML::Field::SFString',
+'VRML::Scene=HASH(0x81958dc)', '^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^
+J^J^M^JViewpoint {^M^J^Iposition 0 0 22^M^J}^M^J^M^J^M^JDE...', undef)
+called at /usr/lib/perl5/site_perl/5.6.0/i386-linux/VRML/VRMLFields.pm
+line 1006
+	VRML::Field::Multi::parse('VRML::Field::MFString',
+'VRML::Scene=HASH(0x81958dc)',
+'^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^M^JViewpoint
+{^M^J^Iposition 0 0 22^M^J}^M^J^M^J^M^JDE...')
+called at /usr/lib/perl5/site_perl/5.6.0/i386-linux/VRML/Parser.pm
+line 229
+	VRML::Parser::parse_interfacedecl('VRML::Scene=HASH(0x81958dc)',
+0, 1, '^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^M^JViewpoint
+{^M^J^Iposition 0 0 22^M^J}^M^J^M^J^M^JDE...', 1, '{', '}')
+called at /usr/lib/perl5/site_perl/5.6.0/i386-linux/VRML/Parser.pm
+line 262
+	VRML::Parser::parse_script('VRML::Scene=HASH(0x81958dc)',
+'^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^M^JViewpoint
+{^M^J^Iposition 0 0 22^M^J}^M^J^M^J^M^JDE...')
+called at /usr/lib/perl5/site_perl/5.6.0/i386-linux/VRML/Parser.pm
+line 333
+	VRML::Field::SFNode::parse('VRML::Field::SFNode',
+'VRML::Scene=HASH(0x81958dc)',
+'^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^M^JViewpoint
+{^M^J^Iposition 0 0 22^M^J}^M^J^M^J^M^JDE...')
+called at /usr/lib/perl5/site_perl/5.6.0/i386-linux/VRML/Parser.pm
+line 307
+	VRML::Field::SFNode::parse('VRML::Field::SFNode',
+'VRML::Scene=HASH(0x81958dc)',
+'^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^M^JViewpoint
+{^M^J^Iposition 0 0 22^M^J}^M^J^M^J^M^JDE...')
+called at /usr/lib/perl5/site_perl/5.6.0/i386-linux/VRML/Parser.pm
+line 141
+	VRML::Parser::parse_statement('VRML::Scene=HASH(0x81958dc)',
+'^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^J^M^JViewpoint
+{^M^J^Iposition 0 0 22^M^J}^M^J^M^J^M^JDE...')
+called at /usr/lib/perl5/site_perl/5.6.0/i386-linux/VRML/Parser.pm
+line 103
+	VRML::Parser::parse('VRML::Scene=HASH(0x81958dc)',
+'#VRML V2.0 utf8^M^J#  ^M^J# Module:  Appearance^M^J# Node  :
+ FontStyl...')
+called at /usr/lib/perl5/site_perl/5.6.0/i386-linux/VRML/Browser.pm
+line 113
+	VRML::Browser::load_string('VRML::Browser=HASH(0x861f088)',
+'#VRML V2.0 utf8^M^J#  ^M^J# Module:  Appearance^M^J# Node  :
+FontStyl...',
+'driver.wrl')
+called at /usr/lib/perl5/site_perl/5.6.0/i386-linux/VRML/Browser.pm
+line 105
+	VRML::Browser::load_file('VRML::Browser=HASH(0x861f088)',
+'driver.wrl', undef)
+called at /usr/bin/freewrl line 541
+
+Died at /usr/bin/freewrl line 392.
+
+\end{verbatim}
+
+\subsection{ImageTexture Test Cases}
+
+\subsubsection{\ITA}
+\label{sec:jpeg-rgb}
+The VRML file is all\_jpg.wrl.
+
+\subsubsection{\ITB}
+The VRML file is all\_png.wrl.
+
+\subsubsection{\ITC}
+The VRML file is greyscale\_jpg.wrl.
+
+\subsubsection{\ITD}
+The VRML file is greyscale\_png.wrl.
+
+\subsubsection{\ITE}
+The VRML file is 256jpg.wrl.
+
+\subsubsection{\ITF}
+The VRML file is 256png.wrl.
+
+\subsubsection{\ITG}
+\label{sec:jpeg-ifs}
+The VRML file is IndexedFaceSet.wrl.
+
+\subsubsection{\ITHa\ITHb}
+The VRML file is 3sides.wrl.
+
+\setcounter{subsubsection}{21}
+%% The next subsubsection should be test case 22:
+\subsubsection{\ITVa\ITVb}
+\label{sec:png-complex-greyscale}
+The VRML file is complex\_greyscale\_alpha.wrl.\newline
+The ImageTexture does not get applied to the Extrusion correctly.
+
+\subsubsection{\ITWa\ITWb}
+The VRML file is rgb\_alpha\_png.wrl, and the ImageTexture is 8bcolrtp.png.\newline
+The colours look a little washed-out.
+
+\subsubsection{\ITXa\ITXb}
+The VRML file is complex\_rgb\_alpha.wrl.\newline
+The results are similar to section~\ref{sec:png-complex-greyscale}.
+
+\setcounter{subsubsection}{29}
+%% The next subsubsection should be test case 30:
+\subsubsection{\ITAD}
+\label{sec:vert-clamp}
+The VRML file is repeats.wrl, and the ImageTexture is vts.jpg.
+
+\subsubsection{\ITAE}
+The VRML file is repeatt.wrl, and the ImageTexture is vts.jpg.
+
+\subsubsection{\ITAF}
+The VRML file is st\_png.wrl, and the ImageTexture is vts.png.
+
+\subsubsection{\ITAG}
+The VRML file is repeats\_png.wrl, and the ImageTexture is vts.png.
+
+\subsubsection{\ITAH}
+The VRML file is repeatt\_png.wrl, and the ImageTexture is vts.png.
+
+\subsection{Material Test Cases}
+
+\subsubsection{\MatA}
+The VRML file is default\_primitives.wrl.
+
+\subsubsection{\MatB}
+The VRML file is default\_complex.wrl.
+
+\subsubsection{\MatC}
+The VRML file is diffuseColor.wrl.
+
+\subsubsection{\MatD}
+The VRML file is shininess.wrl.
+
+\subsubsection{\MatE}
+The VRML file is diffusecolor\_complex.wrl.
+
+\subsubsection{\MatF}
+The VRML file is shininess\_complex.wrl.
+
+\subsubsection{\MatGa\MatGb}
+\label{sec:pref-colour}
+The VRML file is texture\_first\_primitives.wrl.\newline
+The texture colour does not supersede the blue diffuseColor field defined in the Material
+node for all four primitive types.
+See bug 444973.
+
+\subsubsection{\MatHa\MatHb}
+The VRML file is texture\_first\_complex.wrl.\newline
+The results are similar to section~\ref{sec:pref-colour}.
+
+\subsubsection{\MatIa\MatIb}
+The VRML file is texture\_over\_color\_complex.wrl.\newline
+The results are similar to section~\ref{sec:pref-colour}.
+
+\subsubsection{\MatJa\MatJb}
+The VRML file is allgeoms\_diffusecolor\_texture.wrl.\newline
+Improper texture mapping to the extrusion geometry.
+
+\subsubsection{\MatKa\MatKb}
+The VRML file is complex\_color\_first\_texture.wrl.
+
+\subsubsection{\MatL}
+The VRML file is complex\_color\_first.wrl.
+
+\subsubsection{\MatMa\MatMb}
+The VRML file is allgeoms\_diffusecolor.wrl.
+
+\subsubsection{\MatNa\MatNb}
+The VRML file is pointset\_color\_first.wrl.\newline
+FreeWRL crashes as both plug-in and stand-alone application:
+\begin{verbatim}
+Not same number of colors and points at
+/usr/lib/perl5/site_perl/i386-linux/VRML/GLBackEnd.pm line 721.
+    VRML::GLBackEnd::render('VRML::GLBackEnd=HASH(0x815a810)') called at
+/usr/lib/perl5/site_perl/i386-linux/VRML/GLBackEnd.pm line 226
+    VRML::GLBackEnd::update_scene('VRML::GLBackEnd=HASH(0x815a810)',
+ 989940484.62) called at
+/usr/lib/perl5/site_perl/i386-linux/VRML/Browser.pm line 204
+    VRML::Browser::tick('VRML::Browser=HASH(0x86bb614)') called at
+/usr/lib/perl5/site_perl/i386-linux/VRML/Browser.pm line 127
+    VRML::Browser::eventloop('VRML::Browser=HASH(0x86bb614)') called at
+/usr/bin/freewrl line 551
+
+Died at /usr/bin/freewrl line 391.
+\end{verbatim}
+
+\subsubsection{\MatOa\MatOb}
+The VRML file is pointset.wrl.
+
+\subsubsection{\MatPa\MatPb}
+The VRML file is indexedlineset\_color\_first.wrl.\newline
+Some of the lines in the geometry are not entirely rendered.
+
+\subsubsection{\MatQa\MatQb}
+The VRML file is indexedlineset.wrl.
+
+\subsubsection{\MatRa\MatRb}
+The VRML file is rgb\_texture\_alpha\_first.wrl.\newline
+Improper texture mapping to the extrusion geometry.
+
+\subsubsection{\MatSa\MatSb}
+The VRML file is greyscale\_texture\_alpha\_first.wrl.\newline
+Improper texture mapping to the extrusion geometry.
+
+\subsubsection{\MatTa\MatTb}
+\label{sec:rgb-texture-mat-transparency}
+The VRML file is rgb\_texture\_material\_transparency\_first.wrl.\newline
+Material transparencies do not work.
+See bug 444978.
+
+\subsubsection{\MatUa\MatUb}
+The VRML file is greyscale\_texture\_material\_transparency\_first.wrl.\newline
+The results are similar to section~\ref{sec:rgb-texture-mat-transparency}.
+
+\subsubsection{\MatV}
+The VRML file is ambientIntensity.wrl.\newline
+The illumination range looks better for complex geometries.
+See~\ref{sec:amb-intensity-complex}.
+
+\subsubsection{\MatW}
+\label{sec:mat-emissive}
+The VRML file is emissiveColor.wrl.
+
+\subsubsection{\MatX}
+The VRML file is specularColor.wrl.
+
+\subsubsection{\MatY}
+\label{sec:amb-intensity-complex}
+The VRML file is ambientIntensity\_complex.wrl.
+
+\subsubsection{\MatZ}
+The VRML file is emissivecolor\_complex.wrl.\newline
+Some of the lines in the IndexedFaceSet geometries are not entirely rendered.
+
+\subsubsection{\MatAA}
+The VRML file is specularcolor\_complex.wrl.
+
+\subsubsection{\MatAB}
+\label{sec:mat-transparency}
+The VRML file is transparency.wrl.\newline
+Material transparency is not applied to any of the geometries.
+See bug 444978.
+
+\subsubsection{\MatAC}
+The VRML file is transparency\_complex.wrl.\newline
+The results are similar to section~\ref{sec:mat-transparency}.
+
+\subsection{MovieTexture Test Cases}
+MovieTexture is not supported.
+See bug 435228.
+
+\subsection{PixelTexture Test Cases}
+
+\subsection{TextureTransform Test Cases}
+
+\subsubsection{\TTA}
+\subsubsection{\TTBa\TTBb}
+\subsubsection{\TTCa\TTCb}
+\subsubsection{\TTDa\TTDb}
+\subsubsection{\TTEa\TTEb}
+\label{sec:scale}
+The VRML file is scale\_primitives.wrl.\newline
+The TextureTransform scale field is not applied correctly to
+the first four geometries, where scale $< 4$.
+
+\subsubsection{\TTFa\TTFb}
+The VRML file is scale\_complex.wrl.\newline
+The results are similar to section~\ref{sec:scale}.
+
+\subsubsection{\TTGa\TTGb}
+\label{sec:rotation}
+The VRML file is rotation\_primitives.wrl.\newline
+The TextureTransform rotation field is not applied correctly
+to the middle geometries, where rotation $\neq \pm 180^o$ or
+$\pm \pi$ radians.
+See bug 446546.
+
+\subsubsection{\TTHa\TTHb}
+The VRML file is rotation\_complex.wrl.\newline
+The rotation results are similar to section~\ref{sec:rotation} and
+the ImageTexture is not applied to the Extrusion correctly.
+
+\subsubsection{\TTIa\TTIb}
+\label{sec:translation}
+The VRML file is translation\_primitives\_s.wrl.\newline
+
+\subsubsection{\TTJa\TTJb}
+The VRML file is translation\_primitives\_t.wrl.\newline
+
+\subsubsection{\TTKa\TTKb}
+The VRML file is translation\_complex\_s.wrl.\newline
+
+\subsubsection{\TTLa\TTLb}
+The VRML file is translation\_complex\_t.wrl.\newline
+
+\subsubsection{\TTMa\TTMb}
+The VRML file is center\_primitives.wrl.\newline
+
+\subsubsection{\TTNa\TTNb}
+The VRML file is center\_complex.wrl.\newline
+
+\subsubsection{\TTOa\TTOb}
+The VRML file is all\_primitives.wrl.\newline
+
+\subsubsection{\TTPa\TTPb}
+The VRML file is all\_complex.wrl.\newline
+
+\newpage
+\section{Bindable Nodes Test Cases}
+\resetTestCase
+
+\begin{center}
+\setlongtables
+\begin{longtable}{|l|l|l|}
+%% Table head and foot rows
+\hline
+\textbf{Bindable Nodes} & \textbf{Test Case} & \textbf{Result} \\\hline\hline
+\endhead
+ & \multicolumn{2}{|r|}{\textsl{continued on the next page\ldots}} \\\hline
+\endfoot\hline
+\endlastfoot
+
+Background & \testCase \BkgA & Failed \\\cline{2-3}
+ & \testCase \BkgB & Failed \\\cline{2-3}
+ & \testCase \BkgCa & Failed \\
+ & \BkgCb & \\\cline{2-3}
+ & \testCase \BkgDa & Failed \\
+ & \BkgDb & \\\cline{2-3}
+ & \testCase \BkgE & Failed \\\cline{2-3}
+ & \testCase \BkgFa & Passed \\
+ & \BkgFb & \\\cline{2-3}
+ & \testCase \BkgGa & Passed \\
+ & \BkgGb & \\\cline{2-3}
+ & \testCase \BkgH & Failed \\\cline{2-3}
+ & \testCase \BkgI & Failed \\\cline{2-3}
+ & \testCase \BkgJ & Failed \\\cline{2-3}
+ & \testCase \BkgK & Failed \\\cline{2-3}
+ & \testCase \BkgL & Failed \\\cline{2-3}
+ & \testCase \BkgM & Failed \\\cline{2-3}
+ & \testCase \BkgN & Failed \\\cline{2-3}
+ & \testCase \BkgO & Failed \\\cline{2-3}
+ & \testCase \BkgP & Failed \\\cline{2-3}
+ & \testCase \BkgQ & Failed \\\cline{2-3}
+ & \testCase \BkgR & Failed \\\cline{2-3}
+ & \testCase \BkgS & Failed \\\cline{2-3}
+ & \testCase \BkgT & Failed \\\cline{2-3}
+ & \testCase \BkgU & Failed \\\cline{2-3}
+ & \testCase \BkgV & Failed \\\cline{2-3}
+ & \testCase \BkgWa & Failed \\
+ & \BkgWb & \\\cline{2-3}
+
+\resetTestCase
+Fog & \testCase \FogA & Passed \\\cline{2-3}
+ & \multicolumn{2}{|c|}{\textbf{Fog not supported.}} \\\hline
+\resetTestCase
+NavigationInfo & & \\\cline{2-3}
+ & & \\\hline
+\resetTestCase
+Viewpoint & & \\\cline{2-3}
+ & & \\
+\end{longtable}
+\end{center}
+
+\subsection{Background Test Cases}
+
+\setcounter{subsubsection}{0}
+%% The next subsubsection should be test case 1:
+
+\subsubsection{\BkgA}
+The VRML file is test-binding1.wrl.
+Animation does not work.
+
+\subsubsection{\BkgB}
+The VRML file is test-binding2.wrl.
+Button does not work.
+
+\subsubsection{\BkgCa\BkgCb}
+The VRML file is test-binding3.wrl.
+Button does not work.
+
+\subsubsection{\BkgDa\BkgDb}
+The VRML file is test-binding4.wrl.
+Button does not work.
+
+\subsubsection{\BkgE}
+The VRML file is test-binding5.wrl.
+Background switching does not work does not work.
+
+\subsubsection{\BkgFa\BkgFb}
+The VRML file is verify-clampingsky.wrl.
+
+\subsubsection{\BkgGa\BkgGb}
+The VRML file is verify-lastground.wrl.
+See bug 444966.
+
+\subsubsection{\BkgH}
+The VRML file is set-fronturl.wrl.
+Buttons do not work.
+
+\subsubsection{\BkgI}
+The VRML file is set-lefturl.wrl.
+Buttons do not work.
+
+\subsubsection{\BkgJ}
+The VRML file is set-righturl.wrl.
+Buttons do not work.
+
+\subsubsection{\BkgK}
+The VRML file is set-backurl.wrl.
+Buttons do not work.
+
+\subsubsection{\BkgL}
+The VRML file is set-topurl.wrl.
+Freewrl dies.
+
+\subsubsection{\BkgM}
+The VRML file is set-bottomurl.wrl.
+Buttons do not work.
+
+\subsubsection{\BkgN}
+The VRML file is test-wholejpeg.wrl.
+Button does not work.
+
+\subsubsection{\BkgO}
+The VRML file is set-fronturlpng.wrl
+Nothing is displayed. Freewrl appears to die.
+
+\subsubsection{\BkgP}
+The VRML file is set-lefturlpng.wrl
+Nothing is displayed. Freewrl appears to die.
+
+\subsubsection{\BkgQ}
+The VRML file is set-righturlpng.wrl
+Nothing is displayed. Freewrl appears to die.
+
+\subsubsection{\BkgR}
+The VRML file is set-backurlpng.wrl
+Nothing is displayed. Freewrl appears to die.
+
+\subsubsection{\BkgS}
+The VRML file is set-topurlpng.wrl
+Nothing is displayed. Freewrl appears to die.
+
+\subsubsection{\BkgT}
+The VRML file is bottomurlpng.wrl
+Nothing is displayed. Freewrl appears to die.
+
+\subsubsection{\BkgU}
+The VRML file is test-wholepng.wrl
+Nothing is displayed. Freewrl appears to die.
+
+\subsubsection{\BkgV}
+The VRML file is set-skycolor2.wrl.
+Buttons do not work.
+
+\subsubsection{\BkgWa\BkgWb}
+The VRML file is set-groundcolor2.wrl.
+Buttons do not work.
+
+
+
+
+
+\subsection{Fog Test Cases}
+Fog is not supported.
+See bug 435229.
+
+\subsubsection{\FogA}
+The VRML file is nofog.wrl.
+
+\subsection{NavigationInfo Test Cases}
+\section{Geometric Properties Test Cases}
+\resetTestCase
+
+\begin{center}
+\setlongtables
+\begin{longtable}{|l|l|l|}
+%% Table head and foot rows
+\hline
+\textbf{Node Group} & \textbf{Test Case} & \textbf{Result} \\
+\hline\hline
+\endhead
+%%\cline{2-3}
+ & \multicolumn{2}{|r|}{\textsl{continued on the next page\ldots}} \\
+\hline
+\endfoot
+\hline
+\endlastfoot
+& & \\
+\cline{2-3}
+\end{longtable}
+\end{center}
+
+\section{Interpolators Test Cases}
+\resetTestCase
+
+\begin{center}
+\setlongtables
+\begin{longtable}{|l|l|l|}
+%% Table head and foot rows
+\hline
+\textbf{Node Group} & \textbf{Test Case} & \textbf{Result} \\
+\hline\hline
+\endhead
+%%\cline{2-3}
+ & \multicolumn{2}{|r|}{\textsl{continued on the next page\ldots}} \\
+\hline
+\endfoot
+\hline
+\endlastfoot
+& & \\
+\cline{2-3}
+\end{longtable}
+\end{center}
+
+\section{Lights Test Cases}
+\resetTestCase
+
+\begin{center}
+\setlongtables
+\begin{longtable}{|l|l|l|}
+%% Table head and foot rows
+\hline
+\textbf{Node Group} & \textbf{Test Case} & \textbf{Result} \\
+\hline\hline
+\endhead
+%%\cline{2-3}
+ & \multicolumn{2}{|r|}{\textsl{continued on the next page\ldots}} \\
+\hline
+\endfoot
+\hline
+\endlastfoot
+& & \\
+\cline{2-3}
+\end{longtable}
+\end{center}
+
+\section{Miscellaneous Test Cases}
+\resetTestCase
+
+\begin{center}
+\setlongtables
+\begin{longtable}{|l|l|l|}
+%% Table head and foot rows
+\hline
+\textbf{Node Group} & \textbf{Test Case} & \textbf{Result} \\
+\hline\hline
+\endhead
+%%\cline{2-3}
+ & \multicolumn{2}{|r|}{\textsl{continued on the next page\ldots}} \\
+\hline
+\endfoot
+\hline
+\endlastfoot
+& & \\
+\cline{2-3}
+\end{longtable}
+\end{center}
+
+\section{Sensors Test Cases}
+\resetTestCase
+
+\begin{center}
+\setlongtables
+\begin{longtable}{|l|l|l|}
+%% Table head and foot rows
+\hline
+\textbf{Node Group} & \textbf{Test Case} & \textbf{Result} \\
+\hline\hline
+\endhead
+%%\cline{2-3}
+ & \multicolumn{2}{|r|}{\textsl{continued on the next page\ldots}} \\
+\hline
+\endfoot
+\hline
+\endlastfoot
+& & \\
+\cline{2-3}
+\end{longtable}
+\end{center}
+
+\section{Sounds Test Cases}
+\resetTestCase
+
+\begin{center}
+\setlongtables
+\begin{longtable}{|l|l|l|}
+%% Table head and foot rows
+\hline
+\textbf{Node Group} & \textbf{Test Case} & \textbf{Result} \\
+\hline\hline
+\endhead
+%%\cline{2-3}
+ & \multicolumn{2}{|r|}{\textsl{continued on the next page\ldots}} \\
+\hline
+\endfoot
+\hline
+\endlastfoot
+& & \\
+\cline{2-3}
+\end{longtable}
+\end{center}
+
+\subsubsection{}
+The VRML file is
+
+\section{Special Groups Test Cases}
+\resetTestCase
+
+\begin{center}
+\setlongtables
+\begin{longtable}{|l|l|l|}
+%% Table head and foot rows
+\hline
+\textbf{Special Groups} & \textbf{Test Case} & \textbf{Result} \\
+\hline\hline
+\endhead
+%%\cline{2-3}
+ & \multicolumn{2}{|r|}{\textsl{continued on the next page\ldots}} \\
+\hline
+\endfoot
+\hline
+\endlastfoot
+Inline & \testCase \SpGrA & Passed \\\cline{2-3}
+& \testCase \SpGrB & Passed \\\cline{2-3}
+& \testCase \SpGrC & Passed \\\cline{2-3}
+& \testCase \SpGrD & Passed \\\cline{2-3}
+& \testCase \SpGrE & Passed \\\hline
+\multicolumn{3}{|c|}{\textbf{Beyond minimum conformance requirements:
+bounding boxes.}} \\\hline
+& \testCase \SpGrF & Failed \\\hline
+\resetTestCase
+LOD & & \\\cline{2-3}
+& & \\\hline
+\resetTestCase
+Switch & & \\\cline{2-3}
+& & \\
+\end{longtable}
+\end{center}
+
+\subsection{Inline Test Cases}
+
+\subsubsection{\SpGrA}
+The VRML file is single-url.wrl.
+
+\subsubsection{\SpGrB}
+The VRML file is nested-inline.wrl.
+
+\subsubsection{\SpGrC}
+The VRML file is invalid-url.wrl.
+See bug 435578.
+
+\subsubsection{\SpGrD}
+The VRML file is absolute-url.wrl.
+
+\subsubsection{\SpGrE}
+The VRML file is relative-url.wrl.
+
+\subsubsection{\SpGrF}
+The VRML file is test-bboxsizesame.wrl.\newline
+The ImageTexture from the Inline'd file ref1.wrl does not get
+applied to the IndexedFaceSet geometry.
+
+\end{document}

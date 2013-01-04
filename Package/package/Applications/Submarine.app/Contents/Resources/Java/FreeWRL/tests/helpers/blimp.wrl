@@ -1,0 +1,105 @@
+#VRML V2.0 utf8
+
+PROTO dirigible [ ] {
+  Group {
+    children [
+      DEF theAirship Transform {
+        translation 0 0 5
+        children [
+          Transform {
+            center 0 0 -5
+            rotation 0 1 0 0.25
+            children [
+              DEF mainBody Transform {
+                translation 0 0 5 # rear is at zero
+                children [
+                  DEF hull Transform {
+                    translation 0 0 0
+                    scale 0.25 0.25 1
+                    children [ 
+                      Shape {
+                        appearance Appearance {
+                          material Material { diffuseColor 0.53 0.81 0.98 }
+                        }
+                        geometry Sphere { radius 10 }
+                      }
+                    ]
+                  }
+                  DEF horizontalFins Transform {
+                    translation 0 0 -7
+                    scale 1 1 0.1
+                    rotation 1 0 0 1.57
+                    children [
+                      Shape {
+                        appearance Appearance {
+                          material Material { diffuseColor 0 1 0 }
+                        }
+                        geometry Cone { bottomRadius 5 height 5 }
+                      }
+                    ]
+                  }
+                  DEF verticalFins Transform {
+                    rotation 0 0 1 1.57
+                    children [ USE horizontalFins ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+      DEF rearSign Transform {
+        translation 0 0 -12.5
+        children [
+          Transform {
+#JAS            center 0 0 5
+#JAS            rotation 0 -1 0 0.25
+		rotation 1 0 0 1.57
+            children [
+              DEF pilotView Viewpoint {
+                position 7 0 -10
+                orientation 0 1 0 3.0
+                description "Pilot View"
+              }
+	      Inline { url [ "can.wrl" ] }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
+
+Group {
+  children [
+    DEF engineTimer TimeSensor { loop TRUE cycleInterval 60 }
+    DEF swingIt OrientationInterpolator {
+	key [ 0.0 0.50 1.0 ]
+	keyValue [ 0.0 1.0 0.0 0.0,  0.0 1.0 0.0 3.14, 0.0 1.0 0.0 6.28 ]
+    }
+    DEF theAirship Transform {
+      children [
+        Transform {
+          translation -55 0 0
+          children [
+#JS            Sound {
+#JS              minFront 0.1
+#JS              minBack 0.1
+#JS              maxFront 50
+#JS              maxBack 50
+#JS              source DEF dirigibleMotor AudioClip {
+#JS                description "Dirigible Engine"
+#JS                loop TRUE
+#JS                url [ "../sounds/WAV/zep.wav" ]
+#JS              }
+#JS            }
+            dirigible {  }
+          ]
+        }
+      ]
+    }
+  ]
+  ROUTE engineTimer.fraction_changed TO swingIt.set_fraction
+  ROUTE swingIt.value_changed TO theAirship.set_rotation
+#JS  ROUTE engineTimer.startTime TO dirigibleMotor.startTime
+}

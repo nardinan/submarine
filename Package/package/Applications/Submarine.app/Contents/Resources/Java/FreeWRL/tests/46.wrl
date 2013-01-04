@@ -1,0 +1,46 @@
+#VRML V2.0 utf8
+# From http://www.cgrg.ohio-state.edu/~mlewis/
+
+DEF ROOT Group {
+   children [
+      Group {
+	 children [
+	    DEF TOUCH TouchSensor {}
+	    Shape {
+	       appearance Appearance { material Material {} }
+	       geometry Sphere {}
+	    }
+	   ]
+      }
+     ]
+}
+
+DEF SCRIPT Script {
+   eventIn SFBool clicked
+   eventOut MFNode newNodes
+   field SFFloat x -3
+   field SFFloat y 2
+   url "vrmlscript:
+
+function clicked(val) {
+   if(val) {
+      newNodes = Browser.createVrmlFromString('Transform {' +
+					      '  translation ' + x + ' ' + y+ ' 0' +
+					      '  children Shape {' +
+					      '    appearance Appearance { material Material {} }' +
+					      '    geometry Box { size 1 1 1 }' +
+					      '  }' +
+					      '}');
+      x += 1.1;
+      if(x > 3) {
+	 y = y - 1.1;
+	 x = -3;
+      }
+   }
+}
+
+"
+}
+
+ROUTE TOUCH.isActive TO SCRIPT.clicked
+ROUTE SCRIPT.newNodes TO ROOT.addChildren

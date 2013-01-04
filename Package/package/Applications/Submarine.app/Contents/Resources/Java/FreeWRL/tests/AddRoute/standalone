@@ -1,0 +1,4 @@
+EAI=../../java/classes
+
+freewrl --eai root.wrl &
+appletviewer -J-classpath -J$EAI -J-Djava.security.policy="$EAI/java.policy" addroute.html

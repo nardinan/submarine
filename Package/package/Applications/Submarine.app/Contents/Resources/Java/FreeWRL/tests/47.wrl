@@ -1,0 +1,304 @@
+#VRML V2.0 utf8
+#
+#  bounce1.wrl
+#  Bouncing beachball (JavaScript/VRMLscript version)
+#        by David R. Nadeau
+#
+#  This world illustrates the use of a Script node to create a computed
+#  animation path.  In particular, the Script node uses a JavaScript
+#  (or VRMLScript) program script to compute translation values for a
+#  vertically bouncing beach ball.
+#
+#  The bounce path is based upon the projectile motion equation of
+#  physics, constrained to create a cyclic bouncing path with a
+#  user-selected maximum bounce height.  Also, there is no friction,
+#  drag, or damping.
+#
+#  The equation is derived as follows:
+#
+#        (1)  Projectile motion computes a y(t) value (height as a function
+#             of time) based upon the gravitation constant, g, an initial
+#             y-direction velocity, v0, an initial y position, y0, and the
+#             current time, t:
+#
+#                y(t) = 0.5 * g * t * t + v0 * t + y0
+#
+#        (2)  At time t=0, the ball should be on the ground with y=0.
+#             So, y0 = y(0) = 0.  The equation in (1) simplifies to:
+#
+#                y(t) = 0.5 * g * t * t + v0 * t
+#
+#        (3)  At time t=1, at the end of the TimeSensor's fractional time
+#             cycle, the ball should again be on the ground with y=0.
+#             So, y(1) = 0.  Plugging this in to the equation in (2),
+#             we get:
+#
+#                y(t) = 0.5 * g * t * t + v0 * t
+#                y(1) = 0.5 * g * 1 * 1 + v0 * 1
+#                   0 = 0.5 * g + v0
+#
+#             So
+#
+#                   v0 = -0.5 * g
+#
+#        (4)  At time t=0.5, the ball should be at the peak of its bounce
+#             at a user-selected maximum height, h.  So, y(0.5) = h.
+#             Plugging this in to the equation in (2), we get:
+#
+#                y(t)   = 0.5 * g * t * t + v0 * t
+#                y(0.5) = 0.5 * g * 0.5 * 0.5 + v0 * 0.5
+#                     h = g * 0.125 + v0 * 0.5
+#
+#            And v0 = -0.5 * g from equation (3), so
+#
+#                     h = g * 0.125 - 0.5 * g * 0.5
+#                     h = -g * 0.125
+#
+#            So
+#
+#                     g = -8.0 * h
+#
+#        (5)  We can now simplify the equation in (2) using the results
+#             from (3) and (4) to get an equation that computes the
+#             ball height y(t) parameterized only by the maximum height, h,
+#             giving us:
+#
+#                y(t) = 0.5 * g * t * t + v0 * t
+#                     = 0.5 * (-8.0 * h) * t * t + (-0.5 * g) * t
+#                     = 0.5 * (-8.0 * h) * t * t + (4.0 * h) * t
+#                     = 4.0 * h * (-t * t + t)
+#                     = 4.0 * h * t * (1.0 - t)
+#
+#             In the program script, the maximum height, h, is given in
+#             the 'bounceHeight' field.  The current time, t, is given in
+#             the 'set_fraction' eventIn and passed to the eventIn function
+#             as the 'frac' parameter.  Using these names, the above
+#             equation becomes:
+#
+#                 y = 4.0 * bounceHeight * frac * (1.0 - frac)
+#
+#  Things to experiment with
+#        -  Encapsulate the ball, script, timer, and sensors within a
+#           PROTO for a new node named "BouncingBall".  Then use that
+#           new BouncingBall node multiple times to create multiple
+#           bouncing balls.  Your PROTO interface might look like this:
+#
+#                PROTO BouncingBall [
+#                        field SFFloat bounceHeight     2.0
+#                        field SFTime  cycleInterval 2.0
+#                ] { . . . }
+#
+#           See 'bounce3.wrl', which implements such a PROTO.
+#
+#        -  Add a shadow under the bouncing ball.  To do this, add a
+#           circular, semi-transparent, black shape that doesn't bounce.
+#           To make the shadow more realistic, scale the shadow in the X
+#           and Z directions, shrinking it as the ball goes up, and
+#           increasing it as the ball comes down.  You'll need to add
+#           another eventOut for the Script node and send an XYZ scaling
+#           factor triple out that eventOut.  Try the following values
+#           for the XYZ scale values:
+#
+#                xzscale = 1.0 - 0.5 * y / bounceHeight;
+#                shadowScale_changed[0] = xzscale;
+#                shadowScale_changed[1] = 1.0;
+#                shadowScale_changed[2] = xzscale;
+#
+#           See 'bounce4.wrl', which implements shadows using the above
+#           scale values.
+#
+#        -  Add a sound to the PROTO so that each time the ball touches
+#           the ground, it makes a 'boing' sound.
+#
+#        -  When the ball hits the ground, scale the ball slightly so that
+#           it appears to squish.
+#
+
+WorldInfo {
+        title "Bouncing beachball (JavaScript)"
+        info [ "Copyright (c) 1997, David R. Nadeau" ]
+}
+
+Viewpoint {
+    position 0.0 0.6 8.0
+    orientation 1.0 0.0 0.0 0.1
+}
+
+NavigationInfo {
+    type [ "WALK", "ANY" ]
+    headlight FALSE
+    speed 2.0
+}
+
+DirectionalLight {
+    ambientIntensity 0.5
+    direction 0.0 -1.0 -0.5
+}
+
+#
+#  Sky
+#
+Background {
+    skyColor [
+        0.0 0.0 1.0,
+        0.0 0.5 1.0,
+        0.7 0.7 1.0,
+    ]
+    skyAngle [
+        1.371,
+        1.571,
+    ]
+}
+
+
+#
+#  Beach
+#
+Shape {
+    appearance Appearance {
+        material Material { }
+        texture ImageTexture { url "helpers/sand.jpg" }
+        textureTransform TextureTransform { scale 10.0 10.0 }
+    }
+    geometry IndexedFaceSet {
+        coord Coordinate {
+            point [
+                -50.0 -1.0  50.0,
+                 50.0 -1.0  50.0,
+                 50.0 -1.0 -50.0,
+                -50.0 -1.0 -50.0,
+            ]
+        }
+        coordIndex [ 0, 1, 2, 3 ]
+        solid FALSE
+    }
+}
+
+
+#
+#  Palm trees
+#
+Transform {
+    translation -3.0 -1.0 -10.0
+    children [
+        DEF Palm Group {
+            children [
+            # Palm tree - in a billboard so it is never edge-on
+                Billboard {
+                    children [
+                        Shape {
+                            appearance Appearance {
+                                material NULL  # emissive texturing
+                                texture ImageTexture { url "helpers/palm.png" }
+                            }
+                            geometry IndexedFaceSet {
+                                coord Coordinate {
+                                    point [
+                                        -2.5  0.0 0.0,
+                                         2.5  0.0 0.0,
+                                         2.5 11.25 0.0,
+                                        -2.5 11.25 0.0,
+                                    ]
+                                }
+                                coordIndex [ 0, 1, 2, 3 ]
+                                texCoord TextureCoordinate {
+                                        point [
+                                                0.0 0.0,
+                                                1.0 0.0,
+                                                1.0 1.0,
+                                                0.0 1.0,
+                                        ]
+                                }
+                                texCoordIndex [ 0, 1, 2, 3 ]
+                                solid FALSE
+                            }
+                        }
+                    ]
+                }
+            # Fake tree shadow - a black semi-transparent rectangle with
+            # a texture map to give it the right shape
+                Shape {
+                    appearance Appearance {
+                        material Material {
+                                diffuseColor 0.0 0.0 0.0
+                                transparency 0.5
+                        }
+                        texture ImageTexture { url "helpers/palmsh.png" }
+                    }
+                    geometry IndexedFaceSet {
+                        coord Coordinate {
+                            point [
+                                -2.5  0.05  2.5,
+                                 2.5  0.05  2.5,
+                                 2.5  0.05 -2.5,
+                                -2.5  0.05 -2.5,
+                            ]
+                        }
+                        coordIndex [ 0, 1, 2, 3 ]
+                        texCoord TextureCoordinate {
+                                point [
+                                        0.0 0.0,
+                                        1.0 0.0,
+                                        1.0 1.0,
+                                        0.0 1.0,
+                                ]
+                        }
+                        texCoordIndex [ 0, 1, 2, 3 ]
+                        solid FALSE
+                    }
+                }
+            ]
+        }
+    ]
+}
+Transform { translation -5.0 -1.0  -6.0 scale 0.6 0.6 0.6 children USE Palm }
+Transform { translation  5.0 -1.0  -9.0 children USE Palm }
+Transform { translation 10.0 -1.0 -15.0 children USE Palm }
+
+
+#
+#  Bouncing beach ball
+#
+DEF Ball Transform {
+    # animated translation
+    children [
+        Shape {
+            appearance Appearance {
+                material Material {
+                    ambientIntensity 0.5
+                    diffuseColor 1.0 1.0 1.0
+                    specularColor 0.7 0.7 0.7
+                    shininess 0.4
+                }
+                texture ImageTexture { url "helpers/beach.jpg" }
+                textureTransform TextureTransform { scale 2.0 1.0 }
+            }
+            geometry Sphere { }
+        }
+    ]
+}
+
+DEF Clock TimeSensor {
+    cycleInterval 2.0
+    startTime 1.0
+    stopTime 0.0
+    loop TRUE
+}
+
+DEF Bouncer Script {
+    field    SFFloat bounceHeight 3.0
+    eventIn  SFFloat set_fraction
+    eventOut SFVec3f value_changed
+
+    # change 'vrmlscript' to 'javascript' for newer browsers
+    url "vrmlscript:
+        function set_fraction( frac, tm ) {
+            y = 4.0 * bounceHeight * frac * (1.0 - frac);
+            value_changed[0] = 0.0;
+            value_changed[1] = y;
+            value_changed[2] = 0.0;
+        }"
+}
+
+ROUTE Clock.fraction_changed TO Bouncer.set_fraction
+ROUTE Bouncer.value_changed  TO Ball.set_translation

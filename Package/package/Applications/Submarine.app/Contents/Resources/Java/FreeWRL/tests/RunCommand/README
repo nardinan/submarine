@@ -1,0 +1,13 @@
+Run a command in Java.
+
+From our buddy Rob, aka Exile in Paradise. Thanks Rob!
+
+Check out the code, then run the wrl file within FreeWRL.
+You'll have to compile the RunCommand.java file. You may
+have to make sure that either your environment variable
+CLASSPATH is set correctly, or that you have copied the
+vrml directory here.
+
+John Stewart
+CRC Canada
+August 10, 2004.

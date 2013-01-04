@@ -1,0 +1,29 @@
+#VRML V2.0 utf8
+
+WorldInfo {
+   title "Floppy's VRML97 Tutorial Example 1"
+   info ["(C) Copyright 1999 Vapour Technology"
+         "vrmlguide@vapourtech.com"]
+}
+
+Shape {
+   appearance Appearance {
+       texture ImageTexture {
+          url "helpers/brick.png"
+       }
+   }
+   geometry Box {
+       size 4 2 2
+   }
+}
+
+Shape {
+   appearance Appearance {
+       texture PixelTexture {
+          image 2 4 3 0xff0000 0x00ff00 0xff0000 0x00ff00 0xffff00 0x0000ff 0xffff00 0x0000ff
+       }
+   }
+   geometry Box {
+       size 2 4 4
+   }
+}

@@ -1,0 +1,55 @@
+#VRML V2.0 utf8
+# The VRML 2.0 Sourcebook
+# Copyright [1997] By
+# Andrea L. Ames, David R. Nadeau, and John L. Moreland
+NavigationInfo {
+   headlight TRUE
+   type ["EXAMINE", "ANY"]
+   avatarSize [ 0.25,1.6,0 ]
+}
+Transform { 
+	translation 0 -2 0 
+	children
+		Shape {
+			appearance Appearance {
+				material Material {
+					diffuseColor 0.0 1.0 0.7
+				}
+			}
+			geometry Extrusion {
+				creaseAngle 1.57
+				endCap   FALSE
+				beginCap FALSE
+				solid    FALSE
+				crossSection [
+				# Half-circle
+					-1.00  0.00,  -0.92 -0.38,
+					-0.71 -0.71,  -0.38 -0.92,
+					 0.00 -1.00,   0.38 -0.92,
+					 0.71 -0.71,   0.92 -0.38,
+					 1.00  0.00,
+				]
+				spine [
+				# Helix
+					 2.00 0.00 -0.00,   1.85 0.12 -0.77,
+					 1.41 0.24 -1.41,   0.77 0.36 -1.85,
+					 0.00 0.48 -2.00,  -0.77 0.61 -1.85,
+					-1.41 0.73 -1.41,  -1.85 0.85 -0.77,
+					-2.00 0.97  0.00,  -1.85 1.09  0.77,
+					-1.41 1.21  1.41,  -0.77 1.33  1.85,
+					 0.00 1.45  2.00,   0.77 1.58  1.85,
+					 1.41 1.70  1.41,   1.85 1.82  0.77,
+					 2.00 1.94  0.00,   1.85 2.06 -0.77,
+					 1.41 2.18 -1.41,   0.77 2.30 -1.85,
+					 0.00 2.42 -2.00,  -0.77 2.55 -1.85,
+					-1.41 2.67 -1.41,  -1.85 2.79 -0.77,
+					-2.00 2.91  0.00,  -1.85 3.03  0.77,
+					-1.41 3.15  1.41,  -0.77 3.27  1.85,
+					 0.00 3.39  2.00,   0.77 3.52  1.85,
+					 1.41 3.64  1.41,   1.85 3.76  0.77,
+					 2.00 3.88  0.00,
+				]
+			}
+		}
+		
+}

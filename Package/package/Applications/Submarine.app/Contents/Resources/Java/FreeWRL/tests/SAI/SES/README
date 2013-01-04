@@ -1,0 +1,8 @@
+This is the wrl part of a bigger case study.  The controller tries
+to connect to an animation server at port 4445.  If it doesn't exists
+it will run with user interaction only.
+
+You can start a signal server that controls the signals by invoking the
+following command *before* running freewrl:
+
+CLASSPATH=. java SimulationServer

@@ -1,0 +1,35 @@
+#VRML V2.0 utf8
+# ColorRGBA test.
+
+
+    Background {
+        skyAngle        [ 1.07 1.45 1.52 1.57 ]
+        skyColor        [ 0.00 0.00 0.30
+                          0.00 0.00 0.80
+                          0.45 0.70 0.80
+                          0.70 0.50 0.00
+                          1.00 0.00 0.00 ]
+        groundAngle     1.57
+        groundColor     [ 0.0 0.0 0.0, 0.0 0.7 0.0 ]
+    }
+
+Transform {
+
+children Shape {
+	geometry IndexedFaceSet {
+		colorPerVertex FALSE
+		solid FALSE
+		coordIndex [0 1 2 3]
+		colorIndex [0 0 0 0 0 0 0 ]
+
+		coord Coordinate { point [
+                        -3.0 1.5 0,
+                       -3.0 -1.5 0,
+                        3.0 -1.5 0,
+                        3.0 1.5 0,
+		]}
+#color Color {color [ 0 1 1 ]}
+color ColorRGBA {color [0 1 1 0.5]}
+	}
+}
+}

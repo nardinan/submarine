@@ -1,0 +1,227 @@
+#VRML V2.0 utf8
+
+# this file came from a message from Clayton Cottingham.
+# it has been changed to make fonts "standard".
+
+
+Viewpoint {
+  position      0 0 1 
+  fieldOfView 0.3
+}
+DEF t Script {
+          eventOut        SFInt32        out
+          eventOut        SFInt32        out2
+            eventIn               SFFloat            setwords
+            field                 SFInt32            s 0
+            field                 SFInt32            s2 -1
+            field                 SFFloat        slast 0.0
+         url   "vrmlscript:
+                function setwords(value, time)
+                {
+                        if (value<slast)
+                        {s++; s=s%7; out=s;if(s==6)out2=-1;}
+                        if (s == 5)
+                        {s2 = value*4; out2=s2;}
+                        slast=value;
+                }
+                "
+}
+
+Transform {
+  children [
+        DEF cpS Switch {
+                whichChoice -1
+                choice [
+        Transform {}
+        Transform {
+        children        Shape {
+          appearance    Appearance {
+            material    DEF cpM Material {
+		diffuseColor 1.0 1.0 0.0
+            }
+          }
+          geometry      Text {
+            fontStyle   FontStyle {
+              family    "TYPEWRITER"
+                style           "ITALIC"
+              justify   "MIDDLE"
+                size            .8
+            }
+            string      "FreeWRL"
+          }
+        }}
+        Transform {
+        children        Shape {
+          appearance    Appearance {
+            material    DEF cpM Material {
+		diffuseColor 0.4 0.4 1.0
+            }
+          }
+          geometry      Text {
+            fontStyle   FontStyle {
+              family    "SANS"
+                style           "BOLD"
+              justify   "MIDDLE"
+                size            .8
+            }
+            string      "Linux & OS X"
+          }
+        }}
+        Transform {
+        children        Shape {
+          appearance    Appearance {
+            material    DEF cpM Material {
+		diffuseColor 1.0 0.0 0.0
+            }
+          }
+          geometry      Text {
+            fontStyle   FontStyle {
+              family    "SANS"
+                style           "BOLD"
+              justify   "MIDDLE"
+                size            .8
+            }
+            string      "has..."
+          }
+        }}
+        ]
+        }
+]
+        translation 2.365 -0.25 -0.357
+        scale   0.1 0.1 0.1
+        center -2.63 0.25 0
+}
+DEF tT Transform {
+  children      [
+    DEF tS Switch {
+      whichChoice       0
+      choice    [
+        Transform {
+        children        Shape {
+          appearance    Appearance {
+            material    DEF sM Material {
+		diffuseColor 0.6 0.4 1.0
+            }
+          }
+          geometry      Text {
+            fontStyle   FontStyle {
+              family    "SANS"
+              justify   "MIDDLE"
+                size            .8
+            }
+            string      "Sans"
+          }
+        }
+      }
+        Transform {
+        children        Shape {
+          appearance    Appearance {
+            material    USE sM
+          }
+          geometry      Text {
+            fontStyle   FontStyle {
+              family    "SERIF"
+              justify   "MIDDLE"
+                size            .8
+            }
+            string      "Serif"
+          }
+        }
+      }
+        Transform {
+        children        Shape {
+          appearance    Appearance {
+            material    USE sM
+          }
+          geometry      Text {
+            fontStyle   FontStyle {
+              family    "TYPEWRITER"
+              justify   "MIDDLE"
+                size            .8
+            }
+            string      "Typewriter"
+          }
+        }
+      }
+        Transform {
+        children        Shape {
+          appearance    Appearance {
+            material    USE sM
+          }
+          geometry      Text {
+            fontStyle   FontStyle {
+              family    "SANS"
+              justify   "MIDDLE"
+		style "BOLD"
+                size            .8
+            }
+            string      "Sans Bold"
+          }
+        }
+      }
+        Transform {
+        children        Shape {
+          appearance    Appearance {
+            material    USE sM
+          }
+          geometry      Text {
+            fontStyle   FontStyle {
+              family    "TYPEWRITER"
+              justify   "MIDDLE"
+		style "ITALIC"
+                size            .6
+            }
+            string      "Typewriter Italic"
+          }
+        }
+      }
+        Transform{}
+        Transform {
+        children        Shape {
+          appearance    Appearance {
+            material    USE sM
+          }
+          geometry      Text {
+            fontStyle   FontStyle {
+              family    "SERIF"
+                style           "BOLD"
+              justify   "MIDDLE"
+                size            .74
+            }
+            string      "TrueType Fonts!"
+          }
+        }
+      }
+        ]
+    }
+    DEF scroll Group {
+      children  [
+        DEF sTi TimeSensor {
+          startTime     1
+          cycleInterval 5
+          loop  TRUE
+        }
+        DEF sTr PositionInterpolator {
+          key   [ 0, .75, 1 ]
+          keyValue      [ 3.2 -0.25 -0.357,
+                        2.365 -0.25 -0.357,
+                        2.365 -0.25 -0.357 ]
+        }
+        DEF sF ScalarInterpolator {
+          key [0, .85, 1]
+          keyValue [0,0, 1]
+        }
+      ]
+    }
+  ]
+  translation   3.04 -0.258 -0.357
+  scale 0.1 0.1 0.1
+  center        -2.63 0.25 0
+}
+ROUTE sTi.fraction_changed TO sTr.set_fraction
+ROUTE sTi.fraction_changed TO sF.set_fraction
+ROUTE sTr.value_changed TO tT.set_translation
+ROUTE sF.value_changed TO sM.set_transparency
+ROUTE sTi.fraction_changed TO t.setwords
+ROUTE t.out TO tS.set_whichChoice
+ROUTE t.out2 TO cpS.set_whichChoice

@@ -1,0 +1,301 @@
+#VRML V2.0 utf8
+# ml_drainer.wrl , created by vrml_scene.m on 12-Dec-1998 21:46:05
+Background {
+skyAngle [0 0.5 1.0 1.5 2.0 2.5]
+  skyColor [0.8 0.8 0.8
+  0.8 0.8 0.8
+  0.8 0.8 0.8
+  0.8 0.8 0.8
+  0.8 0.8 0.8
+  0.8 0.8 0.8
+  0.8 0.8 0.8]
+  }
+#  Viewpoint {
+#  position   -5.575  -12.322   13.874
+#    orientation    -0.977   -0.208   -0.035    3.439
+#  }
+  Switch {
+choice
+  [
+  Shape {
+    appearance Appearance {
+      material Material { diffuseColor 1.0 0.0 0.0 }
+        }
+        geometry PointSet {
+      coord DEF allpoints Coordinate {
+        point [
+            0.333548  0.0632862  -0.662062 ,
+          -0.0942663  -0.985753   -0.69329 ,
+           -0.864876   -1.40235  -0.513217 ,
+            -1.99271   -1.05156  -0.103801 ,
+            -2.39136  -0.019229   0.159568 ,
+            -1.88752    1.08473   0.124115 ,
+            -1.02657    1.41865  -0.102229 ,
+            -0.18152    1.12567    -0.4014 ,
+            0.243498  0.0297933   0.451852 ,
+          -0.0170884  -0.806829   0.444709 ,
+            -0.76361   -1.17113    0.61611 ,
+            -1.48963  -0.836859   0.884169 ,
+            -1.72962 -0.0250922    1.03949 ,
+            -1.34086   0.713657   0.991273 ,
+           -0.759417   0.921596   0.843346 ,
+           -0.189312   0.754351   0.664946 ,
+          -0.0733776  -0.126451   0.807734 ,
+           -0.228188  -0.559307   0.800543 ,
+           -0.796493  -0.778692   0.949952 ,
+            -1.15909  -0.569092     1.0832 ,
+            -1.28978  -0.152599    1.15811 ,
+              -1.157   0.258569    1.15665 ,
+           -0.792854   0.492845    1.06827 ,
+           -0.375628   0.430477   0.937189 ,
+           -0.460948  -0.152008    1.00824 ,
+           -0.666192  -0.369804     1.0478 ,
+            -0.88849  -0.163177    1.12984 ,
+           -0.662738  0.0576918    1.08202 ,
+           -0.669859  -0.153476    1.07058 ,
+            0.576392  -0.133802  -0.683475 ,
+             1.03878 -0.0919184  -0.901358 ,
+             1.55754 -0.0551654   -1.12858 ,
+             2.22001 -0.0230757   -1.43379 ,
+             2.39836  0.0010042   -1.53628 ,
+            0.534436   0.053734  -0.725375 ,
+             1.02873   0.105639   -0.94477 ,
+             1.52572   0.130084    -1.1786 ,
+             2.18395   0.194082   -1.45725 ,
+             2.47032   0.208895   -1.59243 ,
+            0.580413   0.248366  -0.648194 ,
+             1.06369   0.282502  -0.864904 ,
+             1.54678   0.310096   -1.08504 ,
+             2.22966   0.369216    -1.3774 ,
+             2.41717   0.372438   -1.48624 ,
+          ]
+          }
+          }
+        }
+
+  ]
+  }Group {
+    children [
+    Transform {
+    translation    0.027    0.145   -5.934
+      children [
+      Transform {
+      rotation      -1.000   -0.000   -0.000    0.000
+        children [
+        DEF my_camera Inline {
+        url [ "camera.wrl" ]
+          }
+          ]
+        }
+      ]
+      }
+      Transform {
+    translation    0.117    1.495   -5.696
+      children [
+      Transform {
+      rotation       0.901    0.027   -0.434    0.312
+        children [ USE my_camera ]
+        }
+      ]
+      }
+      Transform {
+    translation    0.035    2.090   -5.500
+      children [
+      Transform {
+      rotation       0.996   -0.021   -0.090    0.454
+        children [ USE my_camera ]
+        }
+      ]
+      }
+      Transform {
+    translation   -0.091    2.383   -5.107
+      children [
+      Transform {
+      rotation       0.991    0.071   -0.115    0.518
+        children [ USE my_camera ]
+        }
+      ]
+      }
+      Transform {
+    translation   -2.636   -1.384   -4.922
+      children [
+      Transform {
+      rotation      -0.495    0.842    0.214    0.555
+        children [ USE my_camera ]
+        }
+      ]
+      }
+      Transform {
+    translation   -3.360    0.525   -4.933
+      children [
+      Transform {
+      rotation       0.114    0.981   -0.154    0.561
+        children [ USE my_camera ]
+        }
+      ]
+      }
+      Transform {
+    translation   -2.292    2.885   -4.808
+      children [
+      Transform {
+      rotation       0.780    0.603   -0.169    0.717
+        children [ USE my_camera ]
+        }
+      ]
+      }
+      Transform {
+    translation   -2.476    3.184   -4.418
+      children [
+      Transform {
+      rotation       0.780    0.601   -0.174    0.797
+        children [ USE my_camera ]
+        }
+      ]
+      }
+      Transform {
+    translation   -4.348   -0.464   -2.833
+      children [
+      Transform {
+      rotation      -0.005    0.990    0.142    0.935
+        children [ USE my_camera ]
+        }
+      ]
+      }
+      Transform {
+    translation   -4.630    1.400   -3.074
+      children [
+      Transform {
+      rotation       0.429    0.903   -0.005    1.005
+        children [ USE my_camera ]
+        }
+      ]
+      }
+      Transform {
+    translation   -4.348    1.175   -3.499
+      children [
+      Transform {
+      rotation       0.451    0.865    0.219    0.942
+        children [ USE my_camera ]
+        }
+      ]
+      }
+      Transform {
+    translation   -4.397    1.391   -3.165
+      children [
+      Transform {
+      rotation       0.438    0.886    0.149    0.985
+        children [ USE my_camera ]
+        }
+      ]
+      }
+    Shape {
+   geometry IndexedLineSet {
+      coord Coordinate {
+        point [
+           0.0267537   0.145415   -5.93382 ,
+            0.117418    1.49511   -5.69627 ,
+           0.0354537    2.08971   -5.49977 ,
+          -0.0907233    2.38283   -5.10717 ,
+            -2.63607   -1.38422    -4.9224 ,
+            -3.36045   0.525112   -4.93267 ,
+             -2.2925    2.88494   -4.80804 ,
+            -2.47588    3.18432   -4.41798 ,
+             -4.3481  -0.463869   -2.83342 ,
+            -4.62979    1.39983   -3.07425 ,
+            -4.34797    1.17539   -3.49946 ,
+            -4.39673    1.39072   -3.16548 ,
+          ]
+        }
+        coordIndex [
+      0 ,
+      1 ,
+      2 ,
+      3 ,
+      4 ,
+      5 ,
+      6 ,
+      7 ,
+      8 ,
+      9 ,
+      10 ,
+      11 ,
+      ]
+
+      }
+      }
+      ]
+  }
+  #VRML V2.0 utf8
+
+# Append this to a VRML 2.0 file which defines a coord node called "allpoints".
+
+Shape {
+   appearance	 Appearance {
+      material Material { diffuseColor	 0.6 0.6 0.6 	}
+   }
+   geometry IndexedFaceSet {
+      solid FALSE
+      coord USE allpoints
+      coordIndex [
+			 # Concentric 4-edged 'faces'
+			 0,    1,    9,    8,    -1,
+			 1,    2,   10,    9,    -1,
+			 2,    3,   11,   10,    -1,
+			 3,    4,   12,   11,    -1,
+			 4,    5,   13,   12,    -1,
+			 5,    6,   14,   13,    -1,
+			 6,    7,   15,   14,    -1,
+			 8,    9,   17,   16,    -1,
+			 9,   10,   18,   17,    -1,
+			 10,   11,   19,   18,    -1,
+			 11,   12,   20,   19,    -1,
+			 12,   13,   21,   20,    -1,
+			 13,   14,   22,   21,    -1,
+			 14,   15,   23,   22,    -1,
+			 # Concentric 4-edged 'faces' (indices jump)
+			 7,    0,     8,   15,    -1,
+			 15,   8,    16,   23,    -1,
+			 # Concentric 3-edged faces
+			 16,  17,  24,     -1,
+			 17,  25,  24,     -1,
+			 17,  18,  25,     -1,
+			 17,  18,  25,     -1,
+			 18,  19,  25,     -1,
+			 19,  26,  25,     -1,
+			 19,  20,  26,     -1,
+			 20,  21,  26,     -1,
+			 21,  27,  26,     -1,
+			 21,  22,  27,     -1,
+			 22,  23,  27,     -1,
+			 23,  24,  27,     -1,
+			 23,  16,  24,     -1,
+			 # Faces in the middle
+			 24,  25,  28,     -1,
+			 25,  26,  28,     -1,
+			 26,  27,  28,     -1,
+			 27,  24,  28,     -1
+	  ]
+   }
+}
+Shape {
+   appearance	 Appearance {
+      material Material { diffuseColor	 0.8 0.8 0.1 	}
+   }
+   geometry IndexedFaceSet {
+      solid FALSE
+      coord USE allpoints
+      coordIndex [
+			 # Handle
+   		 29  , 34  , 35  , 30  , -1  ,
+   		 30  , 35  , 36  , 31  , -1  ,
+			 31  , 36  , 37  , 32  , -1  ,
+			 32  , 37  , 38  , 33  , -1  ,
+			 34  , 39  , 40  , 35  , -1  ,
+			 35  , 40  , 41  , 36  , -1  ,
+			 36  , 41  , 42  , 37  , -1  ,
+			 37  , 42  , 43  , 38  , -1  ,
+	  ]
+   }
+}
+
+

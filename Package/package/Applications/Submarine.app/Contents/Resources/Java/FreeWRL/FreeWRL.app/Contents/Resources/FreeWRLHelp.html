@@ -1,0 +1,192 @@
+<HTML>
+<HEAD>
+<meta name = "AppleTitle" content = "FreeWRLHelp"/>
+<TITLE>FreeWRL Help</TITLE>
+<LINK REV="made" HREF="mailto:root@fisheye.uucp">
+</HEAD>
+
+<BODY>
+
+<A NAME="__index__"></A>
+<!-- INDEX BEGIN -->
+
+<UL>
+
+	<LI><A HREF="#name">NAME</A></LI>
+	<LI><A HREF="#description">DESCRIPTION</A></LI>
+	<LI><A HREF="#keys/mouse">KEYS/MOUSE</A></LI>
+	<UL>
+
+		<LI><A HREF="#walk">Walk</A></LI>
+		<LI><A HREF="#fly  keyboard mode">Fly - keyboard mode</A></LI>
+		<LI><A HREF="#fly  external sensor input">Fly - External Sensor input</A></LI>
+		<LI><A HREF="#examine">Examine</A></LI>
+		<LI><A HREF="#none">None</A></LI>
+	</UL>
+
+	<LI><A HREF="#options">OPTIONS</A></LI>
+	<LI><A HREF="#using freewrl with netscape">USING FREEWRL WITH NETSCAPE</A></LI>
+	<LI><A HREF="#author">AUTHOR</A></LI>
+</UL>
+<!-- INDEX END -->
+
+<HR>
+<P>
+<H1><A NAME="name">NAME</A></H1>
+<P>FreeWRL -- run the FreeWRL VRML97/X3D browser</P>
+<P>
+<HR>
+<H1><A NAME="description">DESCRIPTION</A></H1>
+<P>See the bottom of this text for the copyright and license.</P>
+<P>This command runs the FreeWRL VRML browser.
+See <A HREF="/VRML/Viewer.html">the VRML::Viewer manpage</A> for details on the user interface and 
+<A HREF="/VRML/Browser.html">the VRML::Browser manpage</A> for some other things. This manual
+page explains how to use the browser.</P>
+<P>
+<HR>
+<H1><A NAME="keys/mouse">KEYS/MOUSE</A></H1>
+<P>FreeWRL supports, as per VRML97 spec, several different <EM>navigation modes</EM>.
+In each mode, the meanings of mouse movements and keystrokes are different.</P>
+<P>In addition to the keys described below, there are some keys
+which work in all the modes:</P>
+<DL>
+<DT><STRONG><A NAME="item_d">d</A></STRONG><BR>
+<DD>
+Switch to the Fly (Keyboard input) navigation mode
+<P></P>
+<DT><STRONG><A NAME="item_f">f</A></STRONG><BR>
+<DD>
+Switch to the Fly (External Sensor input) navigation mode
+<P></P>
+<DT><STRONG><A NAME="item_e">e</A></STRONG><BR>
+<DD>
+Switch to the Examine navigation mode
+<P></P>
+<DT><STRONG><A NAME="item_w">w</A></STRONG><BR>
+<DD>
+Switch to the Walk navigation mode
+<P></P>
+<DT><STRONG><A NAME="item_v">v</A></STRONG><BR>
+<DD>
+Go to the next viewpoint in the scene
+<P></P>
+<DT><STRONG><A NAME="item_b">b</A></STRONG><BR>
+<DD>
+Go to the previous viewpoint in the scene
+<P></P>
+<DT><STRONG><A NAME="item_%2F">/</A></STRONG><BR>
+<DD>
+Print out the position and orientation of the current viewpoint
+in the current Viewpoint node's local coordinate system.
+<P>You can add the view you currently see in the window by creating a new
+Viewpoint node (in the same coordinate system as the one you used to
+go to this viewpoint) with these values.</P>
+<P></P>
+<DT><STRONG><A NAME="item_s">s</A></STRONG><BR>
+<DD>
+Save a snapshot or (with the ``-seq'' option) start/stop saving a
+sequence of images. By default, snapshots are saved to
+<EM>freewrl.snap.NNNN.ppm</EM> and sequences to <EM>freewrl.seq.mpg</EM>; see
+options ``-gif'', ``-seqb'' and ``-snapb''. While saving images, freewrl is
+slower.
+<P></P>
+<DT><STRONG><A NAME="item_h">h</A></STRONG><BR>
+<DD>
+Toggle the headlight on or off.
+<P></P>
+<DT><STRONG><A NAME="item_q">command-q</A></STRONG><BR>
+<DD>
+Quit the browser
+<P></P></DL>
+<P>
+<H2><A NAME="walk">Walk</A></H2>
+<P>Drag the mouse while mouse button 1 is pressed to move forwards/backwards
+or turn.
+For translation in the x-y plane press mouse button 3 and drag.</P>
+<P>
+<H2><A NAME="fly  keyboard mode">Fly - keyboard mode</A></H2>
+<P>This mode allows translation/rotations in all planes. There are two
+keymappings: those from the game Descent, and a mapping using the
+keypad.</P>
+<P>There is currently no mouse control, rather, all motion is controlled
+by 12 keys, two for each of your 6 degrees of freedom (3 translations, 
+3 rotations).</P>
+<P>The default keymap in this mode is</P>
+<DL>
+<DT><STRONG><A NAME="item_%278%27%2F%27k%27_and_%27Keypad_Down%27%2F%27Keypa">'8'/'k' and 'Keypad Down'/'Keypad Up'</A></STRONG><BR>
+<DD>
+rotation down/up
+<P></P>
+<DT><STRONG><A NAME="item_%27u%27%2F%27o%27_and_%27Keypad_Left%27%2F%27Keypa">'u'/'o' and 'Keypad Left'/'Keypad Right'</A></STRONG><BR>
+<DD>
+rotation left/right
+<P></P>
+<DT><STRONG><A NAME="item_%277%27%2F%279%27_and_%27Keypad_7%27%2F%27Keypad_9">'7'/'9' and 'Keypad 7'/'Keypad 9'</A></STRONG><BR>
+<DD>
+rotation about the Z axis
+<P></P>
+<DT><STRONG><A NAME="item_%27a%27%2F%27z%27_and_%27Keypad_0%27%2F%27Keypad_%">'a'/'z' and 'Keypad 0'/'Keypad .'</A></STRONG><BR>
+<DD>
+translation forwards/backwards
+<P></P>
+<DT><STRONG><A NAME="item_%27j%27%2F%27l%27_and_%27Arrow_left%27%2F%27Arrow_">'j'/'l' and 'Arrow left'/'Arrow right'</A></STRONG><BR>
+<DD>
+translation left/right
+<P></P>
+<DT><STRONG><A NAME="item_%27p%27%2F%27%3B%27_and_%27Arrow_up%27%2F%27Arrow_">'p'/';' and 'Arrow up'/'Arrow down'</A></STRONG><BR>
+<DD>
+translation up/down
+<P></P></DL>
+<P>It may take a while to get used to the FLY navigation mode but it is the only
+one with full freedom of motion currently.</P>
+<P>
+<H2><A NAME="fly  external sensor input">Fly - External Sensor input</A></H2>
+<P>This mode is entered via the ``f'' key. It takes input from a file in
+the /tmp directory - this file contains x,y,z and quat info, and
+puts the viewpoint there.</P>
+<P>As of December 17, 1999, only Polhemus code works, but Joystick 
+input is literally around the corner.</P>
+<P>
+<H2><A NAME="examine">Examine</A></H2>
+<P>The examine navigation mode is analogous to holding an object in your
+hand and rotating it to see it from various sides: your line of view
+always goes through the same point but you can rotate the object and
+translate yourself closer and farther away.</P>
+<P>Currently, dragging with mouse button 1 pressed
+rotates the scene and dragging up or down mouse button 3 pressed 
+translates you towards and away from the scene. There are no other controls.</P>
+<P>The center around which you rotate is determined by taking the initial
+position and orientation of the viewpoint given in the VRML file. 
+A ray is cast along your line of view and the closest that ray comes 
+to the origin of the local coordinate system is defined as the origin
+of the rotations.</P>
+<P>
+<H2><A NAME="none">None</A></H2>
+<P>As the name says, there is nothing you can do in the NONE navigation mode.</P>
+<P>
+<HR>
+<H1><A NAME="author">AUTHOR</A></H1>
+<P>Project started by Tuomas J. Lukka, continued by John Stewart.</P>
+<P>Please send bug reports to <CODE>john.stewart --at--  crc.ca</CODE>
+including the word ``freewrl''
+on the subject line will make sure that I'll notice it. Also,
+see the FreeWRL home page at <CODE>http://www.crc.ca/FreeWRL</CODE>.</P>
+<P>There is absolutely no warranty, express or implied for this software.
+For details on the conditions of use, see the FreeWRL distribution.</P>
+<P>FreeWRL is Copyright (C) 1998, 1999 Tuomas J. Lukka,
+John Stewart and others.</P>
+<P>This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Library General Public
+License as published by the Free Software Foundation; either
+version 2 of the License, or (at your option) any later version.</P>
+<P>This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Library General Public License for more details.</P>
+<P>You should have received a copy of the GNU Library General Public
+License along with this library; if not, write to the Free
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA</P>
+
+</BODY>
+
+</HTML>

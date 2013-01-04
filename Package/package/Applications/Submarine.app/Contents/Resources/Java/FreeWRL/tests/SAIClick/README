@@ -1,0 +1,6 @@
+Test script from Jeff Dubrule <igor@pobox.com>
+
+Please read the README.SAI in the build directory to see how to run this.
+
+Due to problems with PROTO nodes testscript.wrl doesn't work.  I have
+provided testsimple.wrl, which doesn't use PROTO nodes.

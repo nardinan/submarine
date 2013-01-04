@@ -1,0 +1,248 @@
+%% $Id: test-names.sty,v 1.3 2002/06/03 07:54:37 ayla Exp $
+%%
+%% Titles for test cases.
+%% This saves some typing, although the names are a bit unreadable,
+%% and letters need to be used instead of numbers.
+
+%% Appearance: Appearance test cases
+\newcommand{\AppA}{Material field of an Appearance node.}
+\newcommand{\AppB}{Apply ImageTexture to the texture field.}
+\newcommand{\AppC}{Apply PixelTexture to the texture field.}
+\newcommand{\AppD}{Default color, opacity for unlit, uncolored, untextured Geometry.}
+\newcommand{\AppE}{Default coloring of PointSet and IndexedLineSet.}
+\newcommand{\AppF}{Color node with unlit and untextured Geometry.}
+\newcommand{\AppG}{Texture color with unlit, uncolored Geometry.}
+\newcommand{\AppH}{Color node blending with a greyscale texture for unlit Geometry.}
+\newcommand{\AppI}{Intensity coloring with a greyscale texture for unlit Geometry.}
+\newcommand{\AppJ}{Preference of texture color over Geometry Color node in unlit Geometry.}
+\newcommand{\AppK}{Color texture transparency in an unlit world.}
+\newcommand{\AppL}{Greyscale texture transparency in an unlit world.}
+
+%% Appearance: FontStyle test cases
+\newcommand{\FSA}{FontStyle with default values.}
+\newcommand{\FSB}{FontStyle with 3 family types.}
+\newcommand{\FSC}{FontStyle with next supported family.}
+\newcommand{\FSD}{FontStyle with unsupported family.}
+\newcommand{\FSE}{FontStyle with all families and supported styles.}
+\newcommand{\FSF}{FontStyle with 3 size, spacing values.}
+\newcommand{\FSG}{FontStyle with text orientation, spacing.}
+
+%% Appearance: ImageTexture test cases
+\newcommand{\ITA}{JPG RGB texture mapping to primitive Geomtry.}
+\newcommand{\ITB}{PNG RGB and ``palette'' texture mapping to primitive Geometry.}
+\newcommand{\ITC}{JPG greyscale texture mapping to primitive Geometry.}
+\newcommand{\ITD}{PNG greyscale texture mapping to primitive Geometry.}
+\newcommand{\ITE}{256 x 256 pixel minimum file requirement for JPG files.}
+\newcommand{\ITF}{256 x 256 pixel minimum file requirement for PNG files.}
+\newcommand{\ITG}{Default IndexedFaceSet Geometry mapping for JPG files.}
+\newcommand{\ITHa}{Default IndexedFaceSet Geometry mapping if all sides of~}
+\newcommand{\ITHb}{bounding box are equal length.}
+\newcommand{\ITIa}{Default IndexedFaceSet Geometry mapping if two smaller~}
+\newcommand{\ITIb}{sides of bounding box are equal length.}
+\newcommand{\ITJa}{Default IndexedFaceSet Geometry mapping if two longer~}
+\newcommand{\ITJb}{sides of bounding box are equal length.}
+\newcommand{\ITK}{Default ElevationGrid mapping for JPG files.}
+\newcommand{\ITL}{Default Extrusion mapping for JPG files.}
+\newcommand{\ITM}{Default TEXT mapping for JPG files.}
+\newcommand{\ITN}{Default IndexedFaceSet Geometry mapping for PNG files.}
+\newcommand{\ITOa}{Default IndexedFaceSet Geometry mapping if all sides of}
+\newcommand{\ITOb}{bounding box are equal length.}
+\newcommand{\ITPa}{Default IndexedFaceSet Geometry mapping if two smaller}
+\newcommand{\ITPb}{sides of bounding box are equal length.}
+\newcommand{\ITQa}{Default IndexedFaceSet Geometry mapping if two longer}
+\newcommand{\ITQb}{sides of bounding box are equal length.}
+\newcommand{\ITR}{Default ElevationGrid mapping for PNG files.}
+\newcommand{\ITS}{Default Extrusion mapping for PNG files.}
+\newcommand{\ITT}{Default TEXT mapping for PNG files.}
+\newcommand{\ITUa}{PNG greyscale plus alpha-opacity and binary transparency}
+\newcommand{\ITUb}{texture mapping to primitive geometry.}
+\newcommand{\ITVa}{PNG greyscale plus alpha-opacity and binary transparency}
+\newcommand{\ITVb}{texture mapping to complex geometry.}
+\newcommand{\ITWa}{PNG RGB plus alpha-opacity and binary transparency}
+\newcommand{\ITWb}{texture mapping to primitive geometry.}
+\newcommand{\ITXa}{PNG RGB plus alpha-opacity and binary transparency}
+\newcommand{\ITXb}{texture mapping to complex geometry.}
+\newcommand{\ITY}{JPEG greyscale and diffuseColor combination.}
+\newcommand{\ITZ}{JPEG greyscale and Color node combination.}
+\newcommand{\ITAA}{PNG greyscale and diffuseColor combination.}
+\newcommand{\ITAB}{PNG greyscale and Color node combination.}
+\newcommand{\ITAC}{Unclamped horizontal and vertical ImageTexture mapping.}
+\newcommand{\ITAD}{Vertical clamping of an ImageTexture.}
+\newcommand{\ITAE}{Horizontal clamping of an ImageTexture.}
+\newcommand{\ITAF}{PNG unclamped horizontal and vertical ImageTexture mapping.}
+\newcommand{\ITAG}{PNG vertical clamping of an ImageTexture.}
+\newcommand{\ITAH}{PNG horizontal clamping of an ImageTexture.}
+
+%% Appearance: Material test cases
+\newcommand{\MatA}{Default Material node values for primitive Geometry.}
+\newcommand{\MatB}{Default Material node values for complex Geometry.}
+\newcommand{\MatC}{5 diffuseColor values for primitive Geometries.}
+\newcommand{\MatD}{5 shininess values for primitive Geometries.}
+\newcommand{\MatE}{5 diffuseColor values for complex Geometries.}
+\newcommand{\MatF}{5 shininess values for complex Geometries.}
+\newcommand{\MatGa}{Preference of texture color over Material diffuseColor~}
+\newcommand{\MatGb}{for primitive Geometry.}
+\newcommand{\MatHa}{Preference of texture Color over Material diffuseColor~}
+\newcommand{\MatHb}{for complex Geometry.}
+\newcommand{\MatIa}{Preference of texture Color over Geometry color~}
+\newcommand{\MatIb}{for complex Geometry.}
+\newcommand{\MatJa}{Preference of diffuseColor blending with greyscale texture~}
+\newcommand{\MatJb}{when Geometry color is NULL.}
+\newcommand{\MatKa}{Preference of Geometry color blending with greyscale texture~}
+\newcommand{\MatKb}{over Material node diffuseColor when both are present.}
+\newcommand{\MatL}{Preference of Geometry color over Material node diffuseColor.}
+\newcommand{\MatMa}{Preference of diffuseColor Geometry coloring when~}
+\newcommand{\MatMb}{Geometry Color node is NULL.}
+\newcommand{\MatNa}{Preference of Geometry Color over Material emissiveColor~}
+\newcommand{\MatNb}{for PointSet Geometry.}
+\newcommand{\MatOa}{Preference of emissiveColor when Geometry color is NULL~}
+\newcommand{\MatOb}{for PointSet Geometry.}
+\newcommand{\MatPa}{Preference of Geometry Color over Material EmissiveColor~}
+\newcommand{\MatPb}{for IndexedLineSet Geometry}
+\newcommand{\MatQa}{Preference of EmissiveColor when Geometry Color is NULL~}
+\newcommand{\MatQb}{for IndexedLineSet Geometry}
+\newcommand{\MatRa}{Preference of Color texture Alpha-Opacity over~}
+\newcommand{\MatRb}{Material node Transparency field}
+\newcommand{\MatSa}{Preference of Greyscale texture Alpha-Opacity over~}
+\newcommand{\MatSb}{Material node Transparency field}
+\newcommand{\MatTa}{Preference of Material Transparency when Color texture~}
+\newcommand{\MatTb}{has no Alpha-Opacity Value}
+\newcommand{\MatUa}{Preference of Material Transparency when Greyscale texture~}
+\newcommand{\MatUb}{has no Alpha-Opacity Value}
+\newcommand{\MatV}{5 AmbientIntensity Values for primitive Geometries}
+\newcommand{\MatW}{5 EmissiveColor Values for primitive Geometries}
+\newcommand{\MatX}{5 SpecularColor Values for primitive Geometries}
+\newcommand{\MatY}{5 AmbientIntensity Values for complex Geometries}
+\newcommand{\MatZ}{5 EmissiveColor Values for complex Geometries}
+\newcommand{\MatAA}{5 SpecularColor Values for complex Geometries}
+\newcommand{\MatAB}{5 Transparency Values for primitive Geometries}
+\newcommand{\MatAC}{5 Transparency Values for complex Geometries}
+
+%% Appearance: TextureTransform test cases
+\newcommand{\TTA}{Default TextureTransform node to primitive Geometries}
+\newcommand{\TTBa}{Default TextureTransform Mapping of ImageTexture~}
+\newcommand{\TTBb}{for Extrusion Geometry}
+\newcommand{\TTCa}{Default TextureTransform Mapping of ImageTexture~}
+\newcommand{\TTCb}{for ElevationGrid Geometry}
+\newcommand{\TTDa}{Default TextureTransform Mapping of ImageTexture~}
+\newcommand{\TTDb}{for IndexedFaceSet Geometry}
+\newcommand{\TTEa}{Scale field applied to ImageTexture Mapped~}
+\newcommand{\TTEb}{to primitive Geometry}
+\newcommand{\TTFa}{Scale field applied to ImageTexture Mapped~}
+\newcommand{\TTFb}{to complex Geometry}
+\newcommand{\TTGa}{Rotation field applied to ImageTexture Mapped~}
+\newcommand{\TTGb}{to primitive Geometry}
+\newcommand{\TTHa}{Rotation field applied to ImageTexture Mapped~}
+\newcommand{\TTHb}{to complex Geometry}
+\newcommand{\TTIa}{Horizontal Test of Translation field applied to~}
+\newcommand{\TTIb}{ImageTexture Mapped to primitive Geometry}
+\newcommand{\TTJa}{Vertical Test of Translation field applied to~}
+\newcommand{\TTJb}{ImageTexture Mapped to primitive Geometry}
+\newcommand{\TTKa}{Horizontal Test of Translation field applied to~}
+\newcommand{\TTKb}{ImageTexture Mapped to complex Geometry}
+\newcommand{\TTLa}{Vertical Test of Translation field applied to~}
+\newcommand{\TTLb}{ImageTexture Mapped to complex Geometry}
+\newcommand{\TTMa}{Test of center field applied to ImageTexture Mapped~}
+\newcommand{\TTMb}{to primitive Geometry}
+\newcommand{\TTNa}{Test of center field applied to ImageTexture Mapped~}
+\newcommand{\TTNb}{to complex Geometry}
+\newcommand{\TTOa}{Test of all fields applied to ImageTexture Mapped~}
+\newcommand{\TTOb}{to primitive Geometry}
+\newcommand{\TTPa}{Test of all fields applied to ImageTexture Mapped~}
+\newcommand{\TTPb}{to complex Geometry}
+
+%% Bindable Nodes: Background test cases
+\newcommand{\BkgA}{Simple (Single) Binded Background Sending TRUE Events}
+\newcommand{\BkgB}{Simple (Single) Non Binded Background Sending FALSE Events}
+\newcommand{\BkgCa}{Sending FALSE Event to Background at Stack Top Will Bind~}
+\newcommand{\BkgCb}{Next Background In Stack}
+\newcommand{\BkgDa}{Sending TRUE Event to Background Not at Stack Top Should~}
+\newcommand{\BkgDb}{Force Active Background Out of Stack Top}
+\newcommand{\BkgE}{Multiple Backgrounds Being Activated/Deactivated Dynamically}
+\newcommand{\BkgFa}{when Last Angle is $ < \pi$ Last Should Clamp From Last Angle~}
+\newcommand{\BkgFb}{to Nadir}
+\newcommand{\BkgGa}{when Last Angle is $ < \frac{\pi}{2}$ Then Last Angle/Equator~}
+\newcommand{\BkgGb}{Region Should Be Invisible}
+\newcommand{\BkgH}{Set different values for frontUrl field (JPG Images)}
+\newcommand{\BkgI}{Set different values for leftUrl field (JPG Images)}
+\newcommand{\BkgJ}{Set different values for rightUrl field (JPG Images)}
+\newcommand{\BkgK}{Set different values for backUrl field (JPG Images)}
+\newcommand{\BkgL}{Set different values for topUrl field (JPG Images)}
+\newcommand{\BkgM}{Set different values for bottomUrl field (JPG Images)}
+\newcommand{\BkgN}{Whole Panorama Made Up of JPG Images}
+\newcommand{\BkgO}{Set different values for frontUrl field (PNG Images)}
+\newcommand{\BkgP}{Set different values for leftUrl field (PNG Images)}
+\newcommand{\BkgQ}{Set different values for rightUrl field (PNG Images)}
+\newcommand{\BkgR}{Set different values for backUrl field (PNG Images)}
+\newcommand{\BkgS}{Set different values for topUrl field (PNG Images)}
+\newcommand{\BkgT}{Set different values for bottomUrl field (PNG Images)}
+\newcommand{\BkgU}{Whole Panorama Made Up of PNG Images}
+\newcommand{\BkgV}{Variations of same color at different angles}
+\newcommand{\BkgWa}{Variations of same ground color at different ground}
+\newcommand{\BkgWb}{angles (same sky color).}
+
+%% Bindable Nodes: Fog test cases
+\newcommand{\FogA}{Default Browser Behavior when no Fog nodes Are Present}
+\newcommand{\FogB}{Browser Behavior with Single Fog node with Default visibilityRange}
+\newcommand{\FogC}{Browser Behavior with Single Fog node with Default Color}
+
+%% Bindable Nodes: NavigationInfo test cases
+
+%% Bindable Nodes: Viewpoint test cases
+
+%% Geometric Properties: Color test cases
+\newcommand{\ColrA}{Single color applied to IndexedFaceSet faces.}
+\newcommand{\ColrB}{Single color applied to IndexedLineSet polylines.}
+\newcommand{\ColrC}{Single color applied to PointSet Geometry.}
+\newcommand{\ColrD}{Single color applied to ElevationGrid faces.}
+\newcommand{\ColrE}{Single color applied to IndexedFaceSet vertices.}
+\newcommand{\ColrF}{Single color applied to IndexedLineSet vertices.}
+\newcommand{\ColrG}{Single color applied to ElevationGrid vertices.}
+\newcommand{\ColrH}{Multiple colors applied to IndexedFaceSet faces.}
+\newcommand{\ColrI}{Multiple colors applied to IndexedLineSet polylines.}
+\newcommand{\ColrJ}{Multiple colors applied to PointSet Geometry.}
+\newcommand{\ColrK}{Multiple colors applied to ElevationGrid faces.}
+\newcommand{\ColrL}{Multiple colors applied to IndexedFaceSet vertices.}
+\newcommand{\ColrM}{Multiple colors applied to IndexedLineSet vertices.}
+\newcommand{\ColrN}{Multiple colors applied to ElevationGrid vertices.}
+\newcommand{\ColrO}{IndexedFaceSet color vs. Material diffuseColor.}
+\newcommand{\ColrP}{IndexedLineSet color vs. Material emissiveColor.}
+\newcommand{\ColrQ}{PointSet color vs. Material emissiveColor.}
+\newcommand{\ColrR}{ElevationGrid color vs. Material diffuseColor.}
+\newcommand{\ColrS}{IndexedFaceSet color vs. Material texture.}
+\newcommand{\ColrT}{ElevationGrid color vs. Material texture.}
+\newcommand{\ColrU}{Minimum 15000 colors per color node.}
+
+%% Geometry: Box test cases
+\newcommand{\BoxA}{Default Box.}
+\newcommand{\BoxB}{Lower boundary with initial Viewpoint.}
+\newcommand{\BoxC}{Upper boundary with initial Viewpoint.}
+\newcommand{\BoxD}{Floating point values.}
+\newcommand{\BoxE}{Extents.}
+\newcommand{\BoxF}{Textured Box.}
+
+%% Geometry: Cone test cases
+\newcommand{\ConeA}{Default Cone.}
+\newcommand{\ConeB}{Lower boundary with initial Viewpoint.}
+\newcommand{\ConeC}{Upper boundary with initial Viewpoint.}
+\newcommand{\ConeD}{Floating point values.}
+\newcommand{\ConeE}{Extents.}
+\newcommand{\ConeF}{Invisible sides.}
+\newcommand{\ConeG}{Invisible bottom.}
+\newcommand{\ConeH}{Textured Cone.}
+
+%% Special Groups: Inline test cases
+\newcommand{\InlA}{Single Url Item}
+\newcommand{\InlB}{Inline node Referencing Another Inline node}
+\newcommand{\InlC}{Inline node with invalid url reference.}
+\newcommand{\InlD}{Test absolute urls.}
+\newcommand{\InlE}{Test relative urls.}
+%% Beyond minimum conformance requirements: Bounding boxes
+\newcommand{\InlF}{Bounding Box Size equal to children's size.}
+
+%% Special Groups: LOD test cases
+%% Special Groups: Switch test cases
+
+%% Grouping Nodes: Group test cases
+\newcommand{\GrA}{Group Must Support at least 500 Children}
+\newcommand{\GrB}{Browser Can Parse bboxSize And bboxCenter fields}

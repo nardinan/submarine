@@ -1,0 +1,6 @@
+Updated June 2005; makes 6 objects, adds them, then removes 3, then
+adds 1 back in again. Exercises add/remove and createVRMLFromString.
+
+To compile, you may wish to cp -r the java classes over to this
+directory from the FreeWRL build directory, or reference them via
+the Java CLASSPATH environment variable.

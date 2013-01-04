@@ -1,0 +1,2 @@
+nice freewrl -eai localhost:2000 synthworld.wrl -best &
+java  synth

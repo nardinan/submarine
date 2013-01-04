@@ -1,0 +1,83 @@
+#VRML V2.0 utf8
+
+Group {
+  children [
+
+#JS - add the Simple.wrl background here... I like the Colours!!!
+
+    Background {
+        skyAngle        [ 1.07 1.45 1.52 1.57 ]
+        skyColor        [ 0.00 0.00 0.30
+                          0.00 0.00 0.80
+                          0.45 0.70 0.80
+                          0.70 0.50 0.00
+                          1.00 0.00 0.00 ]
+        groundAngle     1.57
+        groundColor     [ 0.0 0.0 0.0, 0.0 0.7 0.0 ]
+    }
+
+
+    NavigationInfo {
+        type "ANY"
+#      headlight FALSE
+	headlight TRUE
+    }
+
+    DEF VIEWPOINT Viewpoint {
+        description "one"
+        position 0 0 10
+        orientation 0 1 0 0
+    }
+
+    Viewpoint {
+        description "two"
+        position 8.660254 0 -5
+        orientation 0 1 0 2.0943951
+    }
+
+    Viewpoint {
+        description "three"
+        position -8.660254 0 -5
+        orientation 0 1 0 4.1887902
+    }
+
+
+    DEF sphere Transform {               # Second child - a red sphere
+      translation  4 0 2
+      children [
+        Shape {
+          geometry Sphere { radius 2.3 }
+          appearance Appearance {
+            material  DEF sphereMat Material { diffuseColor 1 0 0 }   # Red
+          }
+        }
+      ]
+    }
+
+    DEF box Transform {               # Third child - a blue box
+      translation -3 .2 1
+      rotation     0 1 1  .9
+      children [
+        Shape {
+          geometry Box {}
+          appearance Appearance {
+            material Material { diffuseColor 0 0 1 }  # Blue
+         }
+        }
+      ]
+    }
+
+
+
+   Transform {
+#      translation 20 10 -110
+      translation 10 10 -60
+      rotation 0 -1 0 3.0
+      children [
+	Inline { url [ "helpers/blimp.wrl" ] }
+      ]
+    }
+  ]
+}
+
+

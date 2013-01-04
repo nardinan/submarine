@@ -1,0 +1,62 @@
+#VRML V2.0 utf8
+DEF SWITCH Switch {
+	whichChoice 1
+        choice [
+                Transform{children Shape{appearance Appearance{material Material{}}geometry Box{}}}
+                Transform{children Shape{appearance Appearance{material Material{}}geometry Cone{}}}
+                Transform{children Shape{appearance Appearance{material Material{}}geometry Sphere{}}}
+                Transform{children Shape{appearance Appearance{material Material{}}geometry Cylinder{}}}
+        ]
+}
+
+Transform {
+	translation 2.5 2.5 0
+children [DEF SWITCH2 Switch {
+	whichChoice 1
+        choice [
+                Transform{children Shape{appearance Appearance{material Material{}}geometry Box{}}}
+                Transform{children Shape{appearance Appearance{material Material{}}geometry Cone{}}}
+                Transform{children Shape{appearance Appearance{material Material{}}geometry Sphere{}}}
+                Transform{children Shape{appearance Appearance{material Material{}}geometry Cylinder{}}}
+        ]
+}
+]
+}
+
+# Animation clock
+        DEF Clock TimeSensor { cycleInterval 4.0 loop TRUE },
+                
+DEF SCRIPT Script { 
+	eventIn  SFFloat set_fraction 
+	eventOut SFInt32 value_changed 
+	eventIn  SFInt32 use_choice
+	eventOut SFInt32 choiceCopy
+	field SFInt32 oldChoice -1
+
+url "vrmlscript: 
+function set_fraction ( frac, tm ) { 
+	if (frac < 0.25) value_changed = 0 
+	else if (frac < 0.5) value_changed = 1
+	else if (frac < 0.75) value_changed = 2
+	else value_changed = 3
+	//print ('value is ' + value_changed);
+}
+
+function use_choice (ch, tm) {
+	if (ch != oldChoice) {
+		//print ('choice changed to ' + ch);
+		oldChoice = ch;
+		choiceCopy = ch;
+	}
+}
+
+"}
+
+
+
+
+ROUTE Clock.fraction_changed TO SCRIPT.set_fraction
+ROUTE SCRIPT.value_changed TO SWITCH.set_whichChoice
+ROUTE SWITCH.whichChoice_changed TO SCRIPT.use_choice
+ROUTE SCRIPT.choiceCopy TO SWITCH2.set_whichChoice
+

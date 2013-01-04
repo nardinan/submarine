@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# run the windowed front end from here. This file is for Mac OSX only.
+
+# run FreeWRL in strict parsing mode
+export FREEWRL_STRICT_PARSING=1
+/Applications/FreeWRL/FreeWRL.app/Contents/MacOS/FreeWRL $* 

@@ -1,0 +1,25 @@
+#VRML V2.0 utf8
+
+# Javascript CreateVRMLFromURL example, adapted from the VRML97 ref manual.
+# rev Bob sez:
+# 	Parse the passed URL into a VRML scene. When complete send the 
+#	passed event to the passed node. The event is a string with the 
+#	name of an MFNode eventIn in the passed node.
+
+# From http://web3d.vapourtech.com/tutorials/vrml97/en/tut45.html
+
+DEF GROUP Group {
+}
+
+Script {
+   field SFNode group USE GROUP
+   url "javascript:
+      function initialize() {
+         urlString = new MFString('vrml.wrl');
+         Browser.createVrmlFromURL(urlString,group,'addChildren');
+      }
+   "
+}
+
+
+

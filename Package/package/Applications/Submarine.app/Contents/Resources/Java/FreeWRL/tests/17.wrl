@@ -1,0 +1,24 @@
+#VRML V2.0 utf8
+
+PROTO test [ field SFFloat size 1.0 ]
+{
+  Shape { geometry Sphere { radius IS size } }
+}
+
+EXTERNPROTO mytest1 [ field SFFloat size ]
+"17.wrl"
+
+EXTERNPROTO mytest2 [ ]
+[ "17.wrl#test" ]
+
+Transform {
+  translation -2 0 0
+  children mytest1 { }
+}
+
+Transform { children mytest1 { size 0.5 }}
+
+Transform {
+  translation 2 0 0
+  children mytest2 { }
+}

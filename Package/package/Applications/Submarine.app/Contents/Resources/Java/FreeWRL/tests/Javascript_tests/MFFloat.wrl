@@ -1,0 +1,77 @@
+#VRML V2.0 utf8
+
+Transform {
+	translation -2.2 0 0
+	children [
+		DEF LEFTBOX Transform { children Shape {
+			appearance Appearance {
+				material DEF LEFTAPP Material { }
+			}
+			geometry Box { }
+		}
+	}
+
+	]
+}
+
+Transform {
+	translation 2.2 0 0
+	children [
+		DEF RIGHTBOX Transform { children Shape {
+			appearance Appearance {
+				material DEF RIGHTAPP Material { }
+			}
+			geometry Box { }
+		}
+	}
+
+	]
+}
+
+
+# Animation clock
+DEF Clock TimeSensor {
+	cycleInterval 2.0
+	loop TRUE
+},
+
+# Left box 
+DEF LEFTPATH ColorInterpolator {
+	key [0.0 0.5 1.0 ]
+	keyValue [ 0 0 0, 0 0.5 0.5, 0 1 1]
+}
+
+# Right box 
+DEF RIGHTPATH ColorInterpolator {
+	key [ 0.0 0.5 1.0 ]
+	keyValue [ 0 0 0, 0 0.5 0.5, 0 1 1]
+}
+
+DEF SCRIPT Script {
+	eventOut MFFloat newOrit
+
+	eventIn MFFloat leftBoxChanged
+	eventOut MFFloat rightOrit
+
+url "vrmlscript: 
+function initialize () {
+	newOrit = new MFFloat(0, 0.1, 1.0);
+}
+
+function leftBoxChanged (val, tm) {
+	// make the colour come up slower on the right
+	val[1] = 0.5;
+	rightOrit = val;
+	//print ('now, key is ' + rightOrit)
+}
+"}
+
+ROUTE SCRIPT.newOrit TO LEFTPATH.set_key
+ROUTE SCRIPT.rightOrit TO RIGHTPATH.set_key
+
+ROUTE Clock.fraction_changed TO LEFTPATH.set_fraction
+ROUTE Clock.fraction_changed TO RIGHTPATH.set_fraction
+
+ROUTE LEFTPATH.value_changed TO LEFTAPP.set_diffuseColor
+ROUTE LEFTPATH.key_changed TO SCRIPT.leftBoxChanged
+ROUTE RIGHTPATH.value_changed TO RIGHTAPP.set_diffuseColor

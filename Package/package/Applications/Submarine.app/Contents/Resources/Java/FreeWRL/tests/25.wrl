@@ -1,0 +1,92 @@
+#VRML V2.0 utf8
+#
+# from the "VRML Source Book, figure 22.4
+# background binding.
+#
+# click on the Shapes...
+#
+Group {
+	children [
+	# initial background
+		Background {
+			skyColor [0.0 0.2 0.7, 0.0 0.5 1.0, 1.0 1.0 1.0]
+			skyAngle [1.309 1.571 ]
+			groundColor [0.1 0.1 0.0, 0.4 0.25 0.2, 0.6 0.6 0.6]
+			groundAngle [1.309 1.571 ]
+		}
+
+		# Alternate backgrounds
+		DEF AltBack1 Background {
+			skyColor [1.0 0.0 0.0, 1.0 0.4 0.0, 1.0 1.0 0.0]
+			skyAngle [1.309 1.571 ]
+		}
+		DEF AltBack2 Background {
+        skyAngle        [ 1.07 1.45 1.52 1.57 ]
+        skyColor        [ 0.00 0.00 0.30
+                          0.00 0.00 0.80
+                          0.45 0.70 0.80
+                          0.70 0.50 0.00
+                          1.00 0.00 0.00 ]
+        groundAngle     1.57
+        groundColor     [ 0.0 0.0 0.0, 0.0 0.7 0.0]
+
+		}
+
+
+		# Shapes that act as buttons
+		Transform {
+			translation -2.0 0.0 0.0
+			children [
+				Shape {
+					appearance Appearance{
+					  material Material {
+					    diffuseColor 0.8 0.0 0.0
+					  }
+					}
+					geometry Box {}
+				},
+				DEF TouchBox TouchSensor {}
+			]
+		},
+
+		DEF Column Transform {
+			translation 2.0 0.0 0.0
+			children [
+				Shape {
+					appearance Appearance{
+					  material Material {
+					    diffuseColor 0.0 0.0 0.8
+					  }
+					}
+					geometry Cylinder {}
+				},
+				DEF TouchSphere TouchSensor {}
+			]
+		},
+
+
+	# Animation clock
+		DEF Clock TimeSensor {
+			cycleInterval 4.0
+			loop TRUE
+		},
+
+	# Animation path
+
+		DEF ColumnPath OrientationInterpolator {
+			key [ 0.0 0.5 1.0 ]
+			keyValue [
+				0.0 0.0 1.0 0.0,
+				0.0 0.0 1.0 3.14,
+				0.0 0.0 1.0 6.28
+			]
+		}
+	]
+}
+
+ROUTE Clock.fraction_changed TO ColumnPath.set_fraction
+ROUTE ColumnPath.value_changed TO Column.set_rotation
+
+ROUTE TouchBox.isActive		TO	AltBack1.set_bind
+ROUTE TouchSphere.isActive		TO	AltBack2.set_bind
+ROUTE AltBack2.isBound	TO Clock.enabled

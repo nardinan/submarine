@@ -1,0 +1,29 @@
+#VRML V2.0 utf8
+## test Script nodes and SFNode constructor in JS engine
+
+DEF SCRIPT Script {
+	  eventOut SFNode newNode
+	  url "javascript:
+			function initialize() {
+				 newNode = new SFNode('Cone {}');
+			} "
+}
+
+
+#VRML V2.0 utf8
+# Copyright (C) 1998 Tuomas J. Lukka
+# DISTRIBUTED WITH NO WARRANTY, EXPRESS OR IMPLIED.
+# See the GNU Library General Public License (file COPYING in the distribution)
+# for conditions of use and redistribution.
+
+# Simple cone
+
+DEF MYS Shape {
+	appearance Appearance {
+		material Material {
+		}
+	}
+	geometry NULL
+}
+ROUTE SCRIPT.newNode TO MYS.geometry
+

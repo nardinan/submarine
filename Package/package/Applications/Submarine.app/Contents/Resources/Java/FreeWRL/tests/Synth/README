@@ -1,0 +1,18 @@
+Try #1 for the synth. It works! Future versions will have better
+MIDI control, as the playmidi and midge portions will be replaced.
+
+The Scene has 12 notes, (one octave), and 4 purple "octave selector"
+cones. The red sphere is the record button, and the yellow sphere
+is the play button.
+
+run the midi_control.c program (no make file yet, just
+gcc midi_control.c, and run the a.out program).
+
+Run the script synth.
+
+Note: midge (perl to midi program) must be in path.
+
+Note: playmidi must be in path, and must play to synth.
+
+John Stewart
+March 13 2001

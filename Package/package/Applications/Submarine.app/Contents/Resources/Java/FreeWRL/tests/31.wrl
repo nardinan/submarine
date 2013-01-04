@@ -1,0 +1,152 @@
+#VRML V2.0 utf8
+Group {
+    children [
+    Transform {
+    translation    0.027    0.145   -5.934
+      children [
+      Transform {
+      rotation      -1.000   -0.000   -0.000    0.000
+        children [
+        DEF my_camera Inline {
+        url [ "camera.wrl" ]
+          }
+          ]
+        }
+      ]
+      }
+      Transform {
+    translation    0.117    1.495   -5.696
+      children [
+      Transform {
+      rotation       0.901    0.027   -0.434    0.312
+        children [ USE my_camera ]
+        }
+      ]
+      }
+      Transform {
+    translation    0.035    2.090   -5.500
+      children [
+      Transform {
+      rotation       0.996   -0.021   -0.090    0.454
+        children [ USE my_camera ]
+        }
+      ]
+      }
+      Transform {
+    translation   -0.091    2.383   -5.107
+      children [
+      Transform {
+      rotation       0.991    0.071   -0.115    0.518
+        children [ USE my_camera ]
+        }
+      ]
+      }
+      Transform {
+    translation   -2.636   -1.384   -4.922
+      children [
+      Transform {
+      rotation      -0.495    0.842    0.214    0.555
+        children [ USE my_camera ]
+        }
+      ]
+      }
+      Transform {
+    translation   -3.360    0.525   -4.933
+      children [
+      Transform {
+      rotation       0.114    0.981   -0.154    0.561
+        children [ USE my_camera ]
+        }
+      ]
+      }
+      Transform {
+    translation   -2.292    2.885   -4.808
+      children [
+      Transform {
+      rotation       0.780    0.603   -0.169    0.717
+        children [ USE my_camera ]
+        }
+      ]
+      }
+      Transform {
+    translation   -2.476    3.184   -4.418
+      children [
+      Transform {
+      rotation       0.780    0.601   -0.174    0.797
+        children [ USE my_camera ]
+        }
+      ]
+      }
+      Transform {
+    translation   -4.348   -0.464   -2.833
+      children [
+      Transform {
+      rotation      -0.005    0.990    0.142    0.935
+        children [ USE my_camera ]
+        }
+      ]
+      }
+      Transform {
+    translation   -4.630    1.400   -3.074
+      children [
+      Transform {
+      rotation       0.429    0.903   -0.005    1.005
+        children [ USE my_camera ]
+        }
+      ]
+      }
+      Transform {
+    translation   -4.348    1.175   -3.499
+      children [
+      Transform {
+      rotation       0.451    0.865    0.219    0.942
+        children [ USE my_camera ]
+        }
+      ]
+      }
+      Transform {
+    translation   -4.397    1.391   -3.165
+      children [
+      Transform {
+      rotation       0.438    0.886    0.149    0.985
+        children [ USE my_camera ]
+        }
+      ]
+      }
+    Shape {
+   geometry IndexedLineSet {
+      coord Coordinate {
+        point [
+           0.0267537   0.145415   -5.93382 ,
+            0.117418    1.49511   -5.69627 ,
+           0.0354537    2.08971   -5.49977 ,
+          -0.0907233    2.38283   -5.10717 ,
+            -2.63607   -1.38422    -4.9224 ,
+            -3.36045   0.525112   -4.93267 ,
+             -2.2925    2.88494   -4.80804 ,
+            -2.47588    3.18432   -4.41798 ,
+             -4.3481  -0.463869   -2.83342 ,
+            -4.62979    1.39983   -3.07425 ,
+            -4.34797    1.17539   -3.49946 ,
+            -4.39673    1.39072   -3.16548 ,
+          ]
+        }
+        coordIndex [
+      0 ,
+      1 ,
+      2 ,
+      3 ,
+      4 ,
+      5 ,
+      6 ,
+      7 ,
+      8 ,
+      9 ,
+      10 ,
+      11 ,
+      ]
+
+      }
+      }
+      ]
+  }

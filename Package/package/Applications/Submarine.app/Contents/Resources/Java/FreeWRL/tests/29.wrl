@@ -1,0 +1,23 @@
+#VRML V2.0 utf8
+
+      Shape {
+	appearance	Appearance {
+	  material	NULL
+
+	  texture	DEF _0 ImageTexture {
+	    url	"helpers/stripes.jpg"
+	    	    repeatS	TRUE
+	   	    repeatT     TRUE
+	  }
+
+	  textureTransform	TextureTransform {
+	    scale	1 1
+	  }
+
+	}
+
+	geometry	Sphere {
+		radius 3.0
+	}
+
+      }

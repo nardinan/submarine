@@ -1,0 +1,96 @@
+#VRML V2.0 utf8
+
+Transform {
+	translation -2.2 0 0
+	children [
+		DEF LEFTBOX Transform { children Shape {
+			appearance Appearance {
+				material Material { }
+			}
+			geometry Box { }
+		}
+	}
+
+	]
+}
+
+Transform {
+	translation 2.2 0 0
+	children [
+		DEF RIGHTBOX Transform { children Shape {
+			appearance Appearance {
+				material Material { }
+			}
+			geometry Box { }
+		}
+	}
+
+	]
+}
+
+
+# Animation clock
+DEF Clock TimeSensor {
+	cycleInterval 1.0
+	loop TRUE
+},
+
+# Left box Animation path
+DEF LEFTPATH OrientationInterpolator {
+	key [ 0.0 0.5 1.0 ]
+	keyValue [ 0 0 0 0, 0 0 0 0, 0 0 0 0 ]
+}
+
+# Right box Animation path
+DEF RIGHTPATH OrientationInterpolator {
+	key [ 0.0 0.5 1.0 ]
+	keyValue [ 0 0 0 0, 0 0 0 0, 0 0 0 0 ]
+}
+
+DEF SCRIPT Script { 
+	eventIn  SFFloat set_fraction 
+	eventOut MFRotation newOrit
+	field SFInt32 eventCount 0
+	field SFBool  whichOne FALSE
+
+	eventIn MFRotation leftBoxChanged
+	eventOut MFRotation rightOrit
+
+url "vrmlscript: 
+function eventsProcessed () {
+	//print ('ep ' + eventCount);
+	eventCount = eventCount + 1;
+	if (eventCount == 200) {
+		eventCount = 0;
+		whichOne = !whichOne;
+		if (whichOne == true) {
+			newOrit = new MFRotation( new SFRotation(0.0, 1.0, 0.0, 0.0),
+				new SFRotation(0.0, 1.0, 0.0, 3.14),
+				new SFRotation(0.0, 1.0, 0.0, 6.28));
+		} else {
+			newOrit = new MFRotation(new SFRotation(0.0, 0.0, 0.0, 0.0));
+		}	
+	}
+}
+
+function leftBoxChanged (val, tm) {
+	//print ('length ' + val.length);
+	for (x=0; x<val.length; x++) {
+		/* change the axis of rotation */
+		val[x][1] = 0.0;
+		val[x][2] = 1.0;
+		//print ('element ' + x + ' is  ' + val[x]);
+	}
+	rightOrit = val;
+}
+"}
+
+ROUTE SCRIPT.newOrit TO LEFTPATH.set_keyValue
+ROUTE SCRIPT.rightOrit TO RIGHTPATH.set_keyValue
+
+ROUTE Clock.fraction_changed TO LEFTPATH.set_fraction
+ROUTE Clock.fraction_changed TO RIGHTPATH.set_fraction
+
+ROUTE LEFTPATH.value_changed TO LEFTBOX.set_rotation
+ROUTE LEFTPATH.keyValue_changed TO SCRIPT.leftBoxChanged
+ROUTE RIGHTPATH.value_changed TO RIGHTBOX.set_rotation

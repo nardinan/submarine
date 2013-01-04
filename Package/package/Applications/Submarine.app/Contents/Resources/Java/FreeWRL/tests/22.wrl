@@ -1,0 +1,51 @@
+#VRML V2.0 utf8
+# COPYRIGHT S.PARIKH VIRGINIA TECH DEC 30 1999
+
+
+
+DEF index1XForm Transform { center 0 0 0 children [ Transform { translation 0 0 0
+    children [ Shape { appearance Appearance { material Material { diffuseColor 1 0 1 } }
+	    geometry Cylinder { height 1.5 radius .5 } }
+ ] }
+        DEF index1Clicker TouchSensor {}
+        DEF index1TimeSource TimeSensor { cycleInterval 5 }
+        DEF index1Animation OrientationInterpolator {
+            key      [ 0,   .25,   .5,    .75,    1.0 ]
+            keyValue [ 0 0 0 0, 1 0 0 1.745,  0 0 0 0] }
+
+DEF index2XForm Transform { center 0 1.0 0 children [ Transform { translation 0 1.25 0
+    children [ Shape { appearance Appearance { material Material { diffuseColor 1 0 1 } }
+	    geometry Cylinder { height 1.25 radius .4 } }
+ ] }
+        DEF index2Clicker TouchSensor {}
+        DEF index2TimeSource TimeSensor { cycleInterval 2.5 }
+        DEF index2Animation OrientationInterpolator {
+            key      [ 0,      .5,        1.0 ]
+            keyValue [ 0 0 0 0, 1 0 0 1.745,  0 0 0 0 ] }
+
+DEF index3XForm Transform { center 0 2.0 0 children [ Transform { translation 0 2.25 0
+    children [ Shape { appearance Appearance { material Material { diffuseColor 1 0 1 } }
+	    geometry Cone { height .75 bottomRadius .4 } }
+ ] }
+        DEF index3Clicker TouchSensor {}
+        DEF index3TimeSource TimeSensor { cycleInterval 2.5 }
+        DEF index3Animation OrientationInterpolator {
+            key      [ 0,      .5,        1.0 ]
+            keyValue [ 0 0 0 0, 1 0 0 .785,  0 0 0 0 ] }
+ ] }
+ ] }
+ ] }
+
+
+ROUTE index1Clicker.touchTime TO index1TimeSource.set_startTime
+ROUTE index1Clicker.touchTime TO index2TimeSource.set_startTime
+ROUTE index1Clicker.touchTime TO index3TimeSource.set_startTime
+ROUTE index1TimeSource.fraction_changed TO index1Animation.set_fraction
+ROUTE index1Animation.value_changed TO index1XForm.set_rotation
+ROUTE index2Clicker.touchTime TO index2TimeSource.set_startTime
+ROUTE index2Clicker.touchTime TO index3TimeSource.set_startTime
+ROUTE index2TimeSource.fraction_changed TO index2Animation.set_fraction
+ROUTE index2Animation.value_changed TO index2XForm.set_rotation
+ROUTE index3Clicker.touchTime TO index3TimeSource.set_startTime
+ROUTE index3TimeSource.fraction_changed TO index3Animation.set_fraction
+ROUTE index3Animation.value_changed TO index3XForm.set_rotation

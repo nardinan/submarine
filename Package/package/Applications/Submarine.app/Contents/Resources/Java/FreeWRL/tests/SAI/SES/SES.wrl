@@ -1,0 +1,400 @@
+#VRML V2.0 utf8
+
+DirectionalLight {
+  intensity 1
+  direction 0 -20 -10
+}
+DirectionalLight {
+  intensity .3
+  direction 10 0 0
+}
+DirectionalLight {
+  intensity .3
+  direction -10 0 0
+}
+
+DEF Blick0 Viewpoint {
+  #orientation <?> <?> <?> <Neigung des Blickwinkels>
+  #orientation 1 0 0 -.1
+  orientation 1 0 0 -.4
+  #position <LeftRight> <Height> <Distance>
+  #position 0 10 50
+  position 0 20 45
+  description    "Blick 0"
+}
+
+
+Background {
+  groundColor [ .3 .5 .1, .35 .55 .15, 1 1 1 ]
+  groundAngle [ 1.4, 1.5707 ]
+  skyColor [ 0 0 1, 0 .5 1, 1 1 1 ]
+  skyAngle [ 1.1, 1.5707 ]
+}
+
+
+EXTERNPROTO Signal
+[	eventIn      SFFloat    setPanel1
+	eventIn      SFFloat    setPanel2
+	exposedField SFVec3f    position
+	exposedField SFRotation orientation
+	eventOut     SFTime     touchTime
+]
+"Signal.wrl"
+
+EXTERNPROTO Lok
+[	exposedField SFColor    color
+	exposedField SFVec3f    translation
+	exposedField SFRotation rotation
+	exposedField SFBool     isActive
+	exposedField SFVec3f    inactivePos
+	eventOut     SFTime     touchTime
+]
+"Lok.wrl"
+
+PROTO Kontakt [	exposedField SFColor color	.5 .5 .5
+		exposedField SFVec3f position	0 0 0
+		eventOut     SFTime  toggleTime ]
+{
+  Transform {
+    children [
+      Shape {
+        appearance Appearance {
+	  material Material { diffuseColor IS color }
+	}
+        #geometry Box { size 1 .4 1 }
+        geometry Cylinder { radius .6
+	                    height .4 }
+      } #Shape
+      TouchSensor { touchTime IS toggleTime }
+      #TouchSensor { isActive IS toggleTime }
+    ] #children
+    translation IS position
+  } #Transform
+}
+
+
+
+DEF SignalLR Signal {
+  position -22 -.2 8
+}
+
+DEF SignalRL Signal {
+  position 21.7 -.2 -2.5
+  orientation 0 1 0 3.7296
+}
+
+
+DEF LokLinks0 Lok {
+  color 1 .3 .2
+  rotation 0 1 0 3.1415
+  #translation -35 0 1
+  #inactivePos -35 0 1
+  translation -74 11 8
+  inactivePos -74 11 8
+}
+
+DEF LokLinks1 Lok {
+  color 1 .3 .2
+  rotation 0 1 0 3.1415
+  #translation -40 0 1
+  #inactivePos -40 0 1
+  translation -74 11 5
+  inactivePos -74 11 5
+}
+
+DEF LokLinks2 Lok {
+  color 1 .3 .2
+  rotation 0 1 0 3.1415
+  translation -45 0 1
+  #inactivePos -45 0 1
+  translation -74 11 2
+  inactivePos -74 11 2
+}
+
+
+DEF LokRechts0 Lok {
+  color .2 .3 1
+  #translation 35 0 -1
+  #inactivePos 35 0 -1
+  translation 74 11 -2
+  inactivePos 74 11 -2
+}
+
+DEF LokRechts1 Lok {
+  color .2 .3 1
+  #translation 40 0 -1
+  #inactivePos 40 0 -1
+  translation 74 11 -5
+  inactivePos 74 11 -5
+}
+
+DEF LokRechts2 Lok {
+  color .2 .3 1
+  #translation 45 0 -1
+  #inactivePos 45 0 -1
+  translation 74 11 -8
+  inactivePos 74 11 -8
+}
+
+
+DEF EK1 Kontakt {
+  color 1 .3 .2
+  position -48 0 5
+}
+
+DEF LK1 Kontakt {
+  color 1 .3 .2
+  position -21.5 0 5
+}
+
+DEF AK1 Kontakt {
+  color 1 .3 .2
+  position 20 0 5
+}
+
+DEF EK2 Kontakt {
+  color .2 .3 1
+  position 48 0 -5
+}
+
+DEF LK2 Kontakt {
+  color .2 .3 1
+  position 21.5 0 .8
+}
+
+DEF AK2 Kontakt {
+  color .2 .3 1
+  position -20 0 1.7
+}
+
+
+DEF Controller Script {
+  url "Controller.class"
+
+  field MFNode ltrTrains [ USE LokLinks0, USE LokLinks1, USE LokLinks2 ]
+  field MFNode rtlTrains [ USE LokRechts0, USE LokRechts1, USE LokRechts2 ]
+  field SFNode ltrSignal USE SignalLR
+  field SFNode rtlSignal USE SignalRL
+
+  eventIn SFTime timeStep
+
+  eventIn SFTime activateLL0
+  eventIn SFTime activateLL1
+  eventIn SFTime activateLL2
+  eventIn SFTime activateLR0
+  eventIn SFTime activateLR1
+  eventIn SFTime activateLR2
+
+  eventIn SFTime toggle0
+  eventIn SFTime toggle1
+  eventIn SFTime toggle2
+  eventIn SFTime toggle3
+  eventIn SFTime toggle4
+  eventIn SFTime toggle5
+
+  eventIn SFTime signalLR
+  eventIn SFTime signalRL
+
+  eventOut SFColor toggleColor0
+  eventOut SFColor toggleColor1
+  eventOut SFColor toggleColor2
+  eventOut SFColor toggleColor3
+  eventOut SFColor toggleColor4
+  eventOut SFColor toggleColor5
+
+  eventOut SFColor collision
+
+} #Script "Contoller"
+
+ROUTE LokLinks0.touchTime TO Controller.activateLL0
+ROUTE LokLinks1.touchTime TO Controller.activateLL1
+ROUTE LokLinks2.touchTime TO Controller.activateLL2
+ROUTE LokRechts0.touchTime TO Controller.activateLR0
+ROUTE LokRechts1.touchTime TO Controller.activateLR1
+ROUTE LokRechts2.touchTime TO Controller.activateLR2
+
+ROUTE SignalLR.touchTime TO Controller.signalLR
+ROUTE SignalRL.touchTime TO Controller.signalRL
+
+ROUTE EK1.toggleTime TO Controller.toggle0
+ROUTE AK1.toggleTime TO Controller.toggle1
+ROUTE LK1.toggleTime TO Controller.toggle2
+ROUTE EK2.toggleTime TO Controller.toggle3
+ROUTE AK2.toggleTime TO Controller.toggle4
+ROUTE LK2.toggleTime TO Controller.toggle5
+ROUTE Controller.toggleColor0 TO EK1.color
+ROUTE Controller.toggleColor1 TO AK1.color
+ROUTE Controller.toggleColor2 TO LK1.color
+ROUTE Controller.toggleColor3 TO EK2.color
+ROUTE Controller.toggleColor4 TO AK2.color
+ROUTE Controller.toggleColor5 TO LK2.color
+
+DEF Boden Transform {
+  children [
+    Shape {
+      appearance DEF BodenApp Appearance {
+        material DEF BodenMat Material { diffuseColor .3 .5 .1 }
+	  texture DEF BodenTex ImageTexture { url "Landschaft2.GIF" }
+          textureTransform TextureTransform { scale 1 1 }
+	} #Appearance
+      geometry
+        #Box { size 200 2 200 }
+	  ElevationGrid {
+	    xSpacing 15
+	    zSpacing 8
+	    xDimension 12
+	    zDimension 11
+	    height [ 17, 14, 16, 12, 14, 21, 20, 11,  9, 16, 13, 13,
+		     22, 14, 17, 12, 15, 21, 17, 10, 14, 12, 19, 16,
+		     17, 11, 13, 11,  9, 13, 11, 11, 17,  9, 15, 11,
+		      9,  8,  6, 10,  7, 12, 15,  8, 11,  5,  7,  9,
+		      0,  0,  0,  0,  0,  5, 12,  0,  0,  0,  0,  0,
+		      0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
+		      0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
+		      6,  2,  0, -2, -6,-12,-11, -7, -2,  0,  1,  6,
+		      9,  3, -1, -4, -9,-15,-13,-11, -4, -1,  3,  9,
+		     11,  8,  1, -5,-11,-15,-11, -9, -7, -1,  5,  7,
+		      9,  8, -2,-10, -9, -9,-11,-13, -9,  1,  8,  6 ]
+	  } #ElevationGrid
+    } #Shape
+  ] #children
+  translation -81.5 -.2 -39.5
+} #Transform
+Transform {
+  children [
+    DEF Tunnel Transform {
+	children [
+	  Shape {
+	    appearance Appearance {
+		material USE BodenMat
+		texture ImageTexture { url "Rasen.GIF" }
+	    } #Appearance
+	    geometry Box { size 10 12 30 }
+	  } #Shape
+	  Transform {
+	    children [
+	      DEF TunnelHole Shape {
+	        appearance Appearance {
+		  material DEF TunnelBlack Material { diffuseColor 0 0 0 } }
+	        geometry Box { size .5 7 5 }
+	      } #Shape "TunnelHole"
+	    ] #children
+	    translation 5 -3 -5
+	  } #Transform
+	  Transform {
+	    children [
+	      USE TunnelHole
+	    ] #children
+	    translation 5 -3 5
+	  } #Transform
+	] #children
+	rotation 0 0 1 .25
+	center 5 -6 0
+	translation 6.5 6 39.5
+    } #Transform
+    Transform {
+	children [
+	  USE Tunnel
+	] #children
+	rotation 0 1 0 3.1415
+	center 81.5 0 39.5
+    } #Transform
+  ] #children
+  translation -81.5 -.2 -39.5
+} #Transform
+
+
+DEF Schiene Transform {
+  children [
+    Transform {
+      children [
+	  Shape {
+	    appearance DEF SchienenApp Appearance {
+		material Material { diffuseColor .6 .5 .3 }
+		texture ImageTexture { url "Schiene.GIF" }
+		textureTransform TextureTransform { scale 75 1 }
+	    } #Appearance
+	    geometry Box { size 150 .2 2 }
+	  } #Shape
+	  DEF TS TouchSensor {}
+	] #children
+	translation 0 0 5
+    } #Transform
+    Transform {
+      children [
+	  DEF SchienenOben Shape {
+	    appearance Appearance {
+		material Material { diffuseColor .6 .5 .3 }
+		texture ImageTexture { url "Schiene.GIF" }
+		textureTransform TextureTransform { scale 22.5 1 }
+	    } #Appearance
+	    geometry Box { size 45 .2 2 }
+	  } #Shape
+	] #children
+	translation -52.5 0 -5
+    } #Transform
+    Transform {
+      children [ USE SchienenOben ] #children
+	translation 52.5 0 -5
+    } #Transform
+    Transform {
+      children [
+	  DEF Weiche Shape {
+	    appearance Appearance {
+		material Material { diffuseColor .6 .5 .3 }
+		texture ImageTexture { url "Schiene.GIF" }
+		textureTransform TextureTransform { scale 9.5 1 }
+	    } #Appearance
+	    geometry Box { size 19 .2 2 }
+	  } #Shape
+	] #children
+	rotation 0 1 0 2.57 #5536
+	translation -22.5 0 0
+    } #Transform
+    Transform {
+      children [ USE Weiche ]
+	rotation 0 1 0 -2.57 #5536
+	translation 22.5 0 0
+    } #Transform
+  ] #children
+  translation 0 -.1 0
+} #Transform
+
+
+
+
+Transform {
+  children [
+    Shape {
+        appearance Appearance {
+            material DEF CollisionIndicator Material {
+              diffuseColor 0 1 0
+            }
+        }
+        geometry Sphere { }
+    }
+  ]
+  translation 0 0 0
+}
+
+
+
+DEF AutoStep TimeSensor {
+  cycleInterval .05
+  loop          TRUE
+}
+
+
+ROUTE AutoStep.time TO Controller.timeStep
+ROUTE Controller.collision TO CollisionIndicator.diffuseColor
+
+NavigationInfo {
+  type [ "FLY", "WALK", "ANY" ]
+  headlight FALSE
+} #NavigationInfo
+
+WorldInfo {
+  info  [ "VRML-scene for animation of the Insy-SES case study"
+	  "written at University of Oldenburg in 1998" ]
+  title "SES Fallstudie"
+}

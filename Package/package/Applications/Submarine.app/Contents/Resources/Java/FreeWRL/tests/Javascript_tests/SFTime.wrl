@@ -1,0 +1,35 @@
+#VRML V2.0 utf8
+
+DEF TIME TimeSensor { cycleInterval 3 }
+DEF INTERP_POS PositionInterpolator{key[0,0.25,0.5,0.75,1.0]keyValue[0 0 0,1 0 0,0 0 0,-1 0 0,0 0 0]}
+
+Group {
+    	children [
+	DEF TOUCH TouchSensor {}
+    	DEF BALL Transform {
+        		children [
+        		  Shape {
+            		    appearance Appearance {
+            			material Material { }
+            		    }
+        		    geometry Sphere { }
+        		  }
+        		]
+    	}
+    	]
+}
+
+
+DEF SCRIPT Script { 
+	eventIn SFTime touched
+	eventOut SFTime touch_timed
+
+url "vrmlscript: function touched( frac, tm ) { 
+	touch_timed = frac; 
+	print ('touched at ' + frac + ' timed at ' + tm + ' should be the same');
+}"}
+
+ROUTE TOUCH.touchTime TO SCRIPT.touched
+ROUTE SCRIPT.touch_timed TO TIME.startTime
+ROUTE TIME.fraction_changed TO INTERP_POS.set_fraction
+ROUTE INTERP_POS.value_changed TO BALL.translation

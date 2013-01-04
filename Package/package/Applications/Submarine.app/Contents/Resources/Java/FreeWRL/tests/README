@@ -1,0 +1,169 @@
+To run tests, go to main FreeWRL directory, and type:
+
+./freewrl tests/x.wrl
+
+where x is the test number.
+
+Notes:
+
+1.wrl:	A cone.
+
+1.xml:  X3D box with texture mapped.
+
+2.wrl:	MultiTexture test.
+
+3.wrl:	A "flat" staircase.
+
+4.wrl:	This should rotate around central red column.
+
+5.wrl:	Arrows and yellow cube.
+
+6.wrl:	Rotating Red Cones.
+
+7.wrl:	Rotating Red and Blue Cones.
+
+8.wrl:	Moving boxes. Click on the red arrows.
+
+9.wrl:	Moving pink cube/red sphere. 3 cornered triangular movement.
+
+10.wrl:	Two vectors that you can manipulate with the mouse; and their
+	sum, cross product, and difference move. (JAS - Click on one of
+	the points of the yellow arrows, and move the mouse. The vectors
+	should change. )
+
+11.wrl:	pointset test.
+
+12.wrl:	indexed lineset test.
+
+13.wrl:	indexed face set test.
+
+14.wrl:	indexed face set test (concave).
+
+15.wrl:	Circular arc.
+
+16.wrl:	Flying blimp pulling a coke can.
+
+	This is a world to test the headlight toggle ("h" key).
+
+
+17.wrl:	Simple Externproto test.
+
+18.wrl:	different viewpoints. hit the "v" key to change.
+
+19.wrl:	A Simple "tinman" avatar.
+
+20.wrl:	A cone with a bookcase texture superimposed over it.
+
+21.wrl: A bookcase.
+
+22.wrl: A finger. click on any joint.
+
+23.wrl:
+
+24.wrl: HUD simple display. Bottom cube stays put when you
+	navigate. from
+		http://www.vapourtech.com/vrmlguide/workshop/hud/
+
+25.wrl: Background binding - click on the objects to change them.
+	from the VRML source book, fig 22.4
+
+26.wrl: Background images.
+
+27.wrl: Bouncing ball. Click on the ball. (from Jed Hartman)
+
+28.wrl: Rectangle with a bookcase image mapped on it.
+
+29.wrl: Textured sphere with vertical stripes and arrows going
+        up. Stripes should appear, left to right, as dark red, dark
+        green, dark blue, black, dark cyan and white.
+
+30.wrl: An IndexedFaceSet with RGBA Color nodes.
+
+31.wrl: A set of "camera" like objects. Uses a DEF'd Inline node which has
+        "camera.wrl" as url.
+
+32.wrl: Contains "cameras" and a "common kitchen utensil".
+
+33.wrl: A "big" transparent set of Cones. Shows sorting of nodes,
+	and rendering of transparency.
+
+34.wrl: The noodle drain with a the original texture mapped on it.
+
+35.wrl:	Texture and Texturetransform tests on 4 shapes. Repeating
+	turned off.
+
+36.wrl: Same as above, but with image repeating not turned on.
+
+37.wrl:	Same as 36.wrl, but with textures rotated.
+
+38.wrl:	Texture Blending example.
+
+39.wrl:	Texture Blending Example. This one shows a FreeWRL problem;
+	read the Info node in the wrl file for a full explanation.
+
+40.wrl:	Large IndexFaceSet example - concave.
+
+41.wrl:	Extrusion test: an animated snake.
+
+42.wrl: Extrusion test: a bottle.
+
+43.wrl: Extrusion test: Torroid.
+
+44.wrl: Extrusion test: neat slide?
+
+45.wrl:	PixelTexture test.
+
+46.wrl:	javascript addchild test.
+
+47.wrl: javascript bouncing ball test.
+
+48.wrl: PlaneSensor. Drag the buttons on the cube...
+
+49.wrl: Text test.
+
+Synth:
+	A 3D representation of a music synthesizer. Uses other programs
+	to help drive an external synthesizer.
+
+AddRemove:
+	Java applet with EAI add/remove button. Run the script "standalone"
+	in the directory - check paths for everything, as it is dependent
+	on these, or run it from within netscape. Also, read the "README"
+	in the directory.
+
+AddRoute:
+	Java applet with EAI add/remove/addroute/removeroute buttons.
+	Check paths, etc, and have fun!
+
+Tiny3D:
+	Java applet with EAI to create a scene. Run the script "standalone"
+	in the directory - check paths for everything, as it is dependent
+	on these, or run it from within netscape. Also, read the "README"
+	in the directory.
+
+Tic-Tac-Toe:
+	Java applet with EAI code to play tic-tac-toe. Run the script
+	in the directory - check paths for everything, as it is dependent
+	on these, or run it from within netscape. Also, read the "README"
+	in the directory.
+
+CreateTest:
+	Java applet with EAI. Run the script
+	in the directory - check paths for everything, as it is dependent
+	on these, or run it from within netscape. Also, read the "README"
+	in the directory.
+
+SAIColor:
+	SAI example. Please read the README in the directory.
+
+SAIClick:
+	SAI example. Please read the README in the directory.
+
+SAITic-Tac-Toe:
+	SAI example of the Tic-Tac-Toe program. Please read the README
+	in the directory.
+
+
+helpers:
+	Misc. directory of included files for the above tests.
+

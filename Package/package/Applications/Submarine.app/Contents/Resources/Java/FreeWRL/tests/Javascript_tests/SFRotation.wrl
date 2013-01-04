@@ -1,0 +1,60 @@
+#VRML V2.0 utf8
+#MultiTexture test - images taken from X3D Spec. John Stewart CRC Canada.
+
+Transform {
+	translation -3 0 0
+	children [
+		DEF BOX Transform { children Shape {
+			appearance Appearance {
+				material Material { }
+			}
+			geometry Box { }
+		}
+	}
+	]
+}
+
+Transform {
+	translation 3 0 0
+	children [
+		DEF BOX2 Transform { children Shape {
+			appearance Appearance {
+				material Material {diffuseColor 0.4 0.3 0.9 }
+			}
+			geometry Box {size 2 1 3 }
+		}
+	}
+	]
+}
+
+
+# Animation clock
+	DEF Clock TimeSensor {
+		cycleInterval 4.0
+		loop TRUE
+	},
+
+# Animation path
+
+	DEF ColumnPath OrientationInterpolator {
+		key [ 0.0 0.5 1.0 ]
+		keyValue [
+			0.0 1.0 0.0 6.28,
+			0.0 1.0 0.0 3.14,
+			0.0 1.0 0.0 0.0,
+		]
+}
+
+DEF SCRIPT Script { 
+	eventIn SFRotation rotator
+	eventOut SFRotation centerer
+url "vrmlscript: 
+function rotator (sc, tm) {
+	centerer = new SFRotation(1.0, 0.0, 0.0, sc[3]);
+}
+"}
+
+ROUTE Clock.fraction_changed TO ColumnPath.set_fraction
+ROUTE ColumnPath.value_changed TO BOX.set_rotation
+ROUTE BOX.rotation TO SCRIPT.rotator
+ROUTE SCRIPT.centerer TO BOX2.set_rotation

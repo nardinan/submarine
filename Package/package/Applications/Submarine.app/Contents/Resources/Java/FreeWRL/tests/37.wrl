@@ -1,0 +1,82 @@
+#VRML V2.0 utf8
+
+WorldInfo {
+  info	"Packaged by CosmoPackage"
+}
+Group {
+  children	[
+    Transform {
+      children	Shape {
+	appearance	Appearance {
+	  material	NULL
+
+	  texture	DEF _0 ImageTexture {
+	    url	"helpers/mandrill.jpg"
+	  }
+
+	  textureTransform	DEF _T TextureTransform {
+	    scale	2 2
+	    rotation	0.78
+	  }
+	}
+
+	geometry	Sphere {
+	}
+
+      }
+
+      translation	-3.5 0 0
+    }
+    Transform {
+      children	Shape {
+	appearance	Appearance {
+	  material	NULL
+
+	  texture	USE _0
+
+	  textureTransform	USE _T
+	}
+
+	geometry	Cone {
+	}
+
+      }
+
+      translation	-1.25 0 0
+    }
+    Transform {
+      children	Shape {
+	appearance	Appearance {
+	  material	NULL
+
+	  texture	USE _0
+
+	  textureTransform	USE _T
+	}
+
+	geometry	Cylinder {
+	}
+
+      }
+
+      translation	1 0 0
+    }
+    Transform {
+      children	Shape {
+	appearance	Appearance {
+	  material	NULL
+
+	  texture	USE _0
+
+	  textureTransform	USE _T
+	}
+
+	geometry	Box {
+	}
+
+      }
+
+      translation	3.5 0 0
+    }
+  ]
+}
