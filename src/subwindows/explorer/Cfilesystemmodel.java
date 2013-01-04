@@ -1,5 +1,6 @@
 package subwindows.explorer;
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.Serializable;
 import javax.swing.tree.TreePath;
 public class Cfilesystemmodel extends Ctreemodel implements Serializable {
@@ -20,14 +21,32 @@ public class Cfilesystemmodel extends Ctreemodel implements Serializable {
 
     public Object getChild( Object parent, int index ) {
         File directory = (File)parent;
-        String[] children = directory.list();
+        FilenameFilter hiddenFiles = new FilenameFilter() {
+            public boolean accept(File file, String string) {
+                boolean result = true;
+                if (string.startsWith(".")) {
+                    result = false;
+                }
+                return result;
+            }
+        };
+        String[] children = directory.list(hiddenFiles);
         return new File (directory, children[index]);
     }
 
     public int getChildCount (Object parent) {
         File fileSysEntity = (File)parent;
+        FilenameFilter hiddenFiles = new FilenameFilter() {
+            public boolean accept(File file, String string) {
+                boolean result = true;
+                if (string.startsWith(".")) {
+                    result = false;
+                }
+                return result;
+            }
+        };
         if ( fileSysEntity.isDirectory() ) {
-            String[] children = fileSysEntity.list();
+            String[] children = fileSysEntity.list(hiddenFiles);
             return children.length;
         } else return 0;
     }
@@ -42,7 +61,16 @@ public class Cfilesystemmodel extends Ctreemodel implements Serializable {
     public int getIndexOfChild (Object parent, Object child) {
         File directory = (File)parent;
         File fileSysEntity = (File)child;
-        String[] children = directory.list();
+        FilenameFilter hiddenFiles = new FilenameFilter() {
+            public boolean accept(File file, String string) {
+                boolean result = true;
+                if (string.startsWith(".")) {
+                    result = false;
+                }
+                return result;
+            }
+        };
+        String[] children = directory.list(hiddenFiles);
         int result = -1;
         for (int index = 0; index < children.length; ++index ) {
             if (fileSysEntity.getName().equals(children[index])) {

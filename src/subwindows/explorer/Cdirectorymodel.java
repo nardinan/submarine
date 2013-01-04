@@ -16,7 +16,7 @@ public class Cdirectorymodel extends AbstractTableModel {
 
     public Cdirectorymodel (File dir) {
         initialize();
-        FilenameFilter a = new FilenameFilter() {
+        FilenameFilter hiddenFiles = new FilenameFilter() {
             public boolean accept(File file, String string) {
                 boolean result = true;
                 if (string.startsWith(".")) {
@@ -26,7 +26,7 @@ public class Cdirectorymodel extends AbstractTableModel {
             }
         };
         directory = dir;
-        children = dir.list();
+        children = dir.list(hiddenFiles);
         rowCount = children.length;
     }
 
@@ -36,9 +36,18 @@ public class Cdirectorymodel extends AbstractTableModel {
     }
 
     public void setDirectory (File dir) {
+        FilenameFilter hiddenFiles = new FilenameFilter() {
+            public boolean accept(File file, String string) {
+                boolean result = true;
+                if (string.startsWith(".")) {
+                    result = false;
+                }
+                return result;
+            }
+        };
         if (dir != null) {
             directory = dir;
-            children = dir.list();
+            children = dir.list(hiddenFiles);
             rowCount = children.length;
         } else {
             directory = null;
