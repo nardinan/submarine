@@ -113,13 +113,15 @@ public class Cfileinterface extends JPanel {
             String extension = null, fileName = null;
             if (me.getClickCount() == 2) {
                 File fileSystemEntity = (File)backTree.getSelectionPath().getLastPathComponent();
-                if (fileSystemEntity.isFile()) {
-                    fileName = fileSystemEntity.getName();
-                    int index = fileName.lastIndexOf(".");
-                    if ((index > 0) && (index < fileName.length())) {
-                        extension = fileName.substring(index+1).toLowerCase();
-                        if (extension.equals("x3d"))
-                            backTrack.initializeTab(fileSystemEntity);
+                if (fileSystemEntity != null) {
+                    if (fileSystemEntity.isFile()) {
+                        fileName = fileSystemEntity.getName();
+                        int index = fileName.lastIndexOf(".");
+                        if ((index > 0) && (index < fileName.length())) {
+                            extension = fileName.substring(index+1).toLowerCase();
+                            if (extension.equals("x3d"))
+                                backTrack.initializeTab(fileSystemEntity);
+                        }
                     }
                 }
             }
