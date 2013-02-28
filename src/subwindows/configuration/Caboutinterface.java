@@ -43,7 +43,7 @@ public class Caboutinterface extends JPanel {
     }
 
     public void initializeComponent () {
-        GridBagConstraints positioner = null;
+        GridBagConstraints positioner;
         submarineLabel = new JLabel();
         descriptionLabel = new JLabel();
         freewrlLabel = new JLabel();
@@ -59,7 +59,7 @@ public class Caboutinterface extends JPanel {
         submarineLabel.setText("Submarine© X3D client edition");
         descriptionLabel.setText("an X3D Editor for Mac, Linux and Windows");
         freewrlLabel.setFont(new java.awt.Font("Lucida Grande", 0, 10));
-        freewrlLabel.setText("<html>preview system based on FreeWRL© Application developed by <b>John A. Stewart</b></html>");
+        freewrlLabel.setText("<html>preview system based on FreeWRL&copy; Application developed by <b>John A. Stewart</b></html>");
         developerLabel.setFont(new java.awt.Font("Lucida Grande", 1, 13));
         developerLabel.setText("Developer");
         versionLabel.setFont(new java.awt.Font("Lucida Grande", 1, 13));
@@ -68,7 +68,7 @@ public class Caboutinterface extends JPanel {
         releasedLabel.setText("Released");
         developerName.setText("Andrea Nardinocchi");
         versionID.setText(Cmaininterface.version+"."+Cmaininterface.subVersion+" "+Cmaininterface.status);
-        releasedDate.setText("25 May 2011");
+        releasedDate.setText("28 Feb 2013"); /* Una tantum */
         supportLabel.setText("<html>Thanks to <b>Luna Paciucci</b> & <b>Valerio Egidi</b> for graphical support</html>");
         updateCheck.setText("Check for updates");
         updateCheck.addActionListener(new java.awt.event.ActionListener() {

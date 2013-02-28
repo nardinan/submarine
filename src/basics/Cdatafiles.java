@@ -29,5 +29,6 @@ final public class Cdatafiles {
     static public String defaultWinPreview = "./FreeWRL/FreeWRL.exe"; //integrated application (WIN)
     static public String connectionFile = "tiredless.local";
     static public String connectionWebsite = "http://submarine.unipg.it";
-    static public String updateWebsite = "http://www.psychogames.net/submarine/";
+    //static public String updateWebsite = "http://www.psychogames.net/submarine/"; /* not more this, sigh */
+    static public String updateWebsite = "http://www.nardinan.it/submarine/";
 }

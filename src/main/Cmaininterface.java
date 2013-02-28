@@ -66,7 +66,7 @@ public class Cmaininterface extends Cbasewindow {
     /* utils */
     static public String version = "2";
     static public String subVersion = "2";
-    static public String status = "alpha";
+    static public String status = "beta";
     /* remote project's utilities */
     static public String ipAddress = "127.0.0.1";
     static public String port = "5090";
