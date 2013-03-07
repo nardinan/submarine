@@ -1,4 +1,0 @@
-EAI=../../java/classes
-
-freewrl --eai null.wrl &
-appletviewer -J-classpath -J$EAI -J-Djava.security.policy="$EAI/java.policy" create-test.html

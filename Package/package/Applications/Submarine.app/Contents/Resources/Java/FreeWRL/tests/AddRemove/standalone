@@ -1,2 +1,0 @@
-freewrl root.wrl --eai &
-java  EAIAddRemove
