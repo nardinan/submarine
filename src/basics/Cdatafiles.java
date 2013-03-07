@@ -22,6 +22,7 @@ final public class Cdatafiles {
     static public String parameters = "./datafiles/parameters.properties";
     static public String errors = "./datafiles/errors.properties";
     static public String preview = "./datafiles/preview.x3d";
+    static public String datafilesDir = "./datafiles/";
     static public String temporaryDir = "./files/";
     static public String avatarsDir = "./avatars/";
     static public String defaultMacPreview = "./FreeWRL/FreeWRL.app"; //integrated application (MAC)

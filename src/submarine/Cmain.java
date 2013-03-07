@@ -15,12 +15,86 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package submarine;
+import basics.Cdatafiles;
+import basics.Cdatafilescontent;
 import basics.Cerrormessages;
 import basics.Csplashinterface;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import main.Cmaininterface;
 import subwindows.Cerrorinterface;
 public class Cmain {
     public static void main (String args[]) {
+        /* check flesystem */
+        File link;
+        BufferedWriter stream;
+        link = new File(Cdatafiles.datafilesDir);
+        if (!link.exists()) {
+            link.mkdir();
+        }
+        link = new File(Cdatafiles.temporaryDir);
+        if (!link.exists()) {
+            link.mkdir();
+        }
+        link = new File(Cdatafiles.avatarsDir);
+        if (!link.exists()) {
+            link.mkdir();
+        }
+        link = new File(Cdatafiles.syntax);
+        if (!link.exists()) {
+            try {
+                link.createNewFile();
+                stream = new BufferedWriter(new FileWriter(link));
+                stream.write(Cdatafilescontent.syntaxDefault);
+                stream.close();
+            } catch (IOException ex) {
+                Logger.getLogger(Cmain.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        link = new File(Cdatafiles.application);
+        if (!link.exists()) {
+            try {
+                link.createNewFile();
+                /* empty */
+            } catch (IOException ex) {
+                Logger.getLogger(Cmain.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        link = new File(Cdatafiles.autosave);
+        if (!link.exists()) {
+            try {
+                link.createNewFile();
+                stream = new BufferedWriter(new FileWriter(link));
+                stream.write(Cdatafilescontent.autosaveDefault);
+                stream.close();
+            } catch (IOException ex) {
+                Logger.getLogger(Cmain.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        link = new File(Cdatafiles.parameters);
+        if (!link.exists()) {
+            try {
+                link.createNewFile();
+                /* empty */
+            } catch (IOException ex) {
+                Logger.getLogger(Cmain.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        link = new File(Cdatafiles.errors);
+        if (!link.exists()) {
+            try {
+                link.createNewFile();
+                stream = new BufferedWriter(new FileWriter(link));
+                stream.write(Cdatafilescontent.errorsDefault);
+                stream.close();
+            } catch (IOException ex) {
+                Logger.getLogger(Cmain.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         Cerrormessages.initializeComponent();
         Csplashinterface splashInterface = new Csplashinterface();
         splashInterface.initializeComponent();
