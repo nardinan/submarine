@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist SYSTEM "file://localhost/System/Library/DTDs/PropertyList.dtd">
-<plist version="0.9">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
 <dict>
 	<key>CFBundleName</key>
 	<string>submarine</string>
@@ -31,12 +31,14 @@
 		<key>JVMVersion</key>
 		<string>1.5+</string>
 		<key>ClassPath</key>
-			<array>
+		<array>
+			<string>$JAVAROOT/macwidgets.jar</string>
+			<string>$JAVAROOT/forms.jar</string>
 			<string>$JAVAROOT/Submarine 2.jar</string>
 			<string>$JAVAROOT/autocomplete.jar</string>
 			<string>$JAVAROOT/rsyntaxtextarea.jar</string>
 			<string>$JAVAROOT/swing-layout-1.0.4.jar</string>
-			</array>
+		</array>
 	</dict>
 </dict>
 </plist>

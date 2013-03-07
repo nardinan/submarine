@@ -22,6 +22,7 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -228,7 +229,8 @@ public class Cpreviewinterface extends Cbasewindow {
     public void previewTags () {
         BufferedWriter outputFile;
         Ctabinterface singleSource = null;
-        String informations[], coords[], newStructure = "<?xml version='1.0' encoding='UTF-8'?>\n<!DOCTYPE X3D PUBLIC \"ISO//Web3D//DTD X3D 3.1//EN\" \"http://www.web3d.org/specifications/x3d-3.1.dtd\">\n<X3D profile='Immersive' version='3.0'>\n<Head>\n</Head>\n<Scene>\n\t<NavigationInfo type='\"EXAMINE\",\"ANY\"'></NavigationInfo>\n";
+        File link;
+        String fileName, tempFileName, informations[], coords[], newStructure = "<?xml version='1.0' encoding='UTF-8'?>\n<!DOCTYPE X3D PUBLIC \"ISO//Web3D//DTD X3D 3.1//EN\" \"http://www.web3d.org/specifications/x3d-3.1.dtd\">\n<X3D profile='Immersive' version='3.0'>\n<Head>\n</Head>\n<Scene>\n\t<NavigationInfo type='\"EXAMINE\",\"ANY\"'></NavigationInfo>\n";
         synchronized (listLocker) {
             synchronized (backTrack.tabbedPaneLocker) {
                 singleSource = (Ctabinterface) backTrack.tabbedPane.getSelectedComponent();
@@ -247,11 +249,21 @@ public class Cpreviewinterface extends Cbasewindow {
         }
         newStructure += "\n</Scene>\n</X3D>\n";
         try {
-            outputFile = new BufferedWriter(new FileWriter(Cdatafiles.preview));
+            synchronized (backTrack.tabbedPaneLocker) {
+                singleSource = (Ctabinterface) backTrack.tabbedPane.getSelectedComponent();
+            }
+            synchronized (singleSource.sourceNameLocker) {
+                fileName = singleSource.sourceName;
+            }
+            link = new File(fileName);
+            tempFileName = link.getAbsoluteFile().getParentFile().getAbsolutePath()+
+                    File.separator+".tmp"+link.getName();
+            System.out.println(tempFileName);
+            outputFile = new BufferedWriter(new FileWriter(tempFileName));
             outputFile.write(newStructure);
             outputFile.newLine();
             outputFile.close();
-            backTrack.previewFile(Cdatafiles.preview);
+            backTrack.previewFile(tempFileName);
         } catch (Exception ext) {
             Cerrorinterface bck = new Cerrorinterface("PREVIEERR", false);
         }

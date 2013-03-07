@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE X3D PUBLIC "ISO//Web3D//DTD X3D 3.1//EN" "http://www.web3d.org/specifications/x3d-3.1.dtd">
+<X3D profile='Immersive' version='3.0'>
+<Head>
+</Head>
+<Scene>
+	<NavigationInfo type='"EXAMINE","ANY"'></NavigationInfo>
+<Transform translation='2.0 0.0 0.0' rotation='0.0 0.0 0.0 0.0'>
+<Shape>
+			<Box DEF='scubetto' size='2 2 2' solid='true'/>
+			<Appearance>
+				<Material diffuseColor='0.78431374 0.78431374 0.78431374'/>
+				<ImageTexture repeatS='true' repeatT='true' url='./test.x3dTextures/blue.jpg'/>
+			</Appearance>
+		</Shape>
+</Transform>
+
+</Scene>
+</X3D>
+
